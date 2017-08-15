@@ -1,0 +1,90 @@
+package com.mingshu.goods.views.adapters;
+
+import android.content.Context;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.mingshu.goods.models.GoodsInfo;
+import com.mingshu.goods.utils.CommonUtil;
+import com.mingshu.goods.utils.Constant;
+import com.mingshu.pmp.goods.R;
+
+import java.util.List;
+
+/**
+ * Created by Lisx on 2017-07-03.
+ */
+
+public class DataBindingAdapterGoods extends BaseAdapter {
+
+    List<GoodsInfo> goodsInfos;
+    Context context;
+
+    public DataBindingAdapterGoods(List<GoodsInfo> goodsInfos, Context context){
+        this.goodsInfos = goodsInfos;
+        this.context = context;
+    }
+
+    @Override
+    public int getCount() {
+        return goodsInfos == null ? 0 : goodsInfos.size();
+    }
+
+    @Override
+    public Object getItem(int i) {
+        return goodsInfos == null ? null : goodsInfos.get(i);
+    }
+
+    @Override
+    public long getItemId(int i) {
+        return i;
+    }
+
+    @Override
+    public View getView(int i, View view, ViewGroup viewGroup) {
+
+        ViewHolder viewHolder = null;
+
+        if (view == null){
+            viewHolder = new ViewHolder();
+            view = View.inflate(this.context, R.layout.fragment_goods_item,null);
+            viewHolder.txtGoodsDescription = (TextView) view.findViewById(R.id.txt_goods_description_item);
+            viewHolder.txtRecommendtime= (TextView) view.findViewById(R.id.txt_goods_recommandtime_item);
+            viewHolder.txtRecommendname = (TextView) view.findViewById(R.id.txt_goods_recommandname_item);
+            viewHolder.txtGoodsPrice = (TextView) view.findViewById(R.id.txt_goods_price_item);
+            viewHolder.txtClickCount = (TextView) view.findViewById(R.id.txt_clickcount_item);
+//            viewHolder.txtReason = (TextView) view.findViewById(R.id.txtreason_item);
+            viewHolder.imageGoods = (ImageView) view.findViewById(R.id.image_goods_item);
+
+            view.setTag(viewHolder);
+        }else{
+            viewHolder = (ViewHolder) view.getTag();
+        }
+        if(goodsInfos != null){
+            viewHolder.txtGoodsDescription.setText( goodsInfos.get(i).getDescription());
+            viewHolder.txtRecommendtime.setText(CommonUtil.stampToDate(goodsInfos.get(i).getRecommendtime(),
+                    Constant.DATEFORMAT_DATETIME_SS) );
+            viewHolder.txtRecommendname.setText(goodsInfos.get(i).getRecommendname());
+            viewHolder.txtGoodsPrice.setText(goodsInfos.get(i).getPrice());
+            viewHolder.txtClickCount.setText(String.valueOf(goodsInfos.get(i).getClickcount()));
+            Glide.with(context).load(goodsInfos.get(i).getImages()).dontAnimate().into(viewHolder.imageGoods);
+//            viewHolder.txtReason.setText(goodsInfos.get(i).getReason());
+        }
+
+        return view;
+    }
+
+    public static class ViewHolder{
+        TextView txtGoodsDescription;//描述
+        ImageView imageGoods;//图片
+        TextView txtRecommendname;//推荐人姓名
+        TextView txtRecommendtime;//推荐时间
+        TextView txtGoodsPrice;//价格
+        TextView txtClickCount;//点击数量
+        TextView txtReason;//推荐理由
+    }
+}

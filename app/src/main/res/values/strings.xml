@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">D9推荐</string>
+    <string name="action_settings">Settings</string>
+    <string name="register_word"><u>注册账号</u></string>
+</resources>

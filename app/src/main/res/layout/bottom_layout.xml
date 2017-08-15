@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/line_bottom_goods"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:onClick="imageBtnClick">
+        <ImageButton
+            android:id="@+id/image_btn_goods"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#00000000"
+            android:clickable="false"
+            android:src="@drawable/image_btn_goods" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="商品"/>
+
+    </LinearLayout>
+
+    <!--<LinearLayout-->
+        <!--android:id="@+id/line_bottom_concerns"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="1"-->
+        <!--android:gravity="center"-->
+        <!--android:orientation="vertical"-->
+        <!--android:onClick="imageBtnClick">-->
+        <!--<ImageButton-->
+            <!--android:id="@+id/image_btn_concerns"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="#00000000"-->
+            <!--android:clickable="false"-->
+            <!--android:src="@drawable/image_btn_concerns"/>-->
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="关注"/>-->
+
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+        <!--android:id="@+id/line_bottom_find"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="1"-->
+        <!--android:gravity="center"-->
+        <!--android:orientation="vertical"-->
+        <!--android:onClick="imageBtnClick">-->
+        <!--<ImageButton-->
+            <!--android:id="@+id/image_btn_find"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="#00000000"-->
+            <!--android:clickable="false"-->
+            <!--android:src="@drawable/image_btn_find"/>-->
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="发现"/>-->
+
+    <!--</LinearLayout>-->
+
+    <LinearLayout
+        android:id="@+id/line_bottom_my"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:onClick="imageBtnClick">
+        <ImageButton
+            android:id="@+id/image_btn_my"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#00000000"
+            android:clickable="false"
+            android:src="@drawable/image_btn_my"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我的"/>
+
+    </LinearLayout>
+</LinearLayout>
