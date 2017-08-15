@@ -36,6 +36,8 @@ public class CommonUtil {
      * @param format 需要转换的格式
      */
     public static String stampToDate(String str,String format) {
+        if(str == null || str == "")
+            return "";
         if (str.contains("Date(") && str.contains("+")) {
             str = str.substring(str.indexOf("(") + 1, str.indexOf("+"));
         }

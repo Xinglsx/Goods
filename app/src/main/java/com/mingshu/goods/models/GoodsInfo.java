@@ -175,44 +175,44 @@ public class GoodsInfo implements Serializable {
         this.audittime = audittime;
     }
 
-    public String id;
+    private String id;
 
-    public String description;
-    public String reason;
+    private String description;
+    private String reason;
 
-    public String link ;
+    private String link ;
 
-    public String command ;
+    private String command ;
 
-    public String price ;
+    private String price ;
 
-    public String expirydate;
+    private String expirydate;
 
-    public Boolean isbuy;
+    private Boolean isbuy;
 
-    public short state;
+    private short state;
 
-    public Boolean recommendflag ;
+    private Boolean recommendflag ;
 
-    public String images ;
+    private String images ;
 
-    public String buyimages;
+    private String buyimages;
 
-    public String recommender ;
+    private String recommender ;
 
-    public String recommendname;
+    private String recommendname;
 
-    public String recommendtime;
+    private String recommendtime;
 
-    public String auditopinion ;
+    private String auditopinion ;
 
-    public String audittime;
+    private String audittime;
 
-    public String audituser ;
+    private String audituser ;
 
-    public String auditname;
+    private String auditname;
 
-    public long dealcount;
+    private long dealcount;
 
-    public long clickcount;
+    private long clickcount;
 }

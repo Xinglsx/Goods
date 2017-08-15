@@ -68,8 +68,6 @@ public class FragmentGoods extends BaseFragment {
                 //跳转文章详细信息
                 Intent intent = new Intent();
                 intent.putExtra("goods",goodsInfos.get(i));
-//                intent.putExtra("description", goodsInfos.get(i).getDescription());
-//                intent.putExtra("reason", goodsInfos.get(i).getReason());
                 intent.setClass(FragmentGoods.this.getActivity(),GoodsActivity.class);
                 startActivity(intent);
 

@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.alibaba.fastjson.JSONObject;
 import com.android.volley.Request;
+import com.mingshu.goods.models.GoodsInfo;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -51,5 +52,11 @@ public class ApiCoreManager extends ApiManager {
         JSONObject param = new JSONObject();
         param.put("goodsId",goodsId);
         return createAPI(Request.Method.POST,baseURL+"/Goods/ClickCounIncrement",param);
+    }
+
+    public Api saveGoodsInfo(GoodsInfo goodsInfo){
+        JSONObject param = new JSONObject();
+        param.put("goodsInfo",goodsInfo);
+        return createAPI(Request.Method.POST,baseURL+"/Goods/SaveGoodsInfo",param);
     }
 }

@@ -57,9 +57,7 @@ public class DataBindingAdapterUser extends BaseAdapter {
         }
         if(user != null){
             viewHolder.txtUserNickname.setText( user.getNickname());
-            viewHolder.txtUserId.setText(user.userid);
-//            Glide.with(context).load(goodsInfos.get(i).getImages()).dontAnimate().into(viewHolder.imageGoods);
-//            viewHolder.txtReason.setText(goodsInfos.get(i).getReason());
+            viewHolder.txtUserId.setText(user.getUserid());
         }
 
         return view;

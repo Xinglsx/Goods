@@ -127,34 +127,34 @@ public class UserInfo implements Serializable {
         this.taobao = taobao;
     }
 
-    public String id;
+    private String id;
 
-    public String userid;
+    private String userid;
 
-    public String password;
+    private String password;
 
-    public String nickname ;
+    private String nickname ;
 
-    public String idcard ;
+    private String idcard ;
 
-    public String realname;
+    private String realname;
 
 //    public DateTime? birth ;
-    public String phonenumber ;
+    private String phonenumber ;
 
-    public String avatar ;
+    private String avatar ;
 
-    public short usertype ;
+    private short usertype ;
 
-    public short userlevel;
+    private short userlevel;
 
-    public String usersignature ;
+    private String usersignature ;
 
-    public String wechat ;
+    private String wechat ;
 
-    public String qq;
+    private String qq;
 
-    public String sina;
+    private String sina;
 
-    public String taobao;
+    private String taobao;
 }

@@ -8,7 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:text="PMP"
+        android:text="D9淘宝客"
         android:layout_centerVertical="true"
         android:textColor="#FFFFFF"
         android:textSize="20dp"
@@ -23,6 +23,7 @@
         android:layout_alignParentRight="true"
         android:onClick="imageBtnClick"
         android:layout_marginRight="20dp"
+        android:visibility="invisible"
         />
     <ImageButton
         android:id="@+id/image_btn_search"
@@ -33,5 +34,6 @@
         android:layout_toLeftOf="@id/image_btn_add"
         android:onClick="imageBtnClick"
         android:layout_marginRight="20dp"
+        android:visibility="invisible"
         />
 </RelativeLayout>

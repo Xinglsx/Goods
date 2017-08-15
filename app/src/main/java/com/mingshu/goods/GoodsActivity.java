@@ -12,6 +12,7 @@ import android.view.View;
 
 import com.bumptech.glide.Glide;
 import com.mingshu.goods.models.GoodsInfo;
+import com.mingshu.goods.utils.CommonUtil;
 import com.mingshu.pmp.goods.R;
 import com.mingshu.pmp.goods.databinding.ActivityGoodsBinding;
 
@@ -40,13 +41,19 @@ public class GoodsActivity extends AppCompatActivity {
         binding.btnBuy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                ClipData mClipData = ClipData.newPlainText("Label", goodsInfo.getCommand());
-                cm.setPrimaryClip(mClipData);
-                PackageManager packageManager = getPackageManager();
-                Intent intent = new Intent();
-                intent = packageManager.getLaunchIntentForPackage("com.taobao.taobao");
-                startActivity(intent);
+                String tempCommand = goodsInfo.getCommand();
+                if(tempCommand == null || tempCommand == "") {
+                    CommonUtil.ShowMsg("此商品无法自动跳转！",GoodsActivity.this);
+                }
+                else {
+                    ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                    ClipData mClipData = ClipData.newPlainText("Label", goodsInfo.getCommand());
+                    cm.setPrimaryClip(mClipData);
+                    PackageManager packageManager = getPackageManager();
+                    Intent intent = new Intent();
+                    intent = packageManager.getLaunchIntentForPackage("com.taobao.taobao");
+                    startActivity(intent);
+                }
             }
         });
     }
