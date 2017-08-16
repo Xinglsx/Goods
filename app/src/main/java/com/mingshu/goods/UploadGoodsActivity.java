@@ -6,7 +6,6 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.view.View;
 
@@ -41,8 +40,7 @@ public class UploadGoodsActivity extends ScanBaseActivity{
 
 
     private int xiangji = 1;
-    String fileDir = "/mnt/sdcard/"+"tmp_pic_" + SystemClock.currentThreadTimeMillis() + ".jpg";
-    private File sdcardTempFile = new File(fileDir);
+    String fileDir = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,7 +98,7 @@ public class UploadGoodsActivity extends ScanBaseActivity{
     }
 
     public Uri getMediaFileUri(int type){
-        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "相册名字");
+        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "Goods");
         if (!mediaStorageDir.exists()) {
             if (!mediaStorageDir.mkdirs()) {
                 return null;
@@ -110,7 +108,8 @@ public class UploadGoodsActivity extends ScanBaseActivity{
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         File mediaFile;
         if (type == 1) {
-            mediaFile = new File(mediaStorageDir.getPath() + File.separator + "IMG_" + timeStamp + ".jpg");
+            fileDir = mediaStorageDir.getPath() + File.separator + "IMG_" + timeStamp + ".jpg";
+            mediaFile = new File(fileDir);
         } else {
             return null;
         }
@@ -158,18 +157,9 @@ public class UploadGoodsActivity extends ScanBaseActivity{
             case 1:
                 //相机拍照
                 if(resultCode == RESULT_OK){
-                    //获取图片地址
-                    if(data != null){
-                        if(data.hasExtra("data")){
-//                            Bitmap bitmap = data.get);
-                            Bitmap bitmap = ImageUtil.getScaledImage(UploadGoodsActivity.this,fileDir);
-                            bitmap = ImageUtil.ratio(bitmap,120,240);
-                            goodsInfo.setImages(ImageUtil.bitmapToBase64(bitmap));
-                            binding.imageGoods.setImageBitmap(bitmap);
-                        }
-                    }else{
-                        CommonUtil.ShowMsg("拍照数据获取失败",UploadGoodsActivity.this);
-                    }
+                    Bitmap bitmap = ImageUtil.getScaledImage(UploadGoodsActivity.this,fileDir);
+                    goodsInfo.setImage(ImageUtil.getImage_String(bitmap));
+                    binding.imageGoods.setImageBitmap(bitmap);
                 }else{
                     CommonUtil.ShowMsg("拍照已取消",UploadGoodsActivity.this);
                 }
@@ -177,16 +167,9 @@ public class UploadGoodsActivity extends ScanBaseActivity{
             case 2:
                 //相机拍照
                 if(resultCode == RESULT_OK){
-                    if(data != null){
-                        if(data.hasExtra("data")){
-                            Bitmap bitmap = data.getParcelableExtra("data");
-                            bitmap = ImageUtil.ratio(bitmap,120,240);
-                            goodsInfo.setBuyimages(ImageUtil.bitmapToBase64(bitmap));
-                            binding.imageBuy.setImageBitmap(bitmap);
-                        }
-                    }else{
-                        CommonUtil.ShowMsg("拍照数据获取失败",UploadGoodsActivity.this);
-                    }
+                    Bitmap bitmap = ImageUtil.getScaledImage(UploadGoodsActivity.this,fileDir);
+                    goodsInfo.setBuyimage(ImageUtil.getImage_String(bitmap));
+                    binding.imageBuy.setImageBitmap(bitmap);
                 }else{
                     CommonUtil.ShowMsg("拍照已取消",UploadGoodsActivity.this);
                 }

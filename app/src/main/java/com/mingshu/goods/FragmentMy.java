@@ -50,5 +50,14 @@ public class FragmentMy extends BaseFragment {
                 startActivity(intent);
             }
         });
+
+        (view.findViewById(R.id.linlayout_audit_goods)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setClass(FragmentMy.this.getActivity(),AuditGoodsActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

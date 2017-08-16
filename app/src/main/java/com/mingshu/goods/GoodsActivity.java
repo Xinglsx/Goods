@@ -32,7 +32,7 @@ public class GoodsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         goodsInfo = (GoodsInfo)intent.getSerializableExtra("goods");
 
-        Glide.with(this).load(goodsInfo.getImages()).dontAnimate().into(binding.imageGoods);
+        Glide.with(this).load(goodsInfo.getImage()).dontAnimate().into(binding.imageGoods);
         binding.txtGoodDescription.setText(goodsInfo.getDescription());
         binding.txtReason.setText(goodsInfo.getReason());
         binding.txtGoodsPrice.setText(goodsInfo.getPrice());

@@ -71,7 +71,7 @@ public class DataBindingAdapterGoods extends BaseAdapter {
             viewHolder.txtRecommendname.setText(goodsInfos.get(i).getRecommendname());
             viewHolder.txtGoodsPrice.setText(goodsInfos.get(i).getPrice());
             viewHolder.txtClickCount.setText(String.valueOf(goodsInfos.get(i).getClickcount()));
-            Glide.with(context).load(goodsInfos.get(i).getImages()).dontAnimate().into(viewHolder.imageGoods);
+            Glide.with(context).load(goodsInfos.get(i).getImage()).dontAnimate().into(viewHolder.imageGoods);
 //            viewHolder.txtReason.setText(goodsInfos.get(i).getReason());
         }
 

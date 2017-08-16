@@ -3,8 +3,8 @@
     package="com.mingshu.pmp.goods">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name="winning.framework.BaseApplication"
@@ -29,7 +29,8 @@
         <activity android:name="com.mingshu.goods.GoodsActivity" />
         <activity android:name="com.mingshu.goods.WebViewActivity" />
         <activity android:name="com.mingshu.goods.UploadGoodsActivity" />
-        <activity android:name="com.mingshu.goods.views.MyPopUpWindow"></activity>
+        <activity android:name="com.mingshu.goods.views.MyPopUpWindow" />
+        <activity android:name="com.mingshu.goods.AuditGoodsActivity"></activity>
     </application>
 
 </manifest>

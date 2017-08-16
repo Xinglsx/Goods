@@ -79,20 +79,20 @@ public class GoodsInfo implements Serializable {
         this.recommendflag = recommendflag;
     }
 
-    public String getImages() {
-        return images;
+    public String getImage() {
+        return image;
     }
 
-    public void setImages(String images) {
-        this.images = images;
+    public void setImage(String images) {
+        this.image = images;
     }
 
-    public String getBuyimages() {
-        return buyimages;
+    public String getBuyimage() {
+        return buyimage;
     }
 
-    public void setBuyimages(String buyimages) {
-        this.buyimages = buyimages;
+    public void setBuyimage(String buyimages) {
+        this.buyimage = buyimages;
     }
 
     public String getRecommender() {
@@ -194,9 +194,9 @@ public class GoodsInfo implements Serializable {
 
     private Boolean recommendflag ;
 
-    private String images ;
+    private String image ;
 
-    private String buyimages;
+    private String buyimage;
 
     private String recommender ;
 

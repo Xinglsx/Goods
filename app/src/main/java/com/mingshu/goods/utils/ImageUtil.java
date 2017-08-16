@@ -9,6 +9,7 @@ import android.view.Display;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * Created by Lisx on 2017-08-16.
@@ -61,49 +62,38 @@ public class ImageUtil {
     }
 
     /**
-     * Compress image by size, this will modify image width/height.
-     * Used to get thumbnail
+     * 将图片转成16位的字符串
      *
-     * @param image
-     * @param pixelW target pixel of width
-     * @param pixelH target pixel of height
-     * @return
+     * @return time
      */
-    public static Bitmap ratio(Bitmap image, float pixelW, float pixelH) {
-        ByteArrayOutputStream os = new ByteArrayOutputStream();
-        image.compress(Bitmap.CompressFormat.JPEG, 100, os);
-        if( os.toByteArray().length / 1024>1024) {//判断如果图片大于1M,进行压缩避免在生成图片（BitmapFactory.decodeStream）时溢出
-            os.reset();//重置baos即清空baos
-            image.compress(Bitmap.CompressFormat.JPEG, 50, os);//这里压缩50%，把压缩后的数据存放到baos中
-        }
-        ByteArrayInputStream is = new ByteArrayInputStream(os.toByteArray());
-        BitmapFactory.Options newOpts = new BitmapFactory.Options();
-        //开始读入图片，此时把options.inJustDecodeBounds 设回true了
-        newOpts.inJustDecodeBounds = true;
-        newOpts.inPreferredConfig = Bitmap.Config.RGB_565;
-        Bitmap bitmap = BitmapFactory.decodeStream(is, null, newOpts);
-        newOpts.inJustDecodeBounds = false;
-        int w = newOpts.outWidth;
-        int h = newOpts.outHeight;
-        float hh = pixelH;// 设置高度为240f时，可以明显看到图片缩小了
-        float ww = pixelW;// 设置宽度为120f，可以明显看到图片缩小了
-        //缩放比。由于是固定比例缩放，只用高或者宽其中一个数据进行计算即可
-        int be = 1;//be=1表示不缩放
-        if (w > h && w > ww) {//如果宽度大的话根据宽度固定大小缩放
-            be = (int) (newOpts.outWidth / ww);
-        } else if (w < h && h > hh) {//如果高度高的话根据宽度固定大小缩放
-            be = (int) (newOpts.outHeight / hh);
-        }
-        if (be <= 0) be = 1;
-        newOpts.inSampleSize = be;//设置缩放比例
-        //重新读入图片，注意此时已经把options.inJustDecodeBounds 设回false了
-        is = new ByteArrayInputStream(os.toByteArray());
-        bitmap = BitmapFactory.decodeStream(is, null, newOpts);
-        //压缩好比例大小后再进行质量压缩
-//      return compress(bitmap, maxSize); // 这里再进行质量压缩的意义不大，反而耗资源，删除
-        return bitmap;
+
+    public static String getImage_String(Bitmap bitmap) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 80, stream);// (0 - 100)压缩文件
+        byte[] bt = stream.toByteArray();
+        String photoStr = byte2hex(bt);
+        return photoStr;
     }
 
+    /**
+     * 二进制转字符串(图片压缩使用)
+     *
+     * @param b
+     * @return
+     */
+    public static String byte2hex(byte[] b) {
+        StringBuffer sb = new StringBuffer();
+        String stmp;
+        for (int n = 0; n < b.length; n++) {
+            stmp = Integer.toHexString(b[n] & 0XFF);
+            if (stmp.length() == 1) {
+                sb.append("0" + stmp);
+            } else {
+                sb.append(stmp);
+            }
+        }
+        return sb.toString();
+    }
     /**
      * 图片质量压缩
      *
@@ -140,6 +130,13 @@ public class ImageUtil {
         opts.inJustDecodeBounds = false;
         Bitmap bm = BitmapFactory.decodeFile(path, opts);
         return bm;
+    }
+
+    public static InputStream bitmap2IS(Bitmap bm){
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        InputStream sbs = new ByteArrayInputStream(baos.toByteArray());
+        return sbs;
     }
 
 }

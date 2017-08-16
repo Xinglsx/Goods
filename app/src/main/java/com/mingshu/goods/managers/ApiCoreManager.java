@@ -5,7 +5,9 @@ import android.content.Context;
 import com.alibaba.fastjson.JSONObject;
 import com.android.volley.Request;
 import com.mingshu.goods.models.GoodsInfo;
+import com.mingshu.goods.utils.MyLogUtil;
 
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,9 +24,8 @@ public class ApiCoreManager extends ApiManager {
 
     public ApiCoreManager(Context context){
         super((BaseActivity)context);
-//        baseURL = "http://100.91.28.177:8890/GoodsService.svc";
-        baseURL = "http://192.168.10.61:8890/GoodsService.svc";
-//        baseURL = "http://192.168.2.108:8890/GoodsService.svc";
+        baseURL = "http://192.168.10.61:8890/GoodsService.svc";//公司内网服务器
+//        baseURL = "http://182.61.58.192/GoodsService.svc";//外网服务器
     }
 
     public Api validateUserInfo(String strCode, String password){
@@ -57,7 +58,14 @@ public class ApiCoreManager extends ApiManager {
     public Api saveGoodsInfo(GoodsInfo goodsInfo){
         JSONObject param = new JSONObject();
         param.put("goodsInfo",goodsInfo);
-        //Log.e("param",param.toString());
+        MyLogUtil.LogShitou("param",param.toString());
         return createAPI(Request.Method.POST,baseURL+"/Goods/SaveGoodsInfo",param);
+    }
+
+    public Api updatePictrue(InputStream inputStream){
+        JSONObject param = new JSONObject();
+        param.put("stream",inputStream);
+        MyLogUtil.LogShitou("param",param.toString());
+        return createAPI(Request.Method.POST,baseURL+"/Goods/UpdatePictrue",param);
     }
 }
