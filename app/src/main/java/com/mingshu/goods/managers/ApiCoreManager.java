@@ -57,6 +57,7 @@ public class ApiCoreManager extends ApiManager {
     public Api saveGoodsInfo(GoodsInfo goodsInfo){
         JSONObject param = new JSONObject();
         param.put("goodsInfo",goodsInfo);
+        //Log.e("param",param.toString());
         return createAPI(Request.Method.POST,baseURL+"/Goods/SaveGoodsInfo",param);
     }
 }

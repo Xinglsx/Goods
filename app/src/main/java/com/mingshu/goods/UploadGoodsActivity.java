@@ -1,29 +1,48 @@
 package com.mingshu.goods;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.SystemClock;
+import android.provider.MediaStore;
 import android.view.View;
 
 import com.mingshu.goods.managers.ApiCoreManager;
 import com.mingshu.goods.models.GoodsInfo;
 import com.mingshu.goods.models.UserInfo;
 import com.mingshu.goods.utils.CommonUtil;
+import com.mingshu.goods.utils.Constant;
+import com.mingshu.goods.utils.ImageUtil;
 import com.mingshu.goods.utils.PrompUtil;
+import com.mingshu.goods.views.MyPopUpWindow;
 import com.mingshu.pmp.goods.R;
 import com.mingshu.pmp.goods.databinding.ActivityUploadGoodsBinding;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 import winning.framework.ScanBaseActivity;
 import winning.framework.managers.ApiManager;
 import winning.framework.network.NetworkEngine;
+import winning.framework.utils.ApplicationUtil;
 
-public class UploadGoodsActivity extends ScanBaseActivity {
+public class UploadGoodsActivity extends ScanBaseActivity{
 
     private ActivityUploadGoodsBinding binding;
     private ApiCoreManager apiCoreManager;
     private GoodsInfo goodsInfo;
     private UserInfo userInfo;
+    private MyPopUpWindow myPopUpWindow;
+
+
+    private int xiangji = 1;
+    String fileDir = "/mnt/sdcard/"+"tmp_pic_" + SystemClock.currentThreadTimeMillis() + ".jpg";
+    private File sdcardTempFile = new File(fileDir);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,12 +50,35 @@ public class UploadGoodsActivity extends ScanBaseActivity {
 //        setContentView(R.layout.activity_upload_goods);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_upload_goods);
         apiCoreManager = new ApiCoreManager(this);
+        userInfo = (UserInfo) ApplicationUtil.get(this, Constant.USERINFO);
+        myPopUpWindow = new MyPopUpWindow(this,this);
         goodsInfo = new GoodsInfo();
         binding.setData(goodsInfo);
         initView();
     }
 
     private void initView() {
+        binding.btnAddGoodsImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                myPopUpWindow.initPopupWindow();
+                Intent takeIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                Uri photoUri = getMediaFileUri(1);
+                takeIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+                startActivityForResult(takeIntent, 1);
+            }
+        });
+        binding.btnAddBuyImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                myPopUpWindow.initPopupWindow();
+                Intent takeIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                Uri photoUri = getMediaFileUri(1);
+                takeIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+                startActivityForResult(takeIntent, 2);
+            }
+        });
+
         binding.btnSaveDraft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,6 +97,24 @@ public class UploadGoodsActivity extends ScanBaseActivity {
             }
         });
 
+    }
+
+    public Uri getMediaFileUri(int type){
+        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "相册名字");
+        if (!mediaStorageDir.exists()) {
+            if (!mediaStorageDir.mkdirs()) {
+                return null;
+            }
+        }
+        //创建Media File
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        File mediaFile;
+        if (type == 1) {
+            mediaFile = new File(mediaStorageDir.getPath() + File.separator + "IMG_" + timeStamp + ".jpg");
+        } else {
+            return null;
+        }
+        return Uri.fromFile(mediaFile);
     }
 
     private void saveGoodsInfo(){
@@ -90,4 +150,50 @@ public class UploadGoodsActivity extends ScanBaseActivity {
     public void onSuccessScan(String s) {
 
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode){
+            case 1:
+                //相机拍照
+                if(resultCode == RESULT_OK){
+                    //获取图片地址
+                    if(data != null){
+                        if(data.hasExtra("data")){
+//                            Bitmap bitmap = data.get);
+                            Bitmap bitmap = ImageUtil.getScaledImage(UploadGoodsActivity.this,fileDir);
+                            bitmap = ImageUtil.ratio(bitmap,120,240);
+                            goodsInfo.setImages(ImageUtil.bitmapToBase64(bitmap));
+                            binding.imageGoods.setImageBitmap(bitmap);
+                        }
+                    }else{
+                        CommonUtil.ShowMsg("拍照数据获取失败",UploadGoodsActivity.this);
+                    }
+                }else{
+                    CommonUtil.ShowMsg("拍照已取消",UploadGoodsActivity.this);
+                }
+                break;
+            case 2:
+                //相机拍照
+                if(resultCode == RESULT_OK){
+                    if(data != null){
+                        if(data.hasExtra("data")){
+                            Bitmap bitmap = data.getParcelableExtra("data");
+                            bitmap = ImageUtil.ratio(bitmap,120,240);
+                            goodsInfo.setBuyimages(ImageUtil.bitmapToBase64(bitmap));
+                            binding.imageBuy.setImageBitmap(bitmap);
+                        }
+                    }else{
+                        CommonUtil.ShowMsg("拍照数据获取失败",UploadGoodsActivity.this);
+                    }
+                }else{
+                    CommonUtil.ShowMsg("拍照已取消",UploadGoodsActivity.this);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
 }
