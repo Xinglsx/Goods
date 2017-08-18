@@ -158,7 +158,7 @@ public class UploadGoodsActivity extends ScanBaseActivity{
                 //相机拍照
                 if(resultCode == RESULT_OK){
                     Bitmap bitmap = ImageUtil.getScaledImage(UploadGoodsActivity.this,fileDir);
-                    goodsInfo.setImage(ImageUtil.getImage_String(bitmap));
+                    goodsInfo.setImage(ImageUtil.bitmapToBase64(bitmap));
                     binding.imageGoods.setImageBitmap(bitmap);
                 }else{
                     CommonUtil.ShowMsg("拍照已取消",UploadGoodsActivity.this);
@@ -168,7 +168,7 @@ public class UploadGoodsActivity extends ScanBaseActivity{
                 //相机拍照
                 if(resultCode == RESULT_OK){
                     Bitmap bitmap = ImageUtil.getScaledImage(UploadGoodsActivity.this,fileDir);
-                    goodsInfo.setBuyimage(ImageUtil.getImage_String(bitmap));
+                    goodsInfo.setBuyimage(ImageUtil.bitmapToBase64(bitmap));
                     binding.imageBuy.setImageBitmap(bitmap);
                 }else{
                     CommonUtil.ShowMsg("拍照已取消",UploadGoodsActivity.this);

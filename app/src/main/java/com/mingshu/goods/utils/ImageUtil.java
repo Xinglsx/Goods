@@ -70,7 +70,7 @@ public class ImageUtil {
 
     public static String getImage_String(Bitmap bitmap) {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 80, stream);// (0 - 100)压缩文件
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream);// (0 - 100)压缩文件
         byte[] bt = stream.toByteArray();
         String photoStr = byte2hex(bt);
         return photoStr;
@@ -149,7 +149,7 @@ public class ImageUtil {
         int screenWidth = dp.getWidth();
         int screenHeight = dp.getHeight();
         //3.计算缩小比例
-        int scale = 2;
+        int scale = 4;
         int scaleWidth = imageWidth / screenWidth;
         int scaleHeight = imageHeight / screenHeight;
 
@@ -168,7 +168,7 @@ public class ImageUtil {
 
     public static InputStream bitmap2IS(Bitmap bm){
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        bm.compress(Bitmap.CompressFormat.JPEG, 60, baos);
         InputStream sbs = new ByteArrayInputStream(baos.toByteArray());
         return sbs;
     }

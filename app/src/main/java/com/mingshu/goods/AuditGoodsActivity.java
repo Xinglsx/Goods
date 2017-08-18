@@ -12,8 +12,6 @@ import android.view.View;
 import com.mingshu.goods.managers.ApiCoreManager;
 import com.mingshu.goods.utils.CommonUtil;
 import com.mingshu.goods.utils.ImageUtil;
-import com.mingshu.goods.utils.ImageUtils;
-import com.mingshu.goods.utils.OnCompressListener;
 import com.mingshu.goods.utils.PrompUtil;
 import com.mingshu.pmp.goods.R;
 import com.mingshu.pmp.goods.databinding.ActivityAuditGoodsBinding;
@@ -56,24 +54,24 @@ public class AuditGoodsActivity extends ScanBaseActivity {
             @Override
             public void onClick(View view) {
 //                Bitmap bitmap = ImageUtil.getScaledImage(AuditGoodsActivity.this,fileDir);
-                ImageUtils.with(AuditGoodsActivity.this)
-                        .load(new File(fileDir))
-                        .setCompressListener(new OnCompressListener() {
-                            @Override
-                            public void onStart() {
-                                CommonUtil.ShowMsg("开始！",AuditGoodsActivity.this);
-                            }
-
-                            @Override
-                            public void onSuccess(String strBase64) {
-                                updatePictrue(strBase64);
-                            }
-
-                            @Override
-                            public void onError(Throwable e) {
-                                CommonUtil.ShowMsg("转化错误！",AuditGoodsActivity.this);
-                            }
-                        });
+//                ImageUtils.with(AuditGoodsActivity.this)
+//                        .load(new File(fileDir))
+//                        .setCompressListener(new OnCompressListener() {
+//                            @Override
+//                            public void onStart() {
+////                                CommonUtil.ShowMsg("开始！",AuditGoodsActivity.this);
+//                            }
+//
+//                            @Override
+//                            public void onSuccess(String strBase64) {
+//                                updatePictrue(strBase64);
+//                            }
+//
+//                            @Override
+//                            public void onError(Throwable e) {
+//                                CommonUtil.ShowMsg("转化错误！",AuditGoodsActivity.this);
+//                            }
+//                        }).launch();
 
             }
         });
@@ -123,9 +121,9 @@ public class AuditGoodsActivity extends ScanBaseActivity {
 
     private void updatePictrue(String  strBase64){
         ApiManager.Api api = apiCoreManager.updatePictrue(strBase64);
-        api.invoke(new NetworkEngine.Success<Boolean>(){
+        api.invoke(new NetworkEngine.Success<String>(){
             @Override
-            public void callback(Boolean result){
+            public void callback(String result){
                 PrompUtil.stopProgessDialog();
                 CommonUtil.ShowMsg("保存成功，请等待审核",AuditGoodsActivity.this);
                 AuditGoodsActivity.this.finish();

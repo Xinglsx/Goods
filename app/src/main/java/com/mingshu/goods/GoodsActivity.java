@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -14,7 +13,6 @@ import android.view.View;
 import com.bumptech.glide.Glide;
 import com.mingshu.goods.models.GoodsInfo;
 import com.mingshu.goods.utils.CommonUtil;
-import com.mingshu.goods.utils.ImageUtil;
 import com.mingshu.pmp.goods.R;
 import com.mingshu.pmp.goods.databinding.ActivityGoodsBinding;
 
@@ -33,8 +31,7 @@ public class GoodsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         goodsInfo = (GoodsInfo)intent.getSerializableExtra("goods");
-        Bitmap bitmap = ImageUtil.string2Image(goodsInfo.getImage());
-        Glide.with(this).load(bitmap).dontAnimate().into(binding.imageGoods);
+        Glide.with(this).load(goodsInfo.getImage()).dontAnimate().into(binding.imageGoods);
         binding.txtGoodDescription.setText(goodsInfo.getDescription());
         binding.txtReason.setText(goodsInfo.getReason());
         binding.txtGoodsPrice.setText(goodsInfo.getPrice());
