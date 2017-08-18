@@ -7,7 +7,6 @@ import com.android.volley.Request;
 import com.mingshu.goods.models.GoodsInfo;
 import com.mingshu.goods.utils.MyLogUtil;
 
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -62,9 +61,9 @@ public class ApiCoreManager extends ApiManager {
         return createAPI(Request.Method.POST,baseURL+"/Goods/SaveGoodsInfo",param);
     }
 
-    public Api updatePictrue(InputStream inputStream){
+    public Api updatePictrue(String strBase64){
         JSONObject param = new JSONObject();
-        param.put("stream",inputStream);
+        param.put("strBase64",strBase64);
         MyLogUtil.LogShitou("param",param.toString());
         return createAPI(Request.Method.POST,baseURL+"/Goods/UpdatePictrue",param);
     }

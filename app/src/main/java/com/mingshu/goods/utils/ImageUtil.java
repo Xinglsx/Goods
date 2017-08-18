@@ -11,6 +11,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+
 /**
  * Created by Lisx on 2017-08-16.
  */
@@ -76,6 +77,18 @@ public class ImageUtil {
     }
 
     /**
+     * 将16位的字符串转成图片
+     */
+    public static Bitmap string2Image(String str){
+        Bitmap bitmap = null;
+        byte[] bytes = hex2byte(str);//字符串转二进制
+        //二进度转图片
+        bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+
+        return bitmap;
+    }
+
+    /**
      * 二进制转字符串(图片压缩使用)
      *
      * @param b
@@ -93,6 +106,27 @@ public class ImageUtil {
             }
         }
         return sb.toString();
+    }
+    /**
+     * 字符串转二进制
+     * @param str 字符串
+     */
+    public static byte[] hex2byte(String str) {
+        if (str == null)
+            return null;
+        str = str.trim();
+        int len = str.length();
+        if (len == 0 || len % 2 == 1)
+            return null;
+        byte[] b = new byte[len / 2];
+        try {
+            for (int i = 0; i < str.length(); i += 2) {
+                b[i / 2] = (byte) Integer.decode("0X" + str.substring(i, i + 2)).intValue();
+            }
+            return b;
+        } catch (Exception e) {
+            return null;
+        }
     }
     /**
      * 图片质量压缩

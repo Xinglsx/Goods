@@ -7,7 +7,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.mingshu.goods.models.GoodsInfo;
 import com.mingshu.goods.utils.CommonUtil;
 import com.mingshu.goods.utils.Constant;
@@ -71,7 +70,8 @@ public class DataBindingAdapterGoods extends BaseAdapter {
             viewHolder.txtRecommendname.setText(goodsInfos.get(i).getRecommendname());
             viewHolder.txtGoodsPrice.setText(goodsInfos.get(i).getPrice());
             viewHolder.txtClickCount.setText(String.valueOf(goodsInfos.get(i).getClickcount()));
-            Glide.with(context).load(goodsInfos.get(i).getImage()).dontAnimate().into(viewHolder.imageGoods);
+//            Bitmap bitmap = ImageUtil.string2Image(goodsInfos.get(i).getImage());
+//            Glide.with(context).load(bitmap).dontAnimate().into(viewHolder.imageGoods);
 //            viewHolder.txtReason.setText(goodsInfos.get(i).getReason());
         }
 

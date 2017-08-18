@@ -80,8 +80,8 @@ public class UploadGoodsActivity extends ScanBaseActivity{
         binding.btnSaveDraft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goodsInfo.setState((short) 0);
                 PrompUtil.startProgressDialog(UploadGoodsActivity.this,"保存草稿中，请稍等。。。");
+                goodsInfo.setState((short) 0);
                 saveGoodsInfo();
             }
         });
@@ -89,8 +89,8 @@ public class UploadGoodsActivity extends ScanBaseActivity{
         binding.btnSaveSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goodsInfo.setState((short) 1);
                 PrompUtil.startProgressDialog(UploadGoodsActivity.this,"提交审核中，请稍等。。。");
+                goodsInfo.setState((short) 1);
                 saveGoodsInfo();
             }
         });
