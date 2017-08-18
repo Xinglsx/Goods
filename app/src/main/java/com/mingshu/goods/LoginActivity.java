@@ -43,7 +43,10 @@ public class LoginActivity extends ScanBaseActivity {
             binding.txtPassword.setText(sp.getString(Constant.PASSWORD,""));//不再保存密码
             if(sp.getBoolean(Constant.AUTOLOGIN_ISCHECK,false)){
                 binding.chkAutoLogin.setChecked(true);
-                Login();
+                Intent intent = this.getIntent();
+                if(!intent.getBooleanExtra("isLogout",false)){
+                    Login();
+                }
             }
         }
 
