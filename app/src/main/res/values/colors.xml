@@ -4,9 +4,12 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorGreen">#1849F8</color>
+    <color name="colorGoodsListBackground">#d5dfff</color>
     <color name="colorTitle">#4D4D4D</color>
     <color name="colorGray">#707070</color>
-    <color name="colorBackground">#FCFCFC</color>
-    <color name="colorBtnBackground">#3679ff</color>
+    <color name="colorBackground">#f5f5f5</color>
+    <color name="colorBtnBackground">#00349b</color>
     <color name="colorBtnBackground2">#9bcfff</color>
+    <color name="colorBtnYellow">#f29702</color>
+    <color name="colorWhite">#FFFFFF</color>
 </resources>

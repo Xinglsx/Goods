@@ -5,10 +5,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.Toast;
 
 import com.mingshu.goods.managers.ApiCoreManager;
 import com.mingshu.goods.models.UserInfo;
@@ -35,6 +37,8 @@ public class LoginActivity extends ScanBaseActivity {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_login);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
+//        Glide.with(this).load(getResources().getDrawable(R.drawable.image_background,null)).dontAnimate().into(0,0);
+
         apiCoreManager = new ApiCoreManager(this);
         sp = this.getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         binding.txtUserCode.setText(sp.getString(Constant.USERCODE,""));
@@ -110,8 +114,13 @@ public class LoginActivity extends ScanBaseActivity {
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 break;
-            case R.id.btn_exit:
-                finish();
+            case R.id.txt_about_us:
+                break;
+            case R.id.txt_guest_login:
+                break;
+            case R.id.txt_forget_password:
+                break;
+            default:
                 break;
         }
     }
@@ -180,5 +189,22 @@ public class LoginActivity extends ScanBaseActivity {
 
     private void failuerMessage(String message){
         CommonUtil.ShowMsg(message,this);
+    }
+
+    private long mkeyTime;
+
+    //两次返回键退出
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if ((System.currentTimeMillis() - mkeyTime) > 1500) {
+                mkeyTime = System.currentTimeMillis();
+                Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_LONG).show();
+            } else {
+                finish();
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

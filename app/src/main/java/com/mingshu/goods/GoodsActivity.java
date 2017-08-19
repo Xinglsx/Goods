@@ -42,7 +42,7 @@ public class GoodsActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String tempCommand = goodsInfo.getCommand();
                 if(tempCommand == null || tempCommand == "") {
-                    CommonUtil.ShowMsg("此商品无法自动跳转！",GoodsActivity.this);
+                    CommonUtil.ShowMsg("此商品未维护好，无法自动跳转！",GoodsActivity.this);
                 }
                 else {
                     ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);

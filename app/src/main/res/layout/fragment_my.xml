@@ -2,146 +2,148 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
     <data></data>
-    <LinearLayout android:layout_width="match_parent"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:background="@color/colorBackground">
-
-        <LinearLayout
+        <Button
+            android:id="@+id/btn_logout"
             android:layout_width="match_parent"
-            android:layout_height="100dp">
-            <ImageView
-                android:id="@+id/image_user_head"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@drawable/image_head_gril"
-                android:padding="4dp"/>
+            android:layout_height="50dp"
+            android:text="退出登录"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorBtnYellow"
+            android:layout_margin="10dp"/>
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_above="@id/btn_buy">
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_marginLeft="20dp">
-                <TextView
-                    android:id="@+id/txt_user_nickname"
+                android:layout_height="100dp">
+                <ImageView
+                    android:id="@+id/image_user_head"
                     android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:text="用户昵称"
-                    android:gravity="bottom"
-                    android:textSize="40px"
-                    />
-                <TextView
-                    android:id="@+id/txt_user_id"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:text="账号："
-                    android:gravity="top"
-                    android:layout_marginTop="10dp"
-                    />
+                    android:layout_height="match_parent"
+                    android:src="@drawable/image_head_gril"
+                    android:padding="4dp"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="20dp">
+                    <TextView
+                        android:id="@+id/txt_user_nickname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:text="用户昵称"
+                        android:gravity="bottom"
+                        android:textSize="18sp"
+                        />
+                    <TextView
+                        android:id="@+id/txt_user_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:text="账号："
+                        android:gravity="top"
+                        android:layout_marginTop="10dp"
+                        android:textSize="13sp"
+                        />
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/linlayout_change_user"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:gravity="center_vertical"
-            android:layout_marginTop="30dp"
-            android:background="#FFFFFF">
-            <ImageView
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:src="@drawable/image_change_user"
-                android:layout_marginLeft="30dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="切换账号"
+            <LinearLayout
+                android:id="@+id/linlayout_change_user"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
                 android:gravity="center_vertical"
-                android:textSize="35px"
-                android:layout_marginLeft="30dp"/>
-        </LinearLayout>
+                android:layout_marginTop="30dp"
+                android:background="#FFFFFF">
+                <ImageView
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:src="@drawable/image_change_user"
+                    android:layout_marginLeft="30dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="切换账号"
+                    android:gravity="center_vertical"
+                    android:textSize="18sp"
+                    android:layout_marginLeft="20dp"/>
+            </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/linlayout_upload_goods"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:gravity="center_vertical"
-            android:layout_marginTop="30dp"
-            android:background="#FFFFFF">
-            <ImageView
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:src="@drawable/image_upload_goods_48"
-                android:layout_marginLeft="30dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="上传商品"
+            <LinearLayout
+                android:id="@+id/linlayout_upload_goods"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
                 android:gravity="center_vertical"
-                android:textSize="35px"
-                android:layout_marginLeft="30dp"/>
-        </LinearLayout>
+                android:layout_marginTop="30dp"
+                android:background="#FFFFFF">
+                <ImageView
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:src="@drawable/image_upload_goods_48"
+                    android:layout_marginLeft="30dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="上传商品"
+                    android:gravity="center_vertical"
+                    android:textSize="18sp"
+                    android:layout_marginLeft="20dp"/>
+            </LinearLayout>
 
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_height="0.5dp"
-            android:background="@color/colorGray"
-            />
-
-        <LinearLayout
-            android:id="@+id/linlayout_audit_goods"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:gravity="center_vertical"
-            android:background="#FFFFFF">
-            <ImageView
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:src="@drawable/image_audit_goods_48"
-                android:layout_marginLeft="30dp"/>
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="审核商品"
+                android:layout_width="fill_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="0.5dp"
+                android:background="@color/colorGray"
+                />
+
+            <LinearLayout
+                android:id="@+id/linlayout_audit_goods"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
                 android:gravity="center_vertical"
-                android:textSize="35px"
-                android:layout_marginLeft="30dp"/>
-        </LinearLayout>
+                android:background="#FFFFFF">
+                <ImageView
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:src="@drawable/image_audit_goods_48"
+                    android:layout_marginLeft="30dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="审核商品"
+                    android:gravity="center_vertical"
+                    android:textSize="18sp"
+                    android:layout_marginLeft="20dp"/>
+            </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/linlayout_setting"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:gravity="center_vertical"
-            android:layout_marginTop="30dp"
-            android:background="#FFFFFF">
-            <ImageView
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:src="@drawable/image_setting_48"
-                android:layout_marginLeft="30dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="设置"
+            <LinearLayout
+                android:id="@+id/linlayout_setting"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
                 android:gravity="center_vertical"
-                android:textSize="35px"
-                android:layout_marginLeft="30dp"/>
-        </LinearLayout>
+                android:layout_marginTop="30dp"
+                android:background="#FFFFFF">
+                <ImageView
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:src="@drawable/image_setting_48"
+                    android:layout_marginLeft="30dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="设置"
+                    android:gravity="center_vertical"
+                    android:textSize="18sp"
+                    android:layout_marginLeft="20dp"/>
+            </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginTop="20dp">
-            <Button
-                android:id="@+id/btn_logout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="退出登录"/>
         </LinearLayout>
-    </LinearLayout>
-
+    </RelativeLayout>
 </layout>

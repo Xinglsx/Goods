@@ -42,14 +42,17 @@ public class RegisterActivity extends ScanBaseActivity {
                 String password = binding.editPassword.getText().toString();
                 String passwordRepeat = binding.editPasswordRepeat.getText().toString();
                 if(password == null || "".equals(password) ){
+                    PrompUtil.stopProgessDialog();
                     CommonUtil.DisplayToast("密码未输入！",this);
                     break;
                 }
                 if(password.length() < 6 || password.length() > 12){
+                    PrompUtil.stopProgessDialog();
                     CommonUtil.DisplayToast("请输入6到12位密码！",this);
                     break;
                 }
                 if(!password.equals(passwordRepeat)){
+                    PrompUtil.stopProgessDialog();
                     CommonUtil.DisplayToast("您两次输入的密码不一致！",this);
                     break;
                 }

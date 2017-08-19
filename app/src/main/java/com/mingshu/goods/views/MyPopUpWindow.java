@@ -8,7 +8,6 @@ import android.os.SystemClock;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
@@ -82,12 +81,7 @@ public class MyPopUpWindow{
         //关闭事件
         popupWindow.setOnDismissListener(new PopupDismissListener());
 
-        Button open = (Button) popupWindowView.findViewById(R.id.picture_selector_take_photo_btn);
-        Button save = (Button) popupWindowView.findViewById(R.id.picture_selector_pick_picture_btn);
-        Button close = (Button) popupWindowView.findViewById(R.id.picture_selector_cancel_btn);
-
-
-        open.setOnClickListener(new View.OnClickListener() {
+        popupWindowView.findViewById(R.id.picture_selector_take_photo_btn).setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -97,7 +91,7 @@ public class MyPopUpWindow{
             }
         });
 
-        save.setOnClickListener(new View.OnClickListener() {
+        popupWindowView.findViewById(R.id.picture_selector_pick_picture_btn).setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -107,7 +101,7 @@ public class MyPopUpWindow{
             }
         });
 
-        close.setOnClickListener(new View.OnClickListener() {
+        popupWindowView.findViewById(R.id.picture_selector_cancel_btn).setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {

@@ -231,21 +231,21 @@
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:text="保存草稿"
-                        android:background="@color/colorBtnBackground"/>
+                        android:background="@color/colorBtnYellow"/>
                     <Button
                         android:id="@+id/btn_save_submit"
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:text="提交审核 "
                         android:layout_marginLeft="40dp"
-                        android:background="@color/colorBtnBackground"/>
+                        android:background="@color/colorBtnYellow"/>
                 </LinearLayout>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorGreen"
-                    android:padding="5dp"
-                    android:text="审核要点：自购、自用优先通过，推荐商品商家得分不低于同行业，性价比确实高，上传图片是否合适，上传信息是否准确。"/>
+                    android:padding="8dp"
+                    android:text="@string/audit_key"/>
             </LinearLayout>
         </ScrollView>
 
