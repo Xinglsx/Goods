@@ -35,7 +35,7 @@ public class GoodsActivity extends AppCompatActivity {
         binding.txtGoodDescription.setText(goodsInfo.getDescription());
         binding.txtReason.setText(goodsInfo.getReason());
         binding.txtGoodsPrice.setText(goodsInfo.getPrice());
-        binding.txtClickcount.setText(String.valueOf(goodsInfo.getClickcount()));
+        binding.txtClickcount.setText(String.valueOf(goodsInfo.getClickcount() + 1));
 
         binding.btnBuy.setOnClickListener(new View.OnClickListener() {
             @Override

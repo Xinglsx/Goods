@@ -11,7 +11,6 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
-import android.widget.Toast;
 
 import com.mingshu.pmp.goods.R;
 
@@ -27,6 +26,9 @@ public class MyPopUpWindow{
     private int from = 0;
     private Context context;
     private Activity activity;
+
+    // 数据接口
+    OnGetData mOnGetData;
 
     private int xiangji = 1;
     private File sdcardTempFile = new File("/mnt/sdcard/", "tmp_pic_" + SystemClock.currentThreadTimeMillis() + ".jpg");
@@ -48,7 +50,10 @@ public class MyPopUpWindow{
 
     }
 
-    public void initPopupWindow() {
+    public void initPopupWindow(OnGetData sd) {
+
+        mOnGetData = sd;
+
         from = Location.BOTTOM.ordinal();
         View popupWindowView = activity.getLayoutInflater().inflate(R.layout.layout_picture_selector, null);
         //内容，高度，宽度
@@ -86,7 +91,8 @@ public class MyPopUpWindow{
 
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "拍照", Toast.LENGTH_LONG).show();
+                mOnGetData.onDataCallBack(0);
+                //Toast.makeText(context, "拍照", Toast.LENGTH_LONG).show();
                 popupWindow.dismiss();
             }
         });
@@ -95,7 +101,8 @@ public class MyPopUpWindow{
 
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "从相册选择", Toast.LENGTH_LONG).show();
+                mOnGetData.onDataCallBack(1);
+                //Toast.makeText(context, "从相册选择", Toast.LENGTH_LONG).show();
                 popupWindow.dismiss();
             }
         });
@@ -104,7 +111,8 @@ public class MyPopUpWindow{
 
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "取消", Toast.LENGTH_LONG).show();
+                mOnGetData.onDataCallBack(2);
+                //Toast.makeText(context, "取消", Toast.LENGTH_LONG).show();
                 popupWindow.dismiss();
             }
         });
@@ -131,5 +139,10 @@ public class MyPopUpWindow{
         WindowManager.LayoutParams lp = activity.getWindow().getAttributes();
         lp.alpha = bgAlpha; //0.0-1.0
         activity.getWindow().setAttributes(lp);
+    }
+
+    // 数据接口抽象方法
+    public interface OnGetData {
+        abstract void onDataCallBack(int nClick);
     }
 }

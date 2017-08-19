@@ -7,5 +7,6 @@
     <color name="colorTitle">#4D4D4D</color>
     <color name="colorGray">#707070</color>
     <color name="colorBackground">#FCFCFC</color>
-
+    <color name="colorBtnBackground">#3679ff</color>
+    <color name="colorBtnBackground2">#9bcfff</color>
 </resources>

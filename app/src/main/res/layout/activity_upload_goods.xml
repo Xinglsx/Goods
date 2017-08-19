@@ -182,37 +182,41 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:layout_marginTop="15dp">
                         <Button
                             android:id="@+id/btn_add_goods_image"
-                            android:layout_width="wrap_content"
+                            android:layout_width="150dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="添加商品图片"/>
+                            android:text="添加商品图片"
+                            android:background="@color/colorBtnBackground2"/>
                         <Button
+                            android:background="@color/colorBtnBackground2"
                             android:id="@+id/btn_add_buy_image"
-                            android:layout_width="wrap_content"
+                            android:layout_width="150dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="添加自购图片"
-                            android:layout_marginLeft="40dp"/>
+                            android:layout_marginLeft="30dp"/>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:layout_marginTop="15dp">
                         <ImageView
                             android:id="@+id/image_goods"
                             android:layout_width="150dp"
                             android:layout_height="150dp"
-                            android:src="@drawable/image_btn_football"
+                            android:src="@drawable/image_default"
                             />
                         <ImageView
                             android:id="@+id/image_buy"
                             android:layout_marginLeft="30dp"
                             android:layout_width="150dp"
                             android:layout_height="150dp"
-                            android:src="@drawable/image_btn_football"
+                            android:src="@drawable/image_default"
                             />
                     </LinearLayout>
 
@@ -220,18 +224,21 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:layout_marginTop="15dp">
                     <Button
                         android:id="@+id/btn_save_draft"
-                        android:layout_width="wrap_content"
+                        android:layout_width="150dp"
                         android:layout_height="wrap_content"
-                        android:text="保存草稿"/>
+                        android:text="保存草稿"
+                        android:background="@color/colorBtnBackground"/>
                     <Button
                         android:id="@+id/btn_save_submit"
-                        android:layout_width="wrap_content"
+                        android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:text="提交审核 "
-                        android:layout_marginLeft="40dp" />
+                        android:layout_marginLeft="40dp"
+                        android:background="@color/colorBtnBackground"/>
                 </LinearLayout>
                 <TextView
                     android:layout_width="wrap_content"

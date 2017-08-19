@@ -1,15 +1,21 @@
 package com.mingshu.goods.utils;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.util.Base64;
+import android.util.Log;
 import android.view.Display;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
+
+import static com.android.volley.VolleyLog.TAG;
 
 
 /**
@@ -149,7 +155,7 @@ public class ImageUtil {
         int screenWidth = dp.getWidth();
         int screenHeight = dp.getHeight();
         //3.计算缩小比例
-        int scale = 4;
+        int scale = 2;
         int scaleWidth = imageWidth / screenWidth;
         int scaleHeight = imageHeight / screenHeight;
 
@@ -166,11 +172,23 @@ public class ImageUtil {
         return bm;
     }
 
-    public static InputStream bitmap2IS(Bitmap bm){
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.JPEG, 60, baos);
-        InputStream sbs = new ByteArrayInputStream(baos.toByteArray());
-        return sbs;
+    public static String selectImage(Context context,Intent data){
+        Uri selectedImage = data.getData();
+//      Log.e(TAG, selectedImage.toString());
+        if(selectedImage!=null){
+            String uriStr=selectedImage.toString();
+            String path=uriStr.substring(10,uriStr.length());
+            if(path.startsWith("com.sec.android.gallery3d")){
+                Log.e(TAG, "It's auto backup pic path:"+selectedImage.toString());
+                return null;
+            }
+        }
+        String[] filePathColumn = { MediaStore.Images.Media.DATA };
+        Cursor cursor = context.getContentResolver().query(selectedImage,filePathColumn, null, null, null);
+        cursor.moveToFirst();
+        int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+        String picturePath = cursor.getString(columnIndex);
+        cursor.close();
+        return picturePath;
     }
-
 }

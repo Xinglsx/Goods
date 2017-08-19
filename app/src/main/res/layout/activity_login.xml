@@ -50,7 +50,10 @@
             <EditText
                 android:id="@+id/txt_UserCode"
                 android:layout_width="200dp"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_more_style"
+                android:textSize="18sp"
+                android:padding="5dp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -69,7 +72,10 @@
                 android:id="@+id/txt_Password"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:background="@drawable/btn_more_style"
+                android:textSize="18sp"
+                android:padding="5dp"/>
 
         </LinearLayout>
 

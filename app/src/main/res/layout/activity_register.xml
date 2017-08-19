@@ -3,11 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools">
     <data></data>
     <LinearLayout
-        android:layout_width="368dp"
-        android:layout_height="495dp"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteY="8dp"
-        tools:layout_editor_absoluteX="8dp">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/textView"
@@ -16,7 +14,7 @@
             android:text="注册新账号"
             android:gravity="center"
             android:layout_gravity="center"
-            android:textSize="30dp"/>
+            android:textSize="24sp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -35,13 +33,16 @@
             <EditText
                 android:id="@+id/txt_UserCode"
                 android:layout_width="200dp"
-                android:layout_height="match_parent"
-                android:width="100dp" />
+                android:layout_height="wrap_content"
+                android:width="100dp"
+                android:background="@drawable/btn_more_style"
+                android:textSize="18sp"
+                android:padding="5dp"/>
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="368dp"
+            android:layout_width="match_parent"
             android:layout_height="60dp"
             android:orientation="horizontal"
             tools:layout_editor_absoluteX="8dp"
@@ -59,8 +60,11 @@
             <EditText
                 android:id="@+id/edit_Password"
                 android:layout_width="200dp"
-                android:layout_height="match_parent"
-                android:inputType="textPassword" />
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:background="@drawable/btn_more_style"
+                android:textSize="18sp"
+                android:padding="5dp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -74,7 +78,7 @@
             <TextView
                 android:id="@+id/txt_PasswordRepeat"
                 android:layout_width="120dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:text="确认密码"
                 android:textSize="20dp" />
@@ -82,8 +86,11 @@
             <EditText
                 android:id="@+id/edit_PasswordRepeat"
                 android:layout_width="200dp"
-                android:layout_height="match_parent"
-                android:inputType="textPassword" />
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:background="@drawable/btn_more_style"
+                android:textSize="18sp"
+                android:padding="5dp"/>
 
         </LinearLayout>
 
@@ -92,24 +99,24 @@
             android:layout_height="60dp"
             android:gravity="center"
             android:orientation="horizontal"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="270dp"
-            android:layout_marginTop="50dp">
+            android:layout_marginTop="30dp">
 
             <Button
                 android:id="@+id/btn_load"
                 android:layout_width="120dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:text="注册"
-                android:onClick="click"/>
+                android:onClick="click"
+                android:background="@color/colorBtnBackground"/>
 
             <Button
                 android:id="@+id/btn_exit"
                 android:layout_width="120dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:text="返回登录"
-                android:onClick="click"/>
+                android:onClick="click"
+                android:background="@color/colorBtnBackground"/>
 
         </LinearLayout>
     </LinearLayout>

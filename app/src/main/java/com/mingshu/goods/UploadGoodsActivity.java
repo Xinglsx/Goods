@@ -36,7 +36,8 @@ public class UploadGoodsActivity extends ScanBaseActivity{
     private ApiCoreManager apiCoreManager;
     private GoodsInfo goodsInfo;
     private UserInfo userInfo;
-    private MyPopUpWindow myPopUpWindow;
+    private MyPopUpWindow imagePopUpWindow;
+    private MyPopUpWindow buyImagePopUpWindow;
 
 
     private int xiangji = 1;
@@ -49,31 +50,79 @@ public class UploadGoodsActivity extends ScanBaseActivity{
         binding = DataBindingUtil.setContentView(this, R.layout.activity_upload_goods);
         apiCoreManager = new ApiCoreManager(this);
         userInfo = (UserInfo) ApplicationUtil.get(this, Constant.USERINFO);
-        myPopUpWindow = new MyPopUpWindow(this,this);
         goodsInfo = new GoodsInfo();
         binding.setData(goodsInfo);
+        initUI();
         initView();
+    }
+
+    private void initUI() {
+        imagePopUpWindow = new MyPopUpWindow(this,this);
+        buyImagePopUpWindow = new MyPopUpWindow(this,this);
     }
 
     private void initView() {
         binding.btnAddGoodsImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                myPopUpWindow.initPopupWindow();
-                Intent takeIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                Uri photoUri = getMediaFileUri(1);
-                takeIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
-                startActivityForResult(takeIntent, 1);
+                if(imagePopUpWindow == null){
+                    return;
+                }
+
+                imagePopUpWindow.initPopupWindow(new MyPopUpWindow.OnGetData() {
+                    @Override
+                    public void onDataCallBack(int nClick) {
+                        switch (nClick){
+                            case 0:
+                                Intent takeIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                                Uri photoUri = getMediaFileUri(1);
+                                takeIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+                                startActivityForResult(takeIntent, 1);
+                                break;
+                            case 1:
+                                Intent pickIntent = new Intent(Intent.ACTION_PICK, null);
+                                // 如果限制上传到服务器的图片类型时可以直接写如："image/jpeg 、 image/png等的类型"
+                                pickIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+                                startActivityForResult(pickIntent, 3);
+                                break;
+                            default:
+                                //Toast.makeText(UploadGoodsActivity.this, "点击了取消1", Toast.LENGTH_LONG).show();
+                                break;
+                        }
+                    }
+                });
             }
         });
+
         binding.btnAddBuyImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                myPopUpWindow.initPopupWindow();
-                Intent takeIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                Uri photoUri = getMediaFileUri(1);
-                takeIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
-                startActivityForResult(takeIntent, 2);
+                if(buyImagePopUpWindow == null){
+                    return;
+                }
+
+                buyImagePopUpWindow.initPopupWindow(new MyPopUpWindow.OnGetData() {
+                    @Override
+                    public void onDataCallBack(int nClick) {
+                        switch (nClick){
+                            case 0:
+                                Intent takeIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                                Uri photoUri = getMediaFileUri(1);
+                                takeIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+                                startActivityForResult(takeIntent, 2);
+                                break;
+                            case 1:
+                                Intent pickIntent = new Intent(Intent.ACTION_PICK, null);
+                                // 如果限制上传到服务器的图片类型时可以直接写如："image/jpeg 、 image/png等的类型"
+                                pickIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+                                startActivityForResult(pickIntent, 4);
+                                break;
+                            case 2:
+//                                Toast.makeText(UploadGoodsActivity.this, "点击了取消2", Toast.LENGTH_LONG).show();
+                                break;
+                        }
+                    }
+                });
             }
         });
 
@@ -155,28 +204,44 @@ public class UploadGoodsActivity extends ScanBaseActivity{
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode){
             case 1:
-                //相机拍照
+                //image-相机拍照
                 if(resultCode == RESULT_OK){
                     Bitmap bitmap = ImageUtil.getScaledImage(UploadGoodsActivity.this,fileDir);
                     goodsInfo.setImage(ImageUtil.bitmapToBase64(bitmap));
                     binding.imageGoods.setImageBitmap(bitmap);
-                }else{
-                    CommonUtil.ShowMsg("拍照已取消",UploadGoodsActivity.this);
                 }
                 break;
             case 2:
-                //相机拍照
+                //buyimage-相机拍照
                 if(resultCode == RESULT_OK){
                     Bitmap bitmap = ImageUtil.getScaledImage(UploadGoodsActivity.this,fileDir);
                     goodsInfo.setBuyimage(ImageUtil.bitmapToBase64(bitmap));
                     binding.imageBuy.setImageBitmap(bitmap);
-                }else{
-                    CommonUtil.ShowMsg("拍照已取消",UploadGoodsActivity.this);
                 }
+                break;
+            case 3:
+                if(resultCode == RESULT_OK){
+                    Bitmap bitmap = ImageUtil.getScaledImage(UploadGoodsActivity.this,
+                            ImageUtil.selectImage(UploadGoodsActivity.this,data));
+                    goodsInfo.setImage(ImageUtil.bitmapToBase64(bitmap));
+                    binding.imageGoods.setImageBitmap(bitmap);
+                }
+                //image从相册中选择
+                break;
+            case 4:
+                if(resultCode == RESULT_OK){
+                    Bitmap bitmap = ImageUtil.getScaledImage(UploadGoodsActivity.this,
+                            ImageUtil.selectImage(UploadGoodsActivity.this,data));
+                    goodsInfo.setBuyimage(ImageUtil.bitmapToBase64(bitmap));
+                    binding.imageBuy.setImageBitmap(bitmap);
+                }
+                //buyimage从相册中选择
                 break;
             default:
                 break;
         }
     }
+
+
 
 }
