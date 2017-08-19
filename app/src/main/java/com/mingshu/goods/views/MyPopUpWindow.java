@@ -37,6 +37,8 @@ public class MyPopUpWindow{
         this.activity = activity;
     }
 
+    public MyPopUpWindow(){}
+
     /**
      * 菜单弹出方向
      */

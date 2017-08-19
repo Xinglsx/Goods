@@ -1,5 +1,6 @@
 package com.mingshu.goods;
 
+import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -27,10 +28,11 @@ public class FragmentFind extends BaseFragment {
 
     Context context;
 
+    @SuppressLint({"NewApi", "ValidFragment"})
     public FragmentFind(Context context) {
         this.context = context;
     }
-
+    public FragmentFind(){}
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

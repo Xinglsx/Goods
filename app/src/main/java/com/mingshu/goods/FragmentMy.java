@@ -1,8 +1,8 @@
 package com.mingshu.goods;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -15,7 +15,6 @@ import com.mingshu.goods.utils.ApplicationUtil;
 import com.mingshu.goods.utils.Constant;
 import com.mingshu.goods.views.adapters.BaseFragment;
 import com.mingshu.pmp.goods.R;
-import com.mingshu.pmp.goods.databinding.FragmentMyBinding;
 
 /**
  * Created by Lisx on 2017-06-29.
@@ -26,11 +25,11 @@ public class FragmentMy extends BaseFragment {
     Context context;
     UserInfo curUser;
 
-
+    @SuppressLint({"NewApi", "ValidFragment"})
     public FragmentMy(Context context) {
         this.context = context;
     }
-
+    public FragmentMy(){}
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

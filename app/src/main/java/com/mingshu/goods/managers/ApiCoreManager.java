@@ -23,8 +23,8 @@ public class ApiCoreManager extends ApiManager {
 
     public ApiCoreManager(Context context){
         super((BaseActivity)context);
-        baseURL = "http://192.168.10.61:8890/GoodsService.svc";//公司内网服务器
-//        baseURL = "http://182.61.58.192/GoodsService.svc";//外网服务器
+//        baseURL = "http://192.168.10.61:8890/GoodsService.svc";//公司内网服务器
+        baseURL = "http://182.61.58.192/GoodsService.svc";//外网服务器
     }
 
     public Api validateUserInfo(String strCode, String password){

@@ -1,6 +1,7 @@
 package com.mingshu.goods;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -21,9 +22,12 @@ public class FragmentConcerns extends BaseFragment {
     ListView listViewArticle;
     Context context;
 
+    @SuppressLint({"NewApi", "ValidFragment"})
     public FragmentConcerns(Context context) {
         this.context = context;
     }
+
+    public FragmentConcerns(){}
 
     @Nullable
     @Override

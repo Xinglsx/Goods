@@ -1,5 +1,6 @@
 package com.mingshu.goods;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -38,10 +39,11 @@ public class FragmentGoods extends BaseFragment {
     private DataBindingAdapterGoods bindingAdapterArticle;
     private  Context context;
 
+    @SuppressLint({"NewApi", "ValidFragment"})
     public FragmentGoods(Context context) {
         this.context = context;
     }
-
+    public FragmentGoods(){}
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
