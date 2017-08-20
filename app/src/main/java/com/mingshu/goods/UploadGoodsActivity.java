@@ -1,5 +1,8 @@
 package com.mingshu.goods;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Bitmap;
@@ -130,8 +133,7 @@ public class UploadGoodsActivity extends ScanBaseActivity{
             @Override
             public void onClick(View view) {
                 PrompUtil.startProgressDialog(UploadGoodsActivity.this,"保存草稿中，请稍等。。。");
-                goodsInfo.setState((short) 0);
-                saveGoodsInfo();
+                saveGoodsInfo((short)0);
             }
         });
 
@@ -139,11 +141,46 @@ public class UploadGoodsActivity extends ScanBaseActivity{
             @Override
             public void onClick(View view) {
                 PrompUtil.startProgressDialog(UploadGoodsActivity.this,"提交审核中，请稍等。。。");
-                goodsInfo.setState((short) 1);
-                saveGoodsInfo();
+                saveGoodsInfo((short)1);
             }
         });
 
+        binding.btnPaste.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                paseGoodsInfo();
+            }
+        });
+
+    }
+
+    public Boolean checkData(){
+
+        if(binding.txtGoodsDescription.length() <= 0){
+            CommonUtil.DisplayToast("请输入商品描述！",this);
+            return false;
+        }
+        if(binding.txtGoodsLink.length() <= 0){
+            CommonUtil.DisplayToast("请输入商品链接！",this);
+            return false;
+        }
+        if(binding.txtGoodsCommand.length() <= 0){
+            CommonUtil.DisplayToast("请输入商品吱口令！",this);
+            return false;
+        }
+        if(binding.txtGoodsPrice.length() <= 0){
+            CommonUtil.DisplayToast("请输入商品价格！",this);
+            return false;
+        }
+        if(binding.txtGoodsReason.length() <= 0){
+            CommonUtil.DisplayToast("请输入推荐理由！",this);
+            return false;
+        }
+        if(binding.txtGoodsReason.length() < 50){
+            CommonUtil.DisplayToast("请补充推荐理由，至少50字！",this);
+            return false;
+        }
+        return true;
     }
 
     public Uri getMediaFileUri(int type){
@@ -165,8 +202,13 @@ public class UploadGoodsActivity extends ScanBaseActivity{
         return Uri.fromFile(mediaFile);
     }
 
-    private void saveGoodsInfo(){
+    private void saveGoodsInfo(short state){
 
+        if(!checkData()){
+            PrompUtil.stopProgessDialog();
+            return ;
+        }
+        goodsInfo.setState(state);
         //推荐信息
         goodsInfo.setRecommender(userInfo.getId());
         goodsInfo.setRecommendname(userInfo.getNickname());
@@ -242,6 +284,43 @@ public class UploadGoodsActivity extends ScanBaseActivity{
         }
     }
 
+    private  void paseGoodsInfo()
+    {
+        ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData mClipData = cm.getPrimaryClip();
+        String content = mClipData.getItemAt(mClipData.getItemCount() - 1).getText().toString();
+        //圣手三阶四阶魔方二三五阶顺滑成人比赛盲拧益智玩具套装学生初学【包邮】
+        //【在售价】10.10元
+        //【券后价】5.10元
+        //【下单链接】http://e22a.com/h.KnZPt7
+        //    -----------------
+        //            复制这条信息，￥2kFy02xYXBx￥ ，打开【手机淘宝】即可查看
+        if (content.length() > 0){
+            int startIndex = 0;
+            int endIndex = content.indexOf("【在售价】") - 1;
+            if(startIndex  >= 0 && endIndex >0 && endIndex > startIndex){
+                binding.txtGoodsDescription.setText(content.substring(startIndex,endIndex));
+            }
 
+            startIndex = content.indexOf("【券后价】") + 5;
+            endIndex = content.indexOf("【下单链接】") - 2;
+            if(startIndex  >= 0 && endIndex > startIndex) {
+                binding.txtGoodsPrice.setText("￥" + content.substring(startIndex, endIndex));
+            }
 
+            startIndex = content.indexOf("【下单链接】") + 6;
+            endIndex = content.indexOf("-----") - 1;
+            if(startIndex  >= 0 && endIndex >0 && endIndex > startIndex) {
+                binding.txtGoodsLink.setText("￥" + content.substring(startIndex, endIndex));
+            }
+
+            startIndex = content.indexOf("复制这条信息") + 7;
+            endIndex = content.indexOf("打开【手机淘宝】") - 2;
+            if(startIndex  >= 0 && endIndex >0 && endIndex > startIndex) {
+                binding.txtGoodsCommand.setText(content.substring(startIndex, endIndex));
+            }
+        }else{
+            CommonUtil.DisplayToast("粘贴板内无内容！",this);
+        }
+    }
 }

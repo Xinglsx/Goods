@@ -30,7 +30,8 @@
         <activity android:name="com.mingshu.goods.WebViewActivity" />
         <activity android:name="com.mingshu.goods.UploadGoodsActivity" />
         <activity android:name="com.mingshu.goods.views.MyPopUpWindow" />
-        <activity android:name="com.mingshu.goods.AuditGoodsActivity"></activity>
+        <activity android:name="com.mingshu.goods.AuditGoodsActivity" />
+        <activity android:name="com.mingshu.goods.PendingActivity"></activity>
     </application>
 
 </manifest>

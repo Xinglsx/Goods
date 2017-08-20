@@ -10,84 +10,88 @@
             android:id="@+id/btn_buy"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="一键购买链接地址"
+            android:text="点击此处一键购买"
             android:layout_alignParentBottom="true"
             android:background="@color/colorBtnYellow"
             android:layout_margin="10dp"/>
-
-        <LinearLayout
-            android:layout_above="@id/btn_buy"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/txt_good_item"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_gravity="center"
-                android:text="商品明细"
-                android:background="@color/colorTitle"
-                android:gravity="center"
-                android:textSize="18sp"/>
-            <ImageView
-                android:id="@+id/image_goods"
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:src="@drawable/image_default"
-                android:layout_gravity="center"
-                android:layout_marginTop="15dp"/>
-            <TextView
-                android:id="@+id/txt_good_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="商品描述"
-                android:textSize="18sp"
-                android:gravity="center"
-                android:layout_marginTop="15dp"/>
+            android:layout_height="wrap_content">
             <LinearLayout
+                android:layout_above="@id/btn_buy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="15dp">
+                android:orientation="vertical">
                 <TextView
-                    android:id="@+id/txt_goods_price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:text="￥150~500"
-                    android:paddingLeft="20dp"
+                    android:id="@+id/txt_good_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center"
+                    android:text="商品明细"
+                    android:background="@color/colorTitle"
+                    android:gravity="center"
+                    android:textSize="18sp"/>
+                <ImageView
+                    android:id="@+id/image_goods"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:src="@drawable/image_default"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="15dp"/>
+                <TextView
+                    android:id="@+id/txt_good_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="商品描述"
                     android:textSize="18sp"
-                    android:layout_weight="1"
-                    android:textColor="@color/colorAccent"/>
+                    android:layout_marginTop="15dp"
+                    android:padding="15dp"/>
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_weight="1">
-                    <ImageView
-                        android:paddingLeft="20dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/image_clickcount"/>
+                    android:layout_marginTop="15dp">
                     <TextView
-                        android:id="@+id/txt_clickcount"
+                        android:id="@+id/txt_goods_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:text="￥150~500"
+                        android:paddingLeft="20dp"
+                        android:textSize="18sp"
+                        android:layout_weight="1"
+                        android:textColor="@color/colorAccent"/>
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="100"
-                        android:textSize="18sp"
-                        android:textColor="@color/colorGray"/>
+                        android:orientation="horizontal"
+                        android:layout_weight="1">
+                        <ImageView
+                            android:paddingLeft="20dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:src="@drawable/image_clickcount"/>
+                        <TextView
+                            android:id="@+id/txt_clickcount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="100"
+                            android:textSize="18sp"
+                            android:textColor="@color/colorGray"/>
+                    </LinearLayout>
                 </LinearLayout>
+                <TextView
+                    android:id="@+id/txt_reason"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="推荐理由"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:layout_marginTop="10dp"
+                    android:textSize="20sp"
+                    android:textColor="@color/colorGreen"/>
             </LinearLayout>
-            <TextView
-                android:id="@+id/txt_reason"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="推荐理由"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:layout_marginTop="10dp"
-                android:textSize="20sp"/>
-        </LinearLayout>
-
+        </ScrollView>
     </RelativeLayout>
 </layout>

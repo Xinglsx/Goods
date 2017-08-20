@@ -7,21 +7,9 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
         <include layout="@layout/top_layout"/>
-        <Button
-            android:id="@+id/btn_add_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="添加图片"/>
-        <ImageView
-            android:id="@+id/image_Upload"
-            android:layout_width="300dp"
-            android:layout_height="300dp" >
-        </ImageView>
-        <Button
-            android:id="@+id/btn_upload"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="上传"/>
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="所有待审核商品信息"/>
     </LinearLayout>
 </layout>

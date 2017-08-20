@@ -40,6 +40,13 @@ public class FragmentMy extends BaseFragment {
     }
 
     public void initView() {
+
+        if(curUser.getUsertype() >= 3){
+            view.findViewById(R.id.linlayout_pending).setVisibility(View.GONE);
+        }else {
+            view.findViewById(R.id.linlayout_audit_goods).setVisibility(View.GONE);
+        }
+
         ((TextView)view.findViewById(R.id.txt_user_nickname)).setText(curUser.getNickname());
         ((TextView)view.findViewById(R.id.txt_user_id)).setText("账号："+curUser.getUserid());
 
@@ -79,6 +86,15 @@ public class FragmentMy extends BaseFragment {
                 intent.setClass(FragmentMy.this.getActivity(),LoginActivity.class);
                 intent.putExtra("isLogout",true);
                 winning.framework.utils.ApplicationUtil.put(FragmentMy.this.getActivity(),Constant.USERINFO,"");
+                startActivity(intent);
+            }
+        });
+
+        view.findViewById(R.id.linlayout_pending).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setClass(FragmentMy.this.getActivity(),PendingActivity.class);
                 startActivity(intent);
             }
         });

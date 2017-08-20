@@ -33,8 +33,13 @@ public class GoodsActivity extends AppCompatActivity {
         goodsInfo = (GoodsInfo)intent.getSerializableExtra("goods");
         Glide.with(this).load(goodsInfo.getImage()).dontAnimate().into(binding.imageGoods);
         binding.txtGoodDescription.setText(goodsInfo.getDescription());
-        binding.txtReason.setText(goodsInfo.getReason());
-        binding.txtGoodsPrice.setText(goodsInfo.getPrice());
+        binding.txtReason.setText("推荐理由:" + goodsInfo.getReason());
+        if(goodsInfo.getPrice().contains("￥")){
+            binding.txtGoodsPrice.setText(goodsInfo.getPrice());
+        }else{
+            binding.txtGoodsPrice.setText("￥" + goodsInfo.getPrice());
+        }
+
         binding.txtClickcount.setText(String.valueOf(goodsInfo.getClickcount() + 1));
 
         binding.btnBuy.setOnClickListener(new View.OnClickListener() {

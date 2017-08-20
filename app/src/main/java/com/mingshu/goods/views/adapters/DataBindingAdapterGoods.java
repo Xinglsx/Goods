@@ -69,7 +69,12 @@ public class DataBindingAdapterGoods extends BaseAdapter {
             viewHolder.txtRecommendtime.setText(CommonUtil.stampToDate(goodsInfos.get(i).getRecommendtime(),
                     Constant.DATEFORMAT_DATETIME_SS) );
             viewHolder.txtRecommendname.setText(goodsInfos.get(i).getRecommendname());
-            viewHolder.txtGoodsPrice.setText(goodsInfos.get(i).getPrice());
+            if(goodsInfos.get(i).getPrice().contains("￥")){
+                viewHolder.txtGoodsPrice.setText(goodsInfos.get(i).getPrice());
+            }else{
+                viewHolder.txtGoodsPrice.setText("￥" + goodsInfos.get(i).getPrice());
+            }
+
             viewHolder.txtClickCount.setText(String.valueOf(goodsInfos.get(i).getClickcount()));
             Glide.with(context).load(goodsInfos.get(i).getImage()).dontAnimate().into(viewHolder.imageGoods);
 //            viewHolder.txtReason.setText(goodsInfos.get(i).getReason());

@@ -7,7 +7,9 @@ import android.view.View;
 
 import com.mingshu.goods.managers.ApiCoreManager;
 import com.mingshu.goods.models.UserInfo;
+import com.mingshu.goods.utils.ApplicationUtil;
 import com.mingshu.goods.utils.CommonUtil;
+import com.mingshu.goods.utils.Constant;
 import com.mingshu.goods.utils.PrompUtil;
 import com.mingshu.pmp.goods.R;
 import com.mingshu.pmp.goods.databinding.ActivityRegisterBinding;
@@ -62,7 +64,7 @@ public class RegisterActivity extends ScanBaseActivity {
                     @Override
                     public void callback(UserInfo data) {
                         PrompUtil.stopProgessDialog();
-                        intentHome("注册成功！");
+                        intentHome("注册成功！",data);
                     }
 
                 }, new NetworkEngine.Failure() {
@@ -91,8 +93,9 @@ public class RegisterActivity extends ScanBaseActivity {
         }
     }
 
-    private void intentHome(String message){
+    private void intentHome(String message,UserInfo data){
         CommonUtil.DisplayToast(message,this);
+        ApplicationUtil.put(this, Constant.USERINFO,data);
         Intent intent = new Intent(this,HomeActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
