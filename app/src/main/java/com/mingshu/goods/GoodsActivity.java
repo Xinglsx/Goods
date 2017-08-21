@@ -56,7 +56,12 @@ public class GoodsActivity extends AppCompatActivity {
                     PackageManager packageManager = getPackageManager();
                     Intent intent = new Intent();
                     intent = packageManager.getLaunchIntentForPackage("com.taobao.taobao");
-                    startActivity(intent);
+                    try{
+                        startActivity(intent);
+                    }catch(Exception exp) {
+                        CommonUtil.ShowMsg("请先安装【手机淘宝】",GoodsActivity.this);
+                    }
+
                 }
             }
         });

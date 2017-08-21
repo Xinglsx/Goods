@@ -1,7 +1,12 @@
 package com.mingshu.goods.utils;
 
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
@@ -31,7 +36,7 @@ public class CommonUtil {
     }
 
     /**
-     * 闪现提示
+     * 时间戳转日期
      * @param str 时间戳
      * @param format 需要转换的格式
      */
@@ -50,46 +55,55 @@ public class CommonUtil {
     }
 
     /**
-     * 获取设备唯一标示
-     *
+     * 返回当前程序版本名
+     */
+    public static com.mingshu.goods.models.VersionInfo getAppVersionName(Context context) {
+        com.mingshu.goods.models.VersionInfo versionInfo = new com.mingshu.goods.models.VersionInfo();
+        try {
+            // ---get the package info---
+            PackageManager pm = context.getPackageManager();
+            PackageInfo pi = pm.getPackageInfo(context.getPackageName(), 0);
+            versionInfo.setVersionNumber(pi.versionCode);
+            versionInfo.setVersion(pi.versionName);
+
+        } catch (Exception e) {
+            Log.e("VersionInfo", "Exception", e);
+        }
+        return versionInfo;
+    }
+
+    /**
+     * 判断Wifi网络是否可用
      * @param context
      * @return
      */
-//    public static String getDeviceId(Context context) {
-//        StringBuilder deviceId = new StringBuilder();
-//        // 渠道标志
-//        deviceId.append("android--");
-//        try {
-//
-//            //IMEI（imei）
-//            TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-//            String imei = tm.getDeviceId();
-//            if (!TextUtils.isEmpty(imei)) {
-//                deviceId.append("imei");
-//                deviceId.append(imei);
-//                return deviceId.toString();
-//            }
-//            //wifi mac地址
-//            WifiManager wifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-//            WifiInfo info = wifi.getConnectionInfo();
-//            String wifiMac = info.getMacAddress();
-//            if (!TextUtils.isEmpty(wifiMac)) {
-//                deviceId.append("wifi");
-//                deviceId.append(wifiMac);
-//                return deviceId.toString();
-//            }
-//            //序列号（sn）
-//            String sn = tm.getSimSerialNumber();
-//            if (!TextUtils.isEmpty(sn)) {
-//                deviceId.append("sn");
-//                deviceId.append(sn);
-//                return deviceId.toString();
-//            }
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//        return deviceId.toString();
-//    }
+    public static boolean isWifiConnected(Context context) {
+        if (context != null) {
+            ConnectivityManager mConnectivityManager = (ConnectivityManager) context
+                    .getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo mWiFiNetworkInfo = mConnectivityManager
+                    .getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+            if (mWiFiNetworkInfo != null) {
+                return mWiFiNetworkInfo.isAvailable();
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 获取当前网络连接信息
+     * @param context
+     * @return
+     */
+    public static int getConnectedType(Context context) {
+        if (context != null) {
+            ConnectivityManager mConnectivityManager = (ConnectivityManager) context
+                    .getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo mNetworkInfo = mConnectivityManager.getActiveNetworkInfo();
+            if (mNetworkInfo != null && mNetworkInfo.isAvailable()) {
+                return mNetworkInfo.getType();
+            }
+        }
+        return -1;
+    }
 }

@@ -9,28 +9,29 @@
         <Button
             android:id="@+id/btn_buy"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:text="点击此处一键购买"
             android:layout_alignParentBottom="true"
             android:background="@color/colorBtnYellow"
-            android:layout_margin="10dp"/>
+            android:layout_margin="5dp"/>
+        <TextView
+            android:id="@+id/txt_good_item"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:text="商品明细"
+            android:background="@color/colorTitle"
+            android:gravity="center"
+            android:textSize="18sp"/>
         <ScrollView
+            android:layout_below="@id/txt_good_item"
+            android:layout_above="@id/btn_buy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <LinearLayout
-                android:layout_above="@id/btn_buy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-                <TextView
-                    android:id="@+id/txt_good_item"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_gravity="center"
-                    android:text="商品明细"
-                    android:background="@color/colorTitle"
-                    android:gravity="center"
-                    android:textSize="18sp"/>
                 <ImageView
                     android:id="@+id/image_goods"
                     android:layout_width="match_parent"
@@ -46,12 +47,13 @@
                     android:text="商品描述"
                     android:textSize="18sp"
                     android:layout_marginTop="15dp"
-                    android:padding="15dp"/>
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="15dp">
+                    android:layout_marginTop="10dp">
                     <TextView
                         android:id="@+id/txt_goods_price"
                         android:layout_width="wrap_content"

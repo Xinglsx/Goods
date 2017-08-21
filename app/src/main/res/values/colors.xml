@@ -12,4 +12,5 @@
     <color name="colorBtnBackground2">#9bcfff</color>
     <color name="colorBtnYellow">#f29702</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorBtnGray">#858585</color>
 </resources>

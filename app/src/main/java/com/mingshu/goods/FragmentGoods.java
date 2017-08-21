@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.mingshu.goods.managers.ApiCoreManager;
 import com.mingshu.goods.models.GoodsInfo;
 import com.mingshu.goods.utils.CommonUtil;
@@ -35,9 +37,11 @@ public class FragmentGoods extends BaseFragment {
 
     private List<GoodsInfo> goodsInfos;
     private View view;
-    private ListView listViewArticle;
+    private PullToRefreshListView listViewGoods;
     private DataBindingAdapterGoods bindingAdapterArticle;
     private  Context context;
+    private int pageNumber = 0;
+    private boolean isLogin = true;
 
     @SuppressLint({"NewApi", "ValidFragment"})
     public FragmentGoods(Context context) {
@@ -59,21 +63,43 @@ public class FragmentGoods extends BaseFragment {
 
     private void initView(){
         PrompUtil.startProgressDialog(this.getActivity(),"获取中，请稍等。。。");
-        getArticleInfos(0, Constant.PAGESIZE);
+        getArticleInfos(pageNumber, Constant.PAGESIZE);
 
-        listViewArticle = (ListView)view.findViewById(R.id.listView_Article);
-        listViewArticle.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listViewGoods = (PullToRefreshListView)view.findViewById(R.id.listView_Goods);
+//        listViewGoods.setMode(PullToRefreshBase.Mode.BOTH);
+        listViewGoods.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                articleTitleClick(i);//更新阅读量
+                articleTitleClick(i-1);//更新阅读量
 
                 //跳转文章详细信息
                 Intent intent = new Intent();
-                intent.putExtra("goods",goodsInfos.get(i));
+                intent.putExtra("goods",goodsInfos.get(i-1));
                 intent.setClass(FragmentGoods.this.getActivity(),GoodsActivity.class);
                 startActivity(intent);
+            }
+        });
+        listViewGoods.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+                getArticleInfos(0,Constant.PAGESIZE);
+            }
 
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
 
+            }
+        });
+
+        listViewGoods.setOnLastItemVisibleListener(new PullToRefreshBase.OnLastItemVisibleListener() {
+            @Override
+            public void onLastItemVisible() {
+                if(bindingAdapterArticle.getCount() ==  (pageNumber+1) * Constant.PAGESIZE){
+                    getMoreArticleInfos(pageNumber+1,Constant.PAGESIZE);
+                }
+                else{
+                    CommonUtil.DisplayToast("亲，没有更多商品了",FragmentGoods.this.getActivity());
+                }
             }
         });
     }
@@ -85,22 +111,63 @@ public class FragmentGoods extends BaseFragment {
             @Override
             public void callback(List<GoodsInfo> data) {
                 goodsInfos = data;
-                listViewArticle = (ListView)view.findViewById(R.id.listView_Article);
                 bindingAdapterArticle = new DataBindingAdapterGoods(FragmentGoods.this.goodsInfos,FragmentGoods.this.getActivity());
-                listViewArticle.setAdapter(bindingAdapterArticle);
+                listViewGoods.setAdapter(bindingAdapterArticle);
+                pageNumber = 0;
                 PrompUtil.stopProgessDialog();
+                listViewGoods.onRefreshComplete();
+                if(!isLogin){
+                    CommonUtil.DisplayToast("亲，商品已经刷新成功！",FragmentGoods.this.getActivity());
+                }else{
+                    isLogin = false;
+                }
+
             }
         }, new NetworkEngine.Failure() {
             @Override
             public void callback(int code, String message, Map rawData) {
                 PrompUtil.stopProgessDialog();
                 CommonUtil.ShowMsg(message,FragmentGoods.this.getActivity());
+                listViewGoods.onRefreshComplete();
             }
         }, new NetworkEngine.Error() {
             @Override
             public void callback(int code, String message, Map rawData) {
                 PrompUtil.stopProgessDialog();
                 CommonUtil.ShowMsg(message,FragmentGoods.this.getActivity());
+                listViewGoods.onRefreshComplete();
+            }
+        });
+    }
+
+    private void getMoreArticleInfos(int curPage, int pageSize){
+        ApiCoreManager.Api api = apiCoreManager.getGoodsList(curPage,pageSize);
+        api.invoke(new NetworkEngine.Success<List<GoodsInfo>>() {
+            @Override
+            public void callback(List<GoodsInfo> data) {
+                if(data != null && !data.isEmpty()) {
+                    goodsInfos.removeAll(data);
+                    goodsInfos.addAll(data);
+                    bindingAdapterArticle.AddItem(data);
+                    bindingAdapterArticle.notifyDataSetChanged();
+                    pageNumber++;
+                }
+                PrompUtil.stopProgessDialog();
+                listViewGoods.onRefreshComplete();
+            }
+        }, new NetworkEngine.Failure() {
+            @Override
+            public void callback(int code, String message, Map rawData) {
+                PrompUtil.stopProgessDialog();
+                CommonUtil.ShowMsg(message,FragmentGoods.this.getActivity());
+                listViewGoods.onRefreshComplete();
+            }
+        }, new NetworkEngine.Error() {
+            @Override
+            public void callback(int code, String message, Map rawData) {
+                PrompUtil.stopProgessDialog();
+                CommonUtil.ShowMsg(message,FragmentGoods.this.getActivity());
+                listViewGoods.onRefreshComplete();
             }
         });
     }

@@ -1,8 +1,10 @@
 package com.mingshu.goods;
 
+import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Bitmap;
@@ -42,14 +44,11 @@ public class UploadGoodsActivity extends ScanBaseActivity{
     private MyPopUpWindow imagePopUpWindow;
     private MyPopUpWindow buyImagePopUpWindow;
 
-
-    private int xiangji = 1;
     String fileDir = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_upload_goods);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_upload_goods);
         apiCoreManager = new ApiCoreManager(this);
         userInfo = (UserInfo) ApplicationUtil.get(this, Constant.USERINFO);
@@ -132,16 +131,48 @@ public class UploadGoodsActivity extends ScanBaseActivity{
         binding.btnSaveDraft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PrompUtil.startProgressDialog(UploadGoodsActivity.this,"保存草稿中，请稍等。。。");
-                saveGoodsInfo((short)0);
+                if(CommonUtil.isWifiConnected(UploadGoodsActivity.this)){
+                    PrompUtil.startProgressDialog(UploadGoodsActivity.this,"保存草稿中，请稍等。。。");
+                    saveGoodsInfo((short)0);
+                }else{
+                    AlertDialog.Builder builder = new AlertDialog.Builder(UploadGoodsActivity.this);
+                    builder.setIcon(android.R.drawable.ic_dialog_info);
+                    builder.setTitle("温馨提示");
+                    builder.setMessage("非WI-FI环境，确定要继续吗？");
+                    builder.setCancelable(true);
+                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            PrompUtil.startProgressDialog(UploadGoodsActivity.this,"保存草稿中，请稍等。。。");
+                            saveGoodsInfo((short)0);
+                        }
+                    });
+                    builder.create().show();
+                }
             }
         });
 
         binding.btnSaveSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PrompUtil.startProgressDialog(UploadGoodsActivity.this,"提交审核中，请稍等。。。");
-                saveGoodsInfo((short)1);
+                if(CommonUtil.isWifiConnected(UploadGoodsActivity.this)){
+                    PrompUtil.startProgressDialog(UploadGoodsActivity.this,"提交审核中，请稍等。。。");
+                    saveGoodsInfo((short)1);
+                }else{
+                    AlertDialog.Builder builder = new AlertDialog.Builder(UploadGoodsActivity.this);
+                    builder.setIcon(android.R.drawable.ic_dialog_info);
+                    builder.setTitle("温馨提示");
+                    builder.setMessage("非WI-FI环境，确定要继续吗？");
+                    builder.setCancelable(true);
+                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            PrompUtil.startProgressDialog(UploadGoodsActivity.this,"保存草稿中，请稍等。。。");
+                            saveGoodsInfo((short)1);
+                        }
+                    });
+                    builder.create().show();
+                }
             }
         });
 
@@ -311,7 +342,7 @@ public class UploadGoodsActivity extends ScanBaseActivity{
             startIndex = content.indexOf("【下单链接】") + 6;
             endIndex = content.indexOf("-----") - 1;
             if(startIndex  >= 0 && endIndex >0 && endIndex > startIndex) {
-                binding.txtGoodsLink.setText("￥" + content.substring(startIndex, endIndex));
+                binding.txtGoodsLink.setText(content.substring(startIndex, endIndex));
             }
 
             startIndex = content.indexOf("复制这条信息") + 7;

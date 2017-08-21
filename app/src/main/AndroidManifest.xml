@@ -3,6 +3,7 @@
     package="com.mingshu.pmp.goods">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
@@ -18,11 +19,6 @@
             android:name="com.mingshu.goods.LoginActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name="com.mingshu.goods.HomeActivity" />
         <activity android:name="com.mingshu.goods.RegisterActivity" />
@@ -31,7 +27,13 @@
         <activity android:name="com.mingshu.goods.UploadGoodsActivity" />
         <activity android:name="com.mingshu.goods.views.MyPopUpWindow" />
         <activity android:name="com.mingshu.goods.AuditGoodsActivity" />
-        <activity android:name="com.mingshu.goods.PendingActivity"></activity>
+        <activity android:name="com.mingshu.goods.PendingActivity" />
+        <activity android:name="com.mingshu.goods.WelcomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

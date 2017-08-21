@@ -83,6 +83,12 @@ public class DataBindingAdapterGoods extends BaseAdapter {
         return view;
     }
 
+    public Boolean AddItem(List<GoodsInfo> addGoods){
+        this.goodsInfos.removeAll(addGoods);
+        this.goodsInfos.addAll(addGoods);
+        return true;
+    }
+
     public static class ViewHolder{
         TextView txtGoodsDescription;//描述
         ImageView imageGoods;//图片
@@ -92,4 +98,5 @@ public class DataBindingAdapterGoods extends BaseAdapter {
         TextView txtClickCount;//点击数量
         TextView txtReason;//推荐理由
     }
+
 }

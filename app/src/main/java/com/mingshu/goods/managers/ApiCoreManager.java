@@ -27,6 +27,10 @@ public class ApiCoreManager extends ApiManager {
         baseURL = "http://182.61.58.192/GoodsService.svc";//外网服务器
     }
 
+    public Api getVersionInfo(){
+        return createAPI(Request.Method.GET,baseURL+"/GetVersionInfo",null);
+    }
+
     public Api validateUserInfo(String strCode, String password){
         JSONObject param = new JSONObject();
         param.put("strCode",strCode);
