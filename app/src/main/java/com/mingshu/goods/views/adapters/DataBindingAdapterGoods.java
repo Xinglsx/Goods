@@ -51,7 +51,7 @@ public class DataBindingAdapterGoods extends BaseAdapter {
 
         if (view == null){
             viewHolder = new ViewHolder();
-            view = View.inflate(this.context, R.layout.fragment_goods_item,null);
+            view = View.inflate(this.context, R.layout.item_goods,null);
             viewHolder.txtGoodsDescription = (TextView) view.findViewById(R.id.txt_goods_description_item);
             viewHolder.txtRecommendtime= (TextView) view.findViewById(R.id.txt_goods_recommandtime_item);
             viewHolder.txtRecommendname = (TextView) view.findViewById(R.id.txt_goods_recommandname_item);

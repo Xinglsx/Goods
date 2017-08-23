@@ -22,6 +22,7 @@ import com.mingshu.pmp.goods.R;
 
 public class FragmentMy extends BaseFragment {
     View view;
+
     Context context;
     UserInfo curUser;
 
@@ -40,11 +41,25 @@ public class FragmentMy extends BaseFragment {
     }
 
     public void initView() {
+        int type = curUser.getUsertype();
+        switch (type){
+            default:
+            case 0:
+            case 1:
+            case 2:
+                view.findViewById(R.id.linlayout_pending).setVisibility(View.GONE);
+                view.findViewById(R.id.txt_pending).setVisibility(View.GONE);
 
-        if(curUser.getUsertype() >= 3){
-            view.findViewById(R.id.linlayout_pending).setVisibility(View.GONE);
-        }else {
-            view.findViewById(R.id.linlayout_audit_goods).setVisibility(View.GONE);
+                view.findViewById(R.id.linlayout_upload_goods).setVisibility(View.GONE);
+                view.findViewById(R.id.txt_pending).setVisibility(View.GONE);
+            case 3:
+            case 4:
+                view.findViewById(R.id.linlayout_audit_goods).setVisibility(View.GONE);
+                view.findViewById(R.id.txt_pending).setVisibility(View.GONE);
+
+                view.findViewById(R.id.linlayout_user_manager).setVisibility(View.GONE);
+            case 5:
+                break;
         }
 
         ((TextView)view.findViewById(R.id.txt_user_nickname)).setText(curUser.getNickname());
@@ -74,18 +89,9 @@ public class FragmentMy extends BaseFragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
-                intent.setClass(FragmentMy.this.getActivity(),AuditGoodsActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        (view.findViewById(R.id.btn_logout)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.setClass(FragmentMy.this.getActivity(),LoginActivity.class);
-                intent.putExtra("isLogout",true);
-                winning.framework.utils.ApplicationUtil.put(FragmentMy.this.getActivity(),Constant.USERINFO,"");
+                intent.setClass(FragmentMy.this.getActivity(),GoodsListActivity.class);
+                intent.putExtra("type",1);//管理员
+                intent.putExtra("title","全部待审商品");
                 startActivity(intent);
             }
         });
@@ -94,7 +100,18 @@ public class FragmentMy extends BaseFragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
-                intent.setClass(FragmentMy.this.getActivity(),PendingActivity.class);
+                intent.setClass(FragmentMy.this.getActivity(),GoodsListActivity.class);
+                intent.putExtra("type",0);//用户
+                intent.putExtra("title","个人待审商品");
+                startActivity(intent);
+
+            }
+        });
+        view.findViewById(R.id.linlayout_user_manager).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setClass(FragmentMy.this.getActivity(),UserManagerActivity.class);
                 startActivity(intent);
             }
         });

@@ -63,10 +63,10 @@ public class FragmentGoods extends BaseFragment {
 
     private void initView(){
         PrompUtil.startProgressDialog(this.getActivity(),"获取中，请稍等。。。");
-        getArticleInfos(pageNumber, Constant.PAGESIZE);
+        getGoodsInfos(pageNumber, Constant.PAGESIZE,2);
 
         listViewGoods = (PullToRefreshListView)view.findViewById(R.id.listView_Goods);
-//        listViewGoods.setMode(PullToRefreshBase.Mode.BOTH);
+        listViewGoods.setMode(PullToRefreshBase.Mode.BOTH);
         listViewGoods.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -82,20 +82,13 @@ public class FragmentGoods extends BaseFragment {
         listViewGoods.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-                getArticleInfos(0,Constant.PAGESIZE);
+                getGoodsInfos(0,Constant.PAGESIZE,2);
             }
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
-
-            }
-        });
-
-        listViewGoods.setOnLastItemVisibleListener(new PullToRefreshBase.OnLastItemVisibleListener() {
-            @Override
-            public void onLastItemVisible() {
                 if(bindingAdapterArticle.getCount() ==  (pageNumber+1) * Constant.PAGESIZE){
-                    getMoreArticleInfos(pageNumber+1,Constant.PAGESIZE);
+                    getMoreGoodsInfos(pageNumber+1,Constant.PAGESIZE,2);
                 }
                 else{
                     CommonUtil.DisplayToast("亲，没有更多商品了",FragmentGoods.this.getActivity());
@@ -105,8 +98,8 @@ public class FragmentGoods extends BaseFragment {
     }
 
     //获取文章列表
-    private void getArticleInfos(int curPage, int pageSize){
-        ApiCoreManager.Api api = apiCoreManager.getGoodsList(curPage,pageSize);
+    private void getGoodsInfos(int curPage, int pageSize,int type){
+        ApiCoreManager.Api api = apiCoreManager.getGoodsList(curPage,pageSize,type);
         api.invoke(new NetworkEngine.Success<List<GoodsInfo>>() {
             @Override
             public void callback(List<GoodsInfo> data) {
@@ -140,8 +133,8 @@ public class FragmentGoods extends BaseFragment {
         });
     }
 
-    private void getMoreArticleInfos(int curPage, int pageSize){
-        ApiCoreManager.Api api = apiCoreManager.getGoodsList(curPage,pageSize);
+    private void getMoreGoodsInfos(int curPage, int pageSize,int type){
+        ApiCoreManager.Api api = apiCoreManager.getGoodsList(curPage,pageSize,type);
         api.invoke(new NetworkEngine.Success<List<GoodsInfo>>() {
             @Override
             public void callback(List<GoodsInfo> data) {

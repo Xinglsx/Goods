@@ -18,8 +18,7 @@
         <activity
             android:name="com.mingshu.goods.LoginActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="com.mingshu.goods.HomeActivity" />
         <activity android:name="com.mingshu.goods.RegisterActivity" />
         <activity android:name="com.mingshu.goods.GoodsActivity" />
@@ -31,9 +30,13 @@
         <activity android:name="com.mingshu.goods.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.mingshu.goods.AboutUsActivity" />
+        <activity android:name="com.mingshu.goods.UserManagerActivity" />
+        <activity android:name="com.mingshu.goods.GoodsListActivity"></activity>
     </application>
 
 </manifest>

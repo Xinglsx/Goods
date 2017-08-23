@@ -53,6 +53,10 @@ public class LoginActivity extends ScanBaseActivity {
                 }
             }
         }
+        ininView();
+    }
+
+    public void ininView(){
 
         binding.chkAutoLogin.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -110,17 +114,37 @@ public class LoginActivity extends ScanBaseActivity {
                 Login();
                 break;
             case R.id.txt_register:
-                Intent intent = new Intent(this,RegisterActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
+                Intent intentRegister = new Intent(this,RegisterActivity.class);
+                intentRegister.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intentRegister);
                 break;
             case R.id.txt_about_us:
+                Intent intentAboutUs = new Intent(this,AboutUsActivity.class);
+                intentAboutUs.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intentAboutUs);
                 break;
             case R.id.txt_guest_login:
+                //保存全局用户信息
+                UserInfo tempUser = new UserInfo(){
+                    @Override
+                    public String getUserid() {
+                        return "guest";
+                    }
+                    public String getNickname(){
+                        return "guest";
+                    }
+                    @Override
+                    public short getUsertype() {
+                        return 0;
+                    }
+                };
+                ApplicationUtil.put(this,Constant.USERINFO,tempUser);
+                Intent intentGuest = new Intent(this,HomeActivity.class);
+                intentGuest.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intentGuest);
                 break;
             case R.id.txt_forget_password:
-                break;
-            default:
+                CommonUtil.DisplayToast("请联系管理员或者使用游客模式登录!",this);
                 break;
         }
     }

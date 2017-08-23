@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.pmp.goods"
-        minSdkVersion 22
+        minSdkVersion 19
         targetSdkVersion 25
         versionCode 1
         versionName "1.0.0"
@@ -37,11 +37,11 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile project(':PullToRefresh')
+    compile files('libs/xUtils-2.6.14.jar')
     compile 'winning.framework:framework:2.3'
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:design:25.3.1'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     testCompile 'junit:junit:4.12'
-    compile files('libs/xUtils-2.6.14.jar')
 }

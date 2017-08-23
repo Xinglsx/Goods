@@ -45,10 +45,11 @@ public class ApiCoreManager extends ApiManager {
         return createAPI(Request.Method.POST,baseURL+"/UserInfo/RegisterUserInfo",param);
     }
 
-    public Api getGoodsList(int curPage, int pageSize){
+    public Api getGoodsList(int curPage, int pageSize,int type){
         Map param = new HashMap<>();
         param.put("curPage",String.valueOf(curPage));
         param.put("pageSize",String.valueOf(pageSize));
+        param.put("type",String.valueOf(type));
         return createAPI(Request.Method.GET,baseURL+"/Goods/GetGoodsList",param);
     }
 

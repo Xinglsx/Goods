@@ -46,7 +46,7 @@ public class DataBindingAdapterUser extends BaseAdapter {
 
         if (view == null){
             viewHolder = new ViewHolder();
-            view = View.inflate(this.context, R.layout.fragment_goods_item,null);
+            view = View.inflate(this.context, R.layout.item_goods,null);
             viewHolder.txtUserNickname = (TextView) view.findViewById(R.id.txt_user_nickname);
             viewHolder.txtUserId= (TextView) view.findViewById(R.id.txt_user_id);
             viewHolder.imgUserHead = (ImageView) view.findViewById(R.id.image_user_head);
