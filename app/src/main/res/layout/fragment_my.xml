@@ -90,7 +90,7 @@
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/txt_upload_goods"
+                    android:id="@+id/txt_pending"
                     android:layout_width="fill_parent"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
@@ -119,7 +119,7 @@
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/txt_pending"
+                    android:id="@+id/txt_audit_goods"
                     android:layout_width="fill_parent"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
@@ -148,7 +148,7 @@
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/txt_audit_goods"
+                    android:id="@+id/txt_user_manager"
                     android:layout_width="fill_parent"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"

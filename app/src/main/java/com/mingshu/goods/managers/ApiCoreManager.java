@@ -5,6 +5,7 @@ import android.content.Context;
 import com.alibaba.fastjson.JSONObject;
 import com.android.volley.Request;
 import com.mingshu.goods.models.GoodsInfo;
+import com.mingshu.goods.models.UserInfo;
 import com.mingshu.goods.utils.MyLogUtil;
 
 import java.util.HashMap;
@@ -43,6 +44,21 @@ public class ApiCoreManager extends ApiManager {
         param.put("strCode",strCode);
         param.put("password",password);
         return createAPI(Request.Method.POST,baseURL+"/UserInfo/RegisterUserInfo",param);
+    }
+
+    public Api getUserInfos(int curPage, int pageSize, int type,String filter){
+        Map param = new HashMap<>();
+        param.put("curPage",String.valueOf(curPage));
+        param.put("pageSize",String.valueOf(pageSize));
+        param.put("type",String.valueOf(type));
+        param.put("filter",filter);
+        return createAPI(Request.Method.GET,baseURL+"/UserInfo/GetUserInfos",param);
+    }
+
+    public Api saveUserInfo(UserInfo userInfo){
+        JSONObject param = new JSONObject();
+        param.put("userInfo",userInfo);
+        return createAPI(Request.Method.POST,baseURL+"/UserInfo/SaveUserInfo",param);
     }
 
     public Api getGoodsList(int curPage, int pageSize,int type){

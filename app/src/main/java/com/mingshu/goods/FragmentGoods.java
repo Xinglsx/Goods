@@ -111,6 +111,7 @@ public class FragmentGoods extends BaseFragment {
                 listViewGoods.onRefreshComplete();
                 if(!isLogin){
                     CommonUtil.DisplayToast("亲，商品已经刷新成功！",FragmentGoods.this.getActivity());
+                    listViewGoods.onRefreshComplete();
                 }else{
                     isLogin = false;
                 }

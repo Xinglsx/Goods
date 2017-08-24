@@ -36,7 +36,8 @@
         </activity>
         <activity android:name="com.mingshu.goods.AboutUsActivity" />
         <activity android:name="com.mingshu.goods.UserManagerActivity" />
-        <activity android:name="com.mingshu.goods.GoodsListActivity"></activity>
+        <activity android:name="com.mingshu.goods.GoodsListActivity" />
+        <activity android:name="com.mingshu.goods.UserEditActivity"></activity>
     </application>
 
 </manifest>

@@ -51,13 +51,14 @@ public class FragmentMy extends BaseFragment {
                 view.findViewById(R.id.txt_pending).setVisibility(View.GONE);
 
                 view.findViewById(R.id.linlayout_upload_goods).setVisibility(View.GONE);
-                view.findViewById(R.id.txt_pending).setVisibility(View.GONE);
-            case 3:
-            case 4:
-                view.findViewById(R.id.linlayout_audit_goods).setVisibility(View.GONE);
-                view.findViewById(R.id.txt_pending).setVisibility(View.GONE);
 
+            case 3:
+                view.findViewById(R.id.linlayout_audit_goods).setVisibility(View.GONE);
+                view.findViewById(R.id.txt_audit_goods).setVisibility(View.GONE);
+
+                view.findViewById(R.id.txt_user_manager).setVisibility(View.GONE);
                 view.findViewById(R.id.linlayout_user_manager).setVisibility(View.GONE);
+            case 4:
             case 5:
                 break;
         }
