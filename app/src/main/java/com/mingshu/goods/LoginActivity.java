@@ -119,9 +119,13 @@ public class LoginActivity extends ScanBaseActivity {
                 startActivity(intentRegister);
                 break;
             case R.id.txt_about_us:
-                Intent intentAboutUs = new Intent(this,AboutUsActivity.class);
-                intentAboutUs.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intentAboutUs);
+                Intent intent = new Intent();
+                intent.putExtra("uri","http://182.61.58.192/test");
+                intent.setClass(LoginActivity.this,WebViewActivity.class);
+                startActivity(intent);
+//                Intent intentAboutUs = new Intent(this,AboutUsActivity.class);
+//                intentAboutUs.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                startActivity(intentAboutUs);
                 break;
             case R.id.txt_guest_login:
                 //保存全局用户信息

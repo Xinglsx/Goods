@@ -64,7 +64,7 @@ public class FragmentMy extends BaseFragment {
         }
 
         ((TextView)view.findViewById(R.id.txt_user_nickname)).setText(curUser.getNickname());
-        ((TextView)view.findViewById(R.id.txt_user_id)).setText("账号："+curUser.getUserid());
+        ((TextView)view.findViewById(R.id.txt_user_signature)).setText(curUser.getUsersignature());
 
         (view.findViewById(R.id.linlayout_change_user)).setOnClickListener(new View.OnClickListener() {
             @Override

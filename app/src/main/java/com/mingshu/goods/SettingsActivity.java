@@ -34,14 +34,18 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(SettingsActivity.this,UserInfoActivity.class);
+                intent.setClass(SettingsActivity.this,UserInfoEditActivity.class);
                 startActivity(intent);
             }
         });
         binding.linlayoutAboutUs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CommonUtil.DisplayToast("功能研发中，感谢支持!",SettingsActivity.this);
+                Intent intent = new Intent();
+                intent.putExtra("uri","http://182.61.58.192/test");
+                intent.setClass(SettingsActivity.this,WebViewActivity.class);
+                startActivity(intent);
+//                CommonUtil.DisplayToast("功能研发中，感谢支持!",SettingsActivity.this);
             }
         });
         binding.linlayoutQuestionFeedback.setOnClickListener(new View.OnClickListener() {

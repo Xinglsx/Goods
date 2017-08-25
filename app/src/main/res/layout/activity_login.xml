@@ -167,16 +167,6 @@
                 android:text="游客登录"
                 android:textSize="16sp"
                 android:onClick="click"/>
-
-            <TextView
-                android:id="@+id/txt_about_us"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:textSize="16sp"
-                android:layout_marginLeft="100dp"
-                android:text="关于我们"
-                android:onClick="click"/>
         </LinearLayout>
 
 
