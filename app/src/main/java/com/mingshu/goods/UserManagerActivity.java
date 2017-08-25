@@ -79,7 +79,7 @@ public class UserManagerActivity extends ScanBaseActivity {
                 }
                 Intent intent = new Intent();
                 intent.putExtra("user",userInfos.get(position-1));
-                intent.setClass(UserManagerActivity.this,UserEditActivity.class);
+                intent.setClass(UserManagerActivity.this,UserTypeEditActivity.class);
                 startActivity(intent);
             }
         });

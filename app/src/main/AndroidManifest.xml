@@ -37,7 +37,10 @@
         <activity android:name="com.mingshu.goods.AboutUsActivity" />
         <activity android:name="com.mingshu.goods.UserManagerActivity" />
         <activity android:name="com.mingshu.goods.GoodsListActivity" />
-        <activity android:name="com.mingshu.goods.UserEditActivity"></activity>
+        <activity android:name="com.mingshu.goods.UserTypeEditActivity" />
+        <activity android:name="com.mingshu.goods.ChangePasswordActivity" />
+        <activity android:name="com.mingshu.goods.SettingsActivity" />
+        <activity android:name="com.mingshu.goods.UserInfoActivity"></activity>
     </application>
 
 </manifest>

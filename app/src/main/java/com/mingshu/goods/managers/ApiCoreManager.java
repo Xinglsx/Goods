@@ -6,7 +6,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.android.volley.Request;
 import com.mingshu.goods.models.GoodsInfo;
 import com.mingshu.goods.models.UserInfo;
-import com.mingshu.goods.utils.MyLogUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -61,6 +60,15 @@ public class ApiCoreManager extends ApiManager {
         return createAPI(Request.Method.POST,baseURL+"/UserInfo/SaveUserInfo",param);
     }
 
+    public Api changePassword(String id, String oldPassword, String newPassword){
+        JSONObject param = new JSONObject();
+        param.put("id",id);
+        param.put("oldPassword",oldPassword);
+        param.put("newPassword",newPassword);
+//        MyLogUtil.LogShitou("param",param.toString());
+        return createAPI(Request.Method.POST,baseURL+"/UserInfo/ChangePassword",param);
+    }
+
     public Api getGoodsList(int curPage, int pageSize,int type){
         Map param = new HashMap<>();
         param.put("curPage",String.valueOf(curPage));
@@ -78,14 +86,14 @@ public class ApiCoreManager extends ApiManager {
     public Api saveGoodsInfo(GoodsInfo goodsInfo){
         JSONObject param = new JSONObject();
         param.put("goodsInfo",goodsInfo);
-        MyLogUtil.LogShitou("param",param.toString());
+//        MyLogUtil.LogShitou("param",param.toString());
         return createAPI(Request.Method.POST,baseURL+"/Goods/SaveGoodsInfo",param);
     }
 
     public Api updatePictrue(String strBase64){
         JSONObject param = new JSONObject();
         param.put("strBase64",strBase64);
-        MyLogUtil.LogShitou("param",param.toString());
+//        MyLogUtil.LogShitou("param",param.toString());
         return createAPI(Request.Method.POST,baseURL+"/Goods/UpdatePictrue",param);
     }
 }

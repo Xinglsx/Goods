@@ -116,5 +116,13 @@ public class FragmentMy extends BaseFragment {
                 startActivity(intent);
             }
         });
+        view.findViewById(R.id.linlayout_setting).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(FragmentMy.this.getActivity(),SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
