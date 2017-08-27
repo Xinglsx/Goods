@@ -12,7 +12,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.example.pmp.goods"
+        applicationId "com.mingshu.goods"
         minSdkVersion 19
         targetSdkVersion 25
         versionCode 1

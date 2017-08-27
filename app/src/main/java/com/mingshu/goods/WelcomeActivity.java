@@ -41,6 +41,7 @@ public class WelcomeActivity extends BaseActivity {
                 final Intent it = new Intent(WelcomeActivity.this,LoginActivity.class);
                 it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(it);
+                WelcomeActivity.this.finish();
             }
         });
 
@@ -60,6 +61,7 @@ public class WelcomeActivity extends BaseActivity {
             @Override
             public void run() {
                 startActivity(it);
+                WelcomeActivity.this.finish();
             }
         };
         timer.schedule(task,1500);
