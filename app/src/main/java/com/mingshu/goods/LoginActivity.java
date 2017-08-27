@@ -12,14 +12,13 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Toast;
 
+import com.mingshu.goods.databinding.ActivityLoginBinding;
 import com.mingshu.goods.managers.ApiCoreManager;
 import com.mingshu.goods.models.UserInfo;
 import com.mingshu.goods.utils.ApplicationUtil;
 import com.mingshu.goods.utils.CommonUtil;
 import com.mingshu.goods.utils.Constant;
 import com.mingshu.goods.utils.PrompUtil;
-import com.mingshu.pmp.goods.R;
-import com.mingshu.pmp.goods.databinding.ActivityLoginBinding;
 
 import java.util.Map;
 
@@ -117,15 +116,6 @@ public class LoginActivity extends ScanBaseActivity {
                 Intent intentRegister = new Intent(this,RegisterActivity.class);
                 intentRegister.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intentRegister);
-                break;
-            case R.id.txt_about_us:
-                Intent intent = new Intent();
-                intent.putExtra("uri","http://182.61.58.192/test");
-                intent.setClass(LoginActivity.this,WebViewActivity.class);
-                startActivity(intent);
-//                Intent intentAboutUs = new Intent(this,AboutUsActivity.class);
-//                intentAboutUs.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                startActivity(intentAboutUs);
                 break;
             case R.id.txt_guest_login:
                 //保存全局用户信息

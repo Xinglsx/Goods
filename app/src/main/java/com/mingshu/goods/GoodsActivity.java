@@ -10,14 +10,13 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.bumptech.glide.Glide;
+import com.mingshu.goods.databinding.ActivityGoodsBinding;
 import com.mingshu.goods.managers.ApiCoreManager;
 import com.mingshu.goods.models.GoodsInfo;
 import com.mingshu.goods.models.UserInfo;
 import com.mingshu.goods.utils.CommonUtil;
 import com.mingshu.goods.utils.Constant;
 import com.mingshu.goods.utils.PrompUtil;
-import com.mingshu.pmp.goods.R;
-import com.mingshu.pmp.goods.databinding.ActivityGoodsBinding;
 
 import java.util.Map;
 

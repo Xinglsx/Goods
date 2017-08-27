@@ -11,7 +11,7 @@ import android.text.style.StyleSpan;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.mingshu.pmp.goods.R;
+import com.mingshu.goods.R;
 
 import java.text.NumberFormat;
 

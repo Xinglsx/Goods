@@ -20,7 +20,6 @@ import com.mingshu.goods.utils.Constant;
 import com.mingshu.goods.utils.PrompUtil;
 import com.mingshu.goods.views.adapters.BaseFragment;
 import com.mingshu.goods.views.adapters.DataBindingAdapterGoods;
-import com.mingshu.pmp.goods.R;
 
 import java.util.List;
 import java.util.Map;

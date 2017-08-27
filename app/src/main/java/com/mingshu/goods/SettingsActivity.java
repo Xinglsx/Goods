@@ -6,9 +6,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.mingshu.goods.databinding.ActivitySettingsBinding;
 import com.mingshu.goods.utils.CommonUtil;
-import com.mingshu.pmp.goods.R;
-import com.mingshu.pmp.goods.databinding.ActivitySettingsBinding;
 
 
 public class SettingsActivity extends AppCompatActivity {

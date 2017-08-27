@@ -9,14 +9,13 @@ import android.widget.ListView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.mingshu.goods.databinding.ActivityUserManagerBinding;
 import com.mingshu.goods.managers.ApiCoreManager;
 import com.mingshu.goods.models.UserInfo;
 import com.mingshu.goods.utils.CommonUtil;
 import com.mingshu.goods.utils.Constant;
 import com.mingshu.goods.utils.PrompUtil;
 import com.mingshu.goods.views.adapters.DataBindingAdapterUser;
-import com.mingshu.pmp.goods.R;
-import com.mingshu.pmp.goods.databinding.ActivityUserManagerBinding;
 
 import java.util.List;
 import java.util.Map;

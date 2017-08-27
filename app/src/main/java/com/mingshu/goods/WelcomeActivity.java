@@ -11,7 +11,6 @@ import com.mingshu.goods.managers.ApiCoreManager;
 import com.mingshu.goods.utils.CommonUtil;
 import com.mingshu.goods.utils.DialogUtil;
 import com.mingshu.goods.utils.DownLoadUtil;
-import com.mingshu.pmp.goods.R;
 
 import java.util.Map;
 import java.util.Timer;

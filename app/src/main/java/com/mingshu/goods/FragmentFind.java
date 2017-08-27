@@ -15,7 +15,6 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.mingshu.goods.views.adapters.BaseFragment;
-import com.mingshu.pmp.goods.R;
 
 
 /**

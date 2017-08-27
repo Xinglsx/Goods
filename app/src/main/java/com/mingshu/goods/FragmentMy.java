@@ -14,7 +14,6 @@ import com.mingshu.goods.models.UserInfo;
 import com.mingshu.goods.utils.ApplicationUtil;
 import com.mingshu.goods.utils.Constant;
 import com.mingshu.goods.views.adapters.BaseFragment;
-import com.mingshu.pmp.goods.R;
 
 /**
  * Created by Lisx on 2017-06-29.

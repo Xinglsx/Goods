@@ -8,12 +8,11 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
+import com.mingshu.goods.databinding.ActivityHomeBinding;
 import com.mingshu.goods.models.UserInfo;
 import com.mingshu.goods.utils.ApplicationUtil;
 import com.mingshu.goods.utils.Constant;
 import com.mingshu.goods.views.adapters.MyFragmentAdapter;
-import com.mingshu.pmp.goods.R;
-import com.mingshu.pmp.goods.databinding.ActivityHomeBinding;
 
 import java.util.ArrayList;
 import java.util.List;

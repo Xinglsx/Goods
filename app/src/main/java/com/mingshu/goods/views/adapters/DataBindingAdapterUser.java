@@ -6,8 +6,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.mingshu.goods.R;
 import com.mingshu.goods.models.UserInfo;
-import com.mingshu.pmp.goods.R;
 
 import java.util.List;
 

@@ -11,7 +11,7 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
-import com.mingshu.pmp.goods.R;
+import com.mingshu.goods.R;
 
 import java.io.File;
 

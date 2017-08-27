@@ -4,13 +4,12 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.View;
 
+import com.mingshu.goods.databinding.ActivityChangePasswordBinding;
 import com.mingshu.goods.managers.ApiCoreManager;
 import com.mingshu.goods.models.UserInfo;
 import com.mingshu.goods.utils.CommonUtil;
 import com.mingshu.goods.utils.Constant;
 import com.mingshu.goods.utils.PrompUtil;
-import com.mingshu.pmp.goods.R;
-import com.mingshu.pmp.goods.databinding.ActivityChangePasswordBinding;
 
 import java.util.Map;
 

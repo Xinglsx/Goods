@@ -14,6 +14,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.View;
 
+import com.mingshu.goods.databinding.ActivityUploadGoodsBinding;
 import com.mingshu.goods.managers.ApiCoreManager;
 import com.mingshu.goods.models.GoodsInfo;
 import com.mingshu.goods.models.UserInfo;
@@ -22,8 +23,6 @@ import com.mingshu.goods.utils.Constant;
 import com.mingshu.goods.utils.ImageUtil;
 import com.mingshu.goods.utils.PrompUtil;
 import com.mingshu.goods.views.MyPopUpWindow;
-import com.mingshu.pmp.goods.R;
-import com.mingshu.pmp.goods.databinding.ActivityUploadGoodsBinding;
 
 import java.io.File;
 import java.text.SimpleDateFormat;

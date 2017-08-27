@@ -3,9 +3,8 @@ package com.mingshu.goods;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 
+import com.mingshu.goods.databinding.ActivityAuditGoodsBinding;
 import com.mingshu.goods.managers.ApiCoreManager;
-import com.mingshu.pmp.goods.R;
-import com.mingshu.pmp.goods.databinding.ActivityAuditGoodsBinding;
 
 import winning.framework.ScanBaseActivity;
 

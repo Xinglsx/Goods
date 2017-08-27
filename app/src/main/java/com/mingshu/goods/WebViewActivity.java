@@ -10,7 +10,6 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import com.mingshu.pmp.goods.R;
 
 import static android.webkit.WebSettings.LOAD_NO_CACHE;
 
