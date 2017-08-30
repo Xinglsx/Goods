@@ -5,17 +5,16 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.mingshu.goods.databinding.ActivityAboutUsBinding;
+import com.mingshu.goods.databinding.ActivityQuestionFeedbackBinding;
 
-
-public class AboutUsActivity extends AppCompatActivity {
-    private ActivityAboutUsBinding binding;
+public class QuestionFeedbackActivity extends AppCompatActivity {
+    private ActivityQuestionFeedbackBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_about_us);
-        binding.setTitle("关于我们-闪荐");
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_question_feedback);
+        binding.setTitle("问题反馈");
         initView();
     }
 
@@ -23,7 +22,7 @@ public class AboutUsActivity extends AppCompatActivity {
         binding.setBackClick(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AboutUsActivity.this.finish();
+                QuestionFeedbackActivity.this.finish();
             }
         });
     }

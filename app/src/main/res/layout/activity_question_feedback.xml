@@ -19,12 +19,5 @@
             layout="@layout/public_top_layout"
             bind:backClick="@{backClick}"
             bind:title="@{title}"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:padding="30dp"
-            android:text="        我们不生产商品，我们也不销售商品，我们只推荐我们用着好的产品，我们只推荐性价比高的商品，我们只会给您带来便宜和便利！\n        我们的目标是净化微信朋友圈。淘宝客们把我们的朋友圈冲的乱七八糟，所以我们只能把淘宝客们请到《闪荐》中来分享商品。"
-            android:textSize="20sp"/>
     </LinearLayout>
 </layout>

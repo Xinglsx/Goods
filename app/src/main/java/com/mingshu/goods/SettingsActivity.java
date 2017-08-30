@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.mingshu.goods.databinding.ActivitySettingsBinding;
-import com.mingshu.goods.utils.CommonUtil;
 
 
 public class SettingsActivity extends AppCompatActivity {
@@ -42,22 +41,24 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.putExtra("uri","http://182.61.58.192/test");
-                intent.setClass(SettingsActivity.this,WebViewActivity.class);
+                intent.setClass(SettingsActivity.this,AboutUsActivity.class);
                 startActivity(intent);
-//                CommonUtil.DisplayToast("功能研发中，感谢支持!",SettingsActivity.this);
             }
         });
         binding.linlayoutQuestionFeedback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CommonUtil.DisplayToast("功能研发中，感谢支持!",SettingsActivity.this);
+                Intent intent = new Intent();
+                intent.setClass(SettingsActivity.this,QuestionFeedbackActivity.class);
+                startActivity(intent);
             }
         });
         binding.linlayoutVersionInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CommonUtil.DisplayToast("功能研发中，感谢支持!",SettingsActivity.this);
+                Intent intent = new Intent();
+                intent.setClass(SettingsActivity.this,VersionInfoActivity.class);
+                startActivity(intent);
             }
         });
         binding.setBackClick(new View.OnClickListener() {
