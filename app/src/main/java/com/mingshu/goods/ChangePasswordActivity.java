@@ -30,6 +30,13 @@ public class ChangePasswordActivity extends ScanBaseActivity {
         binding = DataBindingUtil.setContentView(this,R.layout.activity_change_password);
         apiCoreManager = new ApiCoreManager(this);
         curUser = (UserInfo) ApplicationUtil.get(this, Constant.USERINFO);
+        binding.setTitle("修改密码");
+        binding.setBackClick(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ChangePasswordActivity.this.finish();
+            }
+        });
         initView();
     }
 

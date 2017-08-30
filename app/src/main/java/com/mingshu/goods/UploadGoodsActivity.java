@@ -60,6 +60,7 @@ public class UploadGoodsActivity extends ScanBaseActivity{
     private void initUI() {
         imagePopUpWindow = new MyPopUpWindow(this,this);
         buyImagePopUpWindow = new MyPopUpWindow(this,this);
+        binding.setTitle("上传商品信息");
     }
 
     private void initView() {
@@ -182,6 +183,12 @@ public class UploadGoodsActivity extends ScanBaseActivity{
             }
         });
 
+        binding.setBackClick(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UploadGoodsActivity.this.finish();
+            }
+        });
     }
 
     public Boolean checkData(){

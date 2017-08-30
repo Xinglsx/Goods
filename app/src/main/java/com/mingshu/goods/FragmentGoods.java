@@ -65,7 +65,7 @@ public class FragmentGoods extends BaseFragment {
         getGoodsInfos(pageNumber, Constant.PAGESIZE,2);
 
         listViewGoods = (PullToRefreshListView)view.findViewById(R.id.listView_Goods);
-        listViewGoods.setMode(PullToRefreshBase.Mode.BOTH);
+//        listViewGoods.setMode(PullToRefreshBase.Mode.BOTH);
         listViewGoods.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -78,19 +78,28 @@ public class FragmentGoods extends BaseFragment {
                 startActivity(intent);
             }
         });
-        listViewGoods.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
+        listViewGoods.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
             @Override
-            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+            public void onRefresh(PullToRefreshBase<ListView> refreshView) {
                 getGoodsInfos(0,Constant.PAGESIZE,2);
             }
+        });
+//        listViewGoods.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
+//            @Override
+//            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+//
+//            }
+//        });
 
+        listViewGoods.setOnLastItemVisibleListener(new PullToRefreshBase.OnLastItemVisibleListener() {
             @Override
-            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+            public void onLastItemVisible() {
                 if(bindingAdapterArticle.getCount() ==  (pageNumber+1) * Constant.PAGESIZE){
                     getMoreGoodsInfos(pageNumber+1,Constant.PAGESIZE,2);
                 }
                 else{
                     CommonUtil.DisplayToast("亲，没有更多商品了",FragmentGoods.this.getActivity());
+                    listViewGoods.onRefreshComplete();
                 }
             }
         });

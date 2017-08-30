@@ -5,6 +5,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.View;
 
+import com.lidroid.xutils.ViewUtils;
 import com.mingshu.goods.databinding.ActivityRegisterBinding;
 import com.mingshu.goods.managers.ApiCoreManager;
 import com.mingshu.goods.models.UserInfo;
@@ -28,6 +29,15 @@ public class RegisterActivity extends ScanBaseActivity {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_register);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_register);
+        ViewUtils.inject(this);
+        binding.setTitle("新用户注册");
+        binding.setBackClick(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RegisterActivity.this.finish();
+            }
+        });
+//        binding.set("新用户注册");
         apiCoreManager = new ApiCoreManager(this);
     }
 

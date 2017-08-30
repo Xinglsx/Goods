@@ -128,6 +128,13 @@ public class GoodsActivity extends ScanBaseActivity {
                 saveGoodsInfo();
             }
         });
+
+        binding.btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GoodsActivity.this.finish();
+            }
+        });
     }
     @Override
     public void onSuccessScan(String s) {

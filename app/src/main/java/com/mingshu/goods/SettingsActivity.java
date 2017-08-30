@@ -17,6 +17,7 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_settings);
+        binding.setTitle("其他设置");
         initView();
     }
 
@@ -57,6 +58,12 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 CommonUtil.DisplayToast("功能研发中，感谢支持!",SettingsActivity.this);
+            }
+        });
+        binding.setBackClick(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SettingsActivity.this.finish();
             }
         });
     }

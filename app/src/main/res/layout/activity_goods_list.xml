@@ -14,6 +14,7 @@
             android:layout_gravity="center"
             android:text="商品明细"
             android:background="@color/colorTitle"
+            android:textColor="@color/colorWhite"
             android:gravity="center"
             android:textSize="18sp"/>
         <com.handmark.pulltorefresh.library.PullToRefreshListView

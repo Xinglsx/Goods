@@ -45,30 +45,38 @@ public class UserManagerActivity extends ScanBaseActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_user_manager);
         apiCoreManager = new ApiCoreManager(this);
         curUser = (UserInfo) ApplicationUtil.get(this, Constant.USERINFO);
+        binding.setTitle("用户管理");
         initView();
         getUserInfos(pageNumber,pageSize,9,"");
     }
 
     private void initView() {
-        binding.listviewUsers.setMode(PullToRefreshBase.Mode.BOTH);
-        binding.listviewUsers.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
+//        binding.listviewUsers.setMode(PullToRefreshBase.Mode.BOTH);
+        binding.listviewUsers.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
             @Override
-            public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+            public void onRefresh(PullToRefreshBase<ListView> refreshView) {
                 getUserInfos(pageNumber,pageSize,9,"");
             }
-
+        });
+        binding.listviewUsers.setOnLastItemVisibleListener(new PullToRefreshBase.OnLastItemVisibleListener() {
             @Override
-            public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+            public void onLastItemVisible() {
                 if(bindingAdapterUser.getCount() ==  (pageNumber+1) * pageSize){
                     getMoreUserInfos(pageNumber+1,pageSize,9,"");
                 }
                 else{
-                    CommonUtil.DisplayToast("亲，没有更多注册用户了！",UserManagerActivity.this);
-                    binding.listviewUsers.onRefreshComplete();
-                }
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            CommonUtil.DisplayToast("亲，没有更多注册用户了！",UserManagerActivity.this);
+                            binding.listviewUsers.onRefreshComplete();
+                        }
+                    }).start();
 
+                }
             }
         });
+
         binding.listviewUsers.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -83,6 +91,12 @@ public class UserManagerActivity extends ScanBaseActivity {
             }
         });
 
+        binding.setBackClick(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UserManagerActivity.this.finish();
+            }
+        });
     }
 
 

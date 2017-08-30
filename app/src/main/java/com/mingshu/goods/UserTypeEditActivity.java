@@ -52,6 +52,12 @@ public class UserTypeEditActivity extends ScanBaseActivity {
                 updateUser();
             }
         });
+        binding.setBackClick(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UserTypeEditActivity.this.finish();
+            }
+        });
     }
 
     private void updateUser() {
@@ -80,6 +86,8 @@ public class UserTypeEditActivity extends ScanBaseActivity {
     }
 
     private void initData() {
+        binding.setTitle("用户类型修改");
+
         Intent it = this.getIntent();
         if(it.getSerializableExtra("user") != null) {
             user = (UserInfo) it.getSerializableExtra("user");
