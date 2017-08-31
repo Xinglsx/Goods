@@ -26,5 +26,6 @@ public class Constant {
     public static final  String DATEFORMAT_DATE_WITHOUTLINE= "yyyyMMdd";
     public static final  String DATEFORMAT_DATETIME_WITHOUTLINE= "yyyyMMddHHmmss";
 
+    public static final String IS_FIRST_IN = "isFirstIn";
 
 }

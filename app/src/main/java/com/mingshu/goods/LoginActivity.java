@@ -31,28 +31,28 @@ public class LoginActivity extends ScanBaseActivity {
     private ActivityLoginBinding binding;
     private ApiCoreManager apiCoreManager;
     private SharedPreferences sp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_login);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
 //        Glide.with(this).load(getResources().getDrawable(R.drawable.image_background,null)).dontAnimate().into(0,0);
-
+        ininView();
         apiCoreManager = new ApiCoreManager(this);
         sp = this.getSharedPreferences("userInfo", Context.MODE_PRIVATE);
-        binding.txtUserCode.setText(sp.getString(Constant.USERCODE,""));
-        if(sp.getBoolean(Constant.REMEMBERPASSWORD_ISCHECK,false)){
+        binding.txtUserCode.setText(sp.getString(Constant.USERCODE, ""));
+        if (sp.getBoolean(Constant.REMEMBERPASSWORD_ISCHECK, false)) {
             binding.chkRememberPassword.setChecked(true);
-            binding.txtPassword.setText(sp.getString(Constant.PASSWORD,""));//不再保存密码
-            if(sp.getBoolean(Constant.AUTOLOGIN_ISCHECK,false)){
+            binding.txtPassword.setText(sp.getString(Constant.PASSWORD, ""));//不再保存密码
+            if (sp.getBoolean(Constant.AUTOLOGIN_ISCHECK, false)) {
                 binding.chkAutoLogin.setChecked(true);
                 Intent intent = this.getIntent();
-                if(!intent.getBooleanExtra("isLogout",false)){
+                if (!intent.getBooleanExtra("isLogout", false)) {
                     Login();
                 }
             }
         }
-        ininView();
     }
 
     public void ininView(){
@@ -136,6 +136,7 @@ public class LoginActivity extends ScanBaseActivity {
                 Intent intentGuest = new Intent(this,HomeActivity.class);
                 intentGuest.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intentGuest);
+                LoginActivity.this.finish();
                 break;
             case R.id.txt_forget_password:
                 CommonUtil.DisplayToast("请联系管理员或者使用游客模式登录!",this);
@@ -203,6 +204,7 @@ public class LoginActivity extends ScanBaseActivity {
         Intent intent = new Intent(this,HomeActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+        LoginActivity.this.finish();
     }
 
     private void failuerMessage(String message){

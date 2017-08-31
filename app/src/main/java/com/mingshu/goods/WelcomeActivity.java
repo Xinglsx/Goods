@@ -1,14 +1,18 @@
 package com.mingshu.goods;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.mingshu.goods.managers.ApiCoreManager;
 import com.mingshu.goods.utils.CommonUtil;
+import com.mingshu.goods.utils.Constant;
 import com.mingshu.goods.utils.DialogUtil;
 import com.mingshu.goods.utils.DownLoadUtil;
 
@@ -24,6 +28,10 @@ public class WelcomeActivity extends BaseActivity {
     private ApiCoreManager apiCoreManager;
     com.mingshu.goods.models.VersionInfo serviceVersionInfo;
     com.mingshu.goods.models.VersionInfo curVersion;
+    private Boolean isFirstIn = false;
+    private SharedPreferences sp;
+    Intent it = new Intent();
+    ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,30 +39,27 @@ public class WelcomeActivity extends BaseActivity {
         setContentView(R.layout.activity_welcome);
         apiCoreManager = new ApiCoreManager(this);
 
+        imageView = (ImageView) findViewById(R.id.image_view);
+        Glide.with(this).load(R.drawable.image_welcome).dontAnimate().into(imageView);
         curVersion = CommonUtil.getAppVersionName(WelcomeActivity.this);
 
         ((TextView)this.findViewById(R.id.txt_version)).setText("版本号："+curVersion.version);
-
-        this.findViewById(R.id.txt_enter_home).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final Intent it = new Intent(WelcomeActivity.this,LoginActivity.class);
-                it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(it);
-                WelcomeActivity.this.finish();
-            }
-        });
 
         if(CommonUtil.isWifiConnected(this)){
             Update();
         }else{
             skipToHome();
         }
-
     }
 
     private void skipToHome(){
-        final Intent it = new Intent(this,LoginActivity.class);
+        sp = WelcomeActivity.this.getSharedPreferences("first_pref", Context.MODE_PRIVATE);
+        isFirstIn = sp.getBoolean(Constant.IS_FIRST_IN,true);
+        if(isFirstIn){
+            it.setClass(this,GuideActivity.class);
+        }else{
+            it.setClass(this,LoginActivity.class);
+        }
         it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         Timer timer = new Timer();
         TimerTask task = new TimerTask() {
@@ -64,7 +69,7 @@ public class WelcomeActivity extends BaseActivity {
                 WelcomeActivity.this.finish();
             }
         };
-        timer.schedule(task,1500);
+        timer.schedule(task,1000);
     }
 
     private void Update(){

@@ -40,7 +40,8 @@
         <activity android:name=".SettingsActivity" />
         <activity android:name=".UserInfoEditActivity" />
         <activity android:name=".QuestionFeedbackActivity" />
-        <activity android:name=".VersionInfoActivity"></activity>
+        <activity android:name=".VersionInfoActivity" />
+        <activity android:name=".GuideActivity" />
     </application>
 
 </manifest>

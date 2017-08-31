@@ -73,6 +73,7 @@ public class FragmentMy extends BaseFragment {
                 intent.putExtra("isLogout",true);
                 winning.framework.utils.ApplicationUtil.put(FragmentMy.this.getActivity(),Constant.USERINFO,"");
                 startActivity(intent);
+                FragmentMy.this.getActivity().finish();
             }
         });
 

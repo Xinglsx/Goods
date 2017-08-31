@@ -5,6 +5,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.widget.Toast;
@@ -105,5 +106,20 @@ public class CommonUtil {
             }
         }
         return -1;
+    }
+
+    /**
+     * 获取软件的缓存的目录
+     * @param mContext
+     * @return
+     */
+    public static String getDiskCacheDir(Context mContext) {
+        String cachePath;
+        if(Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
+            cachePath = mContext.getExternalCacheDir().getPath();
+        } else {
+            cachePath = mContext.getCacheDir().getPath();
+        }
+        return cachePath;
     }
 }
