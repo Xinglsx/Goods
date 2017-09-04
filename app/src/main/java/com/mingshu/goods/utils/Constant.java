@@ -17,7 +17,7 @@ public class Constant {
     public static final String USERINFO = "UserInfo";
 
     //一次获取文章数量
-    public static final Integer PAGESIZE = 10;
+    public static final Integer PAGESIZE = 8;
 
     //几种主要的时间格式
     public static final  String DATEFORMAT_DATE = "yyyy-MM-dd";

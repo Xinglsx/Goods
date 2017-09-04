@@ -1,6 +1,5 @@
 package com.mingshu.goods;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -26,14 +25,13 @@ import winning.framework.ScanBaseActivity;
 
 public class GuideActivity extends ScanBaseActivity {
     private ActivityGuideBinding binding;
-    private List<Fragment> guidePages;
 
     //导航页资源
     private int[] images = new int[]{
-            R.drawable.image_guide_1,
-            R.drawable.image_guide_2,
-            R.drawable.image_guide_3,
-            R.drawable.image_guide_4
+            R.drawable.image_guide_1,//http://192.224.129.220:8080/images/guides/image_guide_1.png
+            R.drawable.image_guide_2,//http://192.224.129.220:8080/images/guides/image_guide_2.png
+            R.drawable.image_guide_3,//http://192.224.129.220:8080/images/guides/image_guide_3.png
+            R.drawable.image_guide_4//http://192.224.129.220:8080/images/guides/image_guide_4.png
     };
     //用来存放导航图片实例（保证唯一性，滑动的时候不重复创建）
     private List<ImageView> imageViews;
@@ -52,7 +50,6 @@ public class GuideActivity extends ScanBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_guide);
-        guidePages = new ArrayList<>();
         imageViews = new ArrayList<>();
         ll = binding.ll;
         rl = binding.rl;
