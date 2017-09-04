@@ -44,33 +44,37 @@ public class GoodsListActivity extends ScanBaseActivity {
         Intent intent = this.getIntent();
         curType = intent.getIntExtra("type",0);
         if(curType == 0){
-            state = 10;
+            state = 310;
         }else{
             state = 1;
         }
-        binding.txtTitle.setText(intent.getStringExtra("title"));
+
+        binding.setTitle(intent.getStringExtra("title"));
         apiCoreManager = new ApiCoreManager(this);
         initView();
     }
 
     private void initView() {
         listViewGoodsList = binding.listviewGoodsList;
-        listViewGoodsList.setMode(PullToRefreshBase.Mode.BOTH);
+//        listViewGoodsList.setMode(PullToRefreshBase.Mode.BOTH);
         getGoodsInfos(pageNumber,10,state);
+
+        binding.setBackClick(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GoodsListActivity.this.finish();
+            }
+        });
 
         listViewGoodsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                //跳转文章详细信息
+                //跳转商品详细信息
                 Intent intent = new Intent();
                 GoodsInfo temp = goodsInfos.get(i-1);//选中的商品
                 intent.putExtra("goods",temp);
                 if(curType == 0 ){
-                    if(temp.getState() == 0){
-                        nextType = 0;
-                    }else {
-                        nextType = 1;
-                    }
+                    nextType = 1;
                 }else {
                     nextType = 2;
                 }
@@ -87,19 +91,19 @@ public class GoodsListActivity extends ScanBaseActivity {
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
-                if(bindingAdapterArticle.getCount() ==  (pageNumber+1) * Constant.PAGESIZE){
-                    getMoreGoodsInfos(pageNumber+1,Constant.PAGESIZE,state);
-                }
-                else{
-                    CommonUtil.DisplayToast("亲，没有更多商品了",GoodsListActivity.this);
-                }
+
             }
         });
 
         listViewGoodsList.setOnLastItemVisibleListener(new PullToRefreshBase.OnLastItemVisibleListener() {
             @Override
             public void onLastItemVisible() {
-
+                if(bindingAdapterArticle.getCount() ==  (pageNumber+1) * Constant.PAGESIZE){
+                    getMoreGoodsInfos(pageNumber+1,Constant.PAGESIZE,state);
+                }
+                else{
+                    CommonUtil.DisplayToast("亲，没有更多商品了",GoodsListActivity.this);
+                }
             }
         });
 

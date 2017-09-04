@@ -135,18 +135,16 @@
                 android:layout_height="wrap_content"
                 android:text="注册"
                 android:onClick="click"
-                android:textColor="@color/colorWhite"
-                android:background="@color/colorBtnBackground"/>
+                android:background="@color/colorBtnYellow"/>
 
             <Button
                 android:id="@+id/btn_exit"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorWhite"
                 android:layout_marginLeft="60dp"
                 android:text="返回登录"
                 android:onClick="click"
-                android:background="@color/colorBtnBackground"/>
+                android:background="@color/colorBtnYellow"/>
 
         </LinearLayout>
     </LinearLayout>

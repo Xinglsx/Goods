@@ -50,7 +50,7 @@ public class GoodsActivity extends ScanBaseActivity {
         type = intent.getIntExtra("type",0);
         switch (type){
             case 0://一般用户查看商品界面
-                binding.txtAudit.setVisibility(View.GONE);
+                binding.txtRefuse.setVisibility(View.GONE);
                 binding.linlayouRefuseReason.setVisibility(View.GONE);
                 break;
             case 1://可上传用户查看待审核和已拒绝商品界面
@@ -60,7 +60,7 @@ public class GoodsActivity extends ScanBaseActivity {
                 }else {
                     binding.btnBuy.setText("提交审核");
                 }
-                binding.txtAudit.setVisibility(View.GONE);
+                binding.txtRefuse.setVisibility(View.GONE);
                 if(goodsInfo == null || goodsInfo.getState() != 3){
                     binding.linlayouRefuseReason.setVisibility(View.GONE);
                 }else {
@@ -70,7 +70,7 @@ public class GoodsActivity extends ScanBaseActivity {
             case 2://管理员审核界面
                 //审核界面
                 binding.txtTitle.setText("商品审核界面");
-                binding.btnBuy.setText("拒绝通过");
+                binding.btnBuy.setText("审核通过");
                 break;
         }
         initView();
@@ -84,8 +84,11 @@ public class GoodsActivity extends ScanBaseActivity {
         } else {
             binding.txtGoodsPrice.setText("￥" + goodsInfo.getPrice());
         }
-
-        binding.txtClickcount.setText(String.valueOf(goodsInfo.getClickcount() + 1));
+        if(type == 0){
+            binding.txtClickcount.setText(String.valueOf(goodsInfo.getClickcount() + 1));
+        }else{
+            binding.txtClickcount.setText(String.valueOf(goodsInfo.getClickcount()));
+        }
 
         binding.btnBuy.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,8 +113,8 @@ public class GoodsActivity extends ScanBaseActivity {
                 } else if (type == 1) {//提交审核
                     goodsInfo.setState((short)1);
                     saveGoodsInfo();
-                } else {//审核不通过
-                    goodsInfo.setState((short)3);
+                } else {//审核通过
+                    goodsInfo.setState((short)2);
                     goodsInfo.setAudituser(curUser.getId());
                     goodsInfo.setAuditname(curUser.getNickname());
                     saveGoodsInfo();
@@ -119,13 +122,17 @@ public class GoodsActivity extends ScanBaseActivity {
             }
         });
 
-        binding.txtAudit.setOnClickListener(new View.OnClickListener() {
+        binding.txtRefuse.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {//审核通过
-                goodsInfo.setState((short)2);
-                goodsInfo.setAudituser(curUser.getId());
-                goodsInfo.setAuditname(curUser.getNickname());
-                saveGoodsInfo();
+            public void onClick(View v) {//审核不通过
+                if(binding.txtReason.length() <= 0){
+                    CommonUtil.ShowMsg("请写明拒绝理由！",GoodsActivity.this);
+                }else{
+                    goodsInfo.setState((short)3);
+                    goodsInfo.setAudituser(curUser.getId());
+                    goodsInfo.setAuditname(curUser.getNickname());
+                    saveGoodsInfo();
+                }
             }
         });
 

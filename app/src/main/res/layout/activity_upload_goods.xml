@@ -28,24 +28,36 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
                 <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/btn_paste"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <Button
-                        android:id="@+id/btn_paste"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="一件粘贴 "
-                        android:textSize="16sp"
-                        android:background="@color/colorBtnYellow"
-                        android:layout_margin="10dp"/>
-                </LinearLayout>
-
+                    android:layout_height="wrap_content"
+                    android:text="淘宝客一键粘贴 "
+                    android:textSize="16sp"
+                    android:background="@color/colorBtnYellow"
+                    android:layout_margin="10dp"/>
+            </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
+                    android:visibility="gone">
+                    <TextView
+                        android:id="@+id/txt_paste_help"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="不会粘贴，戳我！"
+                        android:gravity="center"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:orientation="horizontal"
                     android:gravity="center_vertical">
                     <TextView
@@ -65,7 +77,8 @@
                         android:layout_weight="5"
                         android:textSize="18sp"
                         android:padding="5dp"
-                        android:lines="2"
+                        android:lines="4"
+                        android:gravity="top"
                         android:text="@={data.description}"/>
                 </LinearLayout>
                 <LinearLayout
@@ -91,7 +104,8 @@
                         android:layout_weight="5"
                         android:textSize="18sp"
                         android:padding="5dp"
-                        android:lines="2"
+                        android:lines="3"
+                        android:gravity="top"
                         android:text="@={data.link}"/>
                 </LinearLayout>
                 <LinearLayout
@@ -143,7 +157,8 @@
                         android:layout_weight="5"
                         android:textSize="18sp"
                         android:padding="5dp"
-                        android:lines="2"
+                        android:lines="1"
+                        android:gravity="top"
                         android:text="@={data.price}"/>
                 </LinearLayout>
                 <LinearLayout
@@ -196,6 +211,8 @@
                         android:textSize="18sp"
                         android:padding="5dp"
                         android:lines="6"
+                        android:gravity="top"
+                        android:hint="请填写推荐理由，至少50字。"
                         android:text="@={data.reason}"/>
                 </LinearLayout>
                 <LinearLayout

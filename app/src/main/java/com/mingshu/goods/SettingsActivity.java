@@ -7,20 +7,30 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.mingshu.goods.databinding.ActivitySettingsBinding;
+import com.mingshu.goods.models.UserInfo;
+import com.mingshu.goods.utils.Constant;
+
+import winning.framework.utils.ApplicationUtil;
 
 
 public class SettingsActivity extends AppCompatActivity {
     private ActivitySettingsBinding binding;
-
+    private UserInfo curUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_settings);
         binding.setTitle("其他设置");
+        curUser = (UserInfo) ApplicationUtil.get(this, Constant.USERINFO);
         initView();
     }
 
     private void initView() {
+        if("guest".equals(curUser.getId())){
+            binding.linlayoutChangePassword.setVisibility(View.GONE);
+            binding.linlayoutChangeUserinfo.setVisibility(View.GONE);
+        }
+
         binding.linlayoutChangePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

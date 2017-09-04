@@ -131,6 +131,7 @@ public class LoginActivity extends ScanBaseActivity {
                     public short getUsertype() {
                         return 0;
                     }
+                    public String getId(){return "guest";}
                 };
                 ApplicationUtil.put(this,Constant.USERINFO,tempUser);
                 Intent intentGuest = new Intent(this,HomeActivity.class);

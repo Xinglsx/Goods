@@ -255,7 +255,7 @@ public class UploadGoodsActivity extends ScanBaseActivity{
             @Override
             public void callback(Boolean result){
                 PrompUtil.stopProgessDialog();
-                CommonUtil.ShowMsg("保存成功，请等待审核",UploadGoodsActivity.this);
+                CommonUtil.DisplayToast("保存成功，请等待审核",UploadGoodsActivity.this);
                 UploadGoodsActivity.this.finish();
             }
         },new NetworkEngine.Failure(){

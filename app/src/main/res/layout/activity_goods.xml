@@ -41,11 +41,11 @@
                 android:text="商品明细"
                 />
             <TextView
-                android:id="@+id/txt_audit"
+                android:id="@+id/txt_refuse"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="审核通过"
+                android:text="拒绝通过"
                 android:textColor="@color/colorAccent"
                 android:textSize="16sp"
                 android:layout_alignParentBottom="true"
