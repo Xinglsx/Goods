@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.bumptech.glide.Glide;
 import com.mingshu.goods.databinding.ActivityGuideBinding;
 import com.mingshu.goods.utils.Constant;
 
@@ -63,7 +64,9 @@ public class GuideActivity extends ScanBaseActivity {
         int pageSize = images.length;
         for (int i = 0; i < pageSize; i++) {
             ImageView iv = new ImageView(GuideActivity.this);
-            iv.setImageResource(images[i]);
+            iv.setScaleType(ImageView.ScaleType.FIT_XY);
+            Glide.with(this).load(images[i]).dontAnimate().into(iv);
+//            iv.setImageResource(images[i]);
             imageViews.add(iv);
             //动态加载灰色圆点
             ImageView gray_Iv = new ImageView(this);
@@ -73,7 +76,7 @@ public class GuideActivity extends ScanBaseActivity {
                             LinearLayout.LayoutParams.WRAP_CONTENT);
             //从第二个开始有边距
             if (i > 0) {
-                layoutParams.leftMargin = 60;  //注意单位是px
+                layoutParams.leftMargin = 100;  //注意单位是px
             }
             gray_Iv.setLayoutParams(layoutParams);
             ll.addView(gray_Iv);
@@ -123,11 +126,15 @@ public class GuideActivity extends ScanBaseActivity {
         binding.btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sp.edit().putBoolean(Constant.IS_FIRST_IN,false).commit();
-                //跳转登录页面
-                Intent it =new Intent(GuideActivity.this,LoginActivity.class);
-                startActivity(it);
-                GuideActivity.this.finish();
+                if(sp.getBoolean(Constant.IS_FIRST_IN,true)){
+                    sp.edit().putBoolean(Constant.IS_FIRST_IN,false).commit();
+                    //跳转登录页面
+                    Intent it =new Intent(GuideActivity.this,LoginActivity.class);
+                    startActivity(it);
+                    GuideActivity.this.finish();
+                }else{
+                    GuideActivity.this.finish();
+                }
             }
         });
     }

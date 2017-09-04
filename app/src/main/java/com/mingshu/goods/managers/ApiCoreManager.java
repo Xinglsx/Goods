@@ -5,6 +5,7 @@ import android.content.Context;
 import com.alibaba.fastjson.JSONObject;
 import com.android.volley.Request;
 import com.mingshu.goods.models.GoodsInfo;
+import com.mingshu.goods.models.Questions;
 import com.mingshu.goods.models.UserInfo;
 
 import java.util.HashMap;
@@ -68,6 +69,12 @@ public class ApiCoreManager extends ApiManager {
         param.put("newPassword",newPassword);
 //        MyLogUtil.LogShitou("param",param.toString());
         return createAPI(Request.Method.POST,baseURL+"/UserInfo/ChangePassword",param);
+    }
+
+    public Api saveQuestion(Questions questionInfo){
+        JSONObject param = new JSONObject();
+        param.put("questionInfo",questionInfo);
+        return createAPI(Request.Method.POST,baseURL+"/UserInfo/SaveQuestion",param);
     }
 
     public Api getGoodsList(int curPage, int pageSize,int type){

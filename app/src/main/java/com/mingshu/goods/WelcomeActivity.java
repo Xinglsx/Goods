@@ -69,7 +69,7 @@ public class WelcomeActivity extends BaseActivity {
                 WelcomeActivity.this.finish();
             }
         };
-        timer.schedule(task,1000);
+        timer.schedule(task,2000);
     }
 
     private void Update(){

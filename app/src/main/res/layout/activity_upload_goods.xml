@@ -37,6 +37,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="一件粘贴 "
+                        android:textSize="16sp"
                         android:background="@color/colorBtnYellow"
                         android:layout_margin="10dp"/>
                 </LinearLayout>
@@ -253,13 +254,15 @@
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:text="保存草稿"
+                        android:textSize="16sp"
                         android:background="@color/colorBtnYellow"/>
                     <Button
                         android:id="@+id/btn_save_submit"
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:text="提交审核 "
-                        android:layout_marginLeft="40dp"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="30dp"
                         android:background="@color/colorBtnYellow"/>
                 </LinearLayout>
                 <TextView

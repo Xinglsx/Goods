@@ -7,6 +7,14 @@
             type="String"/>
 
         <variable
+            name="content"
+            type="String"/>
+
+        <variable
+            name="contact"
+            type="String"/>
+
+        <variable
             name="backClick"
             type="android.view.View.OnClickListener"/>
     </data>
@@ -19,5 +27,56 @@
             layout="@layout/public_top_layout"
             bind:backClick="@{backClick}"
             bind:title="@{title}"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:text="请描述您的疑问或写出您的建议："
+            android:textSize="18sp"/>
+
+        <EditText
+            android:id="@+id/txt_content"
+            android:layout_width="match_parent"
+            android:layout_height="260dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/btn_more_style"
+            android:padding="5dp"
+            android:gravity="top"
+            android:text="@={content}"
+            android:hint="真诚感谢您在百忙中抽出时间来反馈问题或提供建议！您的每一个字我们都会用心去看！"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:text="联系方式"
+            android:textSize="18sp"/>
+
+        <EditText
+            android:id="@+id/txt_contact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:layout_margin="10dp"
+            android:background="@drawable/btn_more_style"
+            android:padding="5dp"
+            android:gravity="top"
+            android:text="@={contact}"
+            android:hint="QQ或邮箱 (选填)"
+            />
+        <Button
+            android:id="@+id/btn_submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="提交"
+            android:textSize="16sp"
+            android:background="@color/colorBtnYellow"/>
     </LinearLayout>
 </layout>

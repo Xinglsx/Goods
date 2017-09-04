@@ -30,6 +30,7 @@ public class UserInfoEditActivity extends ScanBaseActivity {
         binding = DataBindingUtil.setContentView(this,R.layout.activity_userinfo_edit);
         curUser = (UserInfo) ApplicationUtil.get(this, Constant.USERINFO);
         binding.setUser(curUser);
+        binding.setTitle("个人信息修改");
         apiCoreManager = new ApiCoreManager(this);
         initView();
     }
@@ -38,7 +39,15 @@ public class UserInfoEditActivity extends ScanBaseActivity {
         binding.btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //加等待条
+                PrompUtil.startProgressDialog(UserInfoEditActivity.this,"保存中，请稍等。。。");
                 saveUserInfo();
+            }
+        });
+        binding.setBackClick(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UserInfoEditActivity.this.finish();
             }
         });
     }

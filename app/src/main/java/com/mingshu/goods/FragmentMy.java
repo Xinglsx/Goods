@@ -24,6 +24,7 @@ public class FragmentMy extends BaseFragment {
 
     Context context;
     UserInfo curUser;
+    int type;
 
     @SuppressLint({"NewApi", "ValidFragment"})
     public FragmentMy(Context context) {
@@ -40,7 +41,11 @@ public class FragmentMy extends BaseFragment {
     }
 
     public void initView() {
-        int type = curUser.getUsertype();
+        if(curUser == null){
+            type = 0;
+        }else {
+            type= curUser.getUsertype();
+        }
         switch (type){
             default:
             case 0:
@@ -121,6 +126,14 @@ public class FragmentMy extends BaseFragment {
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(FragmentMy.this.getActivity(),SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
+        view.findViewById(R.id.linlayout_help).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(FragmentMy.this.getActivity(),GuideActivity.class);
                 startActivity(intent);
             }
         });

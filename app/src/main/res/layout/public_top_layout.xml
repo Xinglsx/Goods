@@ -13,7 +13,7 @@
     <RelativeLayout
         android:id="@+id/rel_item"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="35dp"
         android:background="@color/colorTitle">
 
         <TextView
@@ -26,7 +26,7 @@
             android:singleLine="true"
             android:text="@{title}"
             android:textColor="@color/colorWhite"
-            android:textSize="20sp" />
+            android:textSize="16sp" />
 
         <ImageButton
             android:id="@+id/btn_back"
