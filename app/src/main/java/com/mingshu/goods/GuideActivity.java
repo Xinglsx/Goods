@@ -68,9 +68,7 @@ public class GuideActivity extends ScanBaseActivity {
             //动态加载灰色圆点
             ImageView gray_Iv = new ImageView(this);
             gray_Iv.setImageResource(R.drawable.gray_point);
-            LinearLayout.LayoutParams layoutParams =
-                    new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-                            LinearLayout.LayoutParams.WRAP_CONTENT);
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(32,32);
             //从第二个开始有边距
             if (i > 0) {
                 layoutParams.leftMargin = 100;  //注意单位是px
@@ -81,6 +79,8 @@ public class GuideActivity extends ScanBaseActivity {
         //添加红色圆点
         red_Iv = new ImageView(this);
         red_Iv.setImageResource(R.drawable.red_point);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(32,32);
+        red_Iv.setLayoutParams(layoutParams);
         rl.addView(red_Iv);
         //任何一个组件都可以得到视图树
         red_Iv.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {

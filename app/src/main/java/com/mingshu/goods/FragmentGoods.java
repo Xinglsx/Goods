@@ -21,6 +21,7 @@ import com.bumptech.glide.Glide;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.mingshu.goods.managers.ApiCoreManager;
+import com.mingshu.goods.models.AdInfo;
 import com.mingshu.goods.models.GoodsInfo;
 import com.mingshu.goods.utils.CommonUtil;
 import com.mingshu.goods.utils.Constant;
@@ -300,11 +301,110 @@ public class FragmentGoods extends BaseFragment {
         //ViewGroup:父控件指ViewPager
         //position:当前子控件在父控件中的位置
         @Override
-        public Object instantiateItem(ViewGroup container, int position) {
+        public Object instantiateItem(final ViewGroup container, final int position) {
             ImageView iv = imageViews.get(position);
+            iv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    switch (position){
+                        case 0 :
+                            skipToAd("carousel0");
+                            break;
+                        case 1:
+                            skipToAd("carousel1");
+                            break;
+                        case 2:
+                            skipToAd("carousel2");
+                            break;
+                        case 3:
+                            skipToAd("carousel3");
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            });
             container.addView(iv);
             return iv;
         }
+        //获取广告
+        public void skipToAd(String key){
+            final ApiCoreManager.Api api = apiCoreManager.getAdvertisement(key);
+            api.invoke(new NetworkEngine.Success<AdInfo>() {
+                @Override
+                public void callback(AdInfo data) {
+                    int type = data.getAdInfo().getType();
+                    switch (type){
+                        case 0:
+                            //关于我们
+                            Intent intent = new Intent(FragmentGoods.this.getActivity(),TextViewActivity.class);
+                            intent.putExtra("title","招募特约用户");
+//                            String content = "<h3>手机APP刚刚上线，现招募20位淘宝客加盟，1元成为特约用户，可以上传自己分享的商品信息。</h3>\n";
+//                            content += "<h4>基本要求：</h4>\n";
+//                            content += "<p>1、对分享购物不感冒</p>\n";
+//                            content += "<p>2、对业余赚钱有渴望</p>\n";
+//                            content += "<p>3、肯专研，爱逛淘宝</p>\n";
+//                            content += "<p>4、每天至少上传一件商品</p>\n";
+//                            content += "<p>5、用Android手机的（没办法，不会开发苹果APP）</p>\n";
+//                            content += "<p>6、电话、微信、姓名实名认证。</p>\n";
+//                            content += "<p>7、熟悉淘宝联盟，清楚淘宝客的基本操作和分享规则的优先考虑。（不了解的，这有教程）</p>\n";
+//                            content += "<h4>加盟流程：</h4>\n";
+//                            content += "下载闪荐 -> 注册闪荐账号 -> 完善个人资料 -> 加微信(ydxc608) -> ";
+//                            content += "出示闪荐账号 -> 成为特约用户 -> 上传一个商品成功 -> 支付1元费用\n";
+                            intent.putExtra("content",data.getAdInfo().getContent());//html类型
+                            startActivity(intent);
+                            break;
+                        case 1:
+                            //文字广告
+                            Intent intent1 = new Intent(FragmentGoods.this.getActivity(),TextViewActivity.class);
+                            intent1.putExtra("title","招募特约用户");
+                            intent1.putExtra("content",data.getAdInfo().getContent());//html类型
+                            startActivity(intent1);
+                            break;
+                        case 2:
+                            //商品广告
+                            Intent intent2 = new Intent(FragmentGoods.this.getActivity(),GoodsActivity.class);
+                            intent2.putExtra("goods",data.getGoodsInfo());
+                            startActivity(intent2);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }, new NetworkEngine.Failure() {
+                @Override
+                public void callback(int code, String message, Map rawData) {
+//                    PrompUtil.stopProgessDialog();
+//                    CommonUtil.ShowMsg(message,FragmentGoods.this.getActivity());
+//                    listViewGoods.onRefreshComplete();
+                    //如果失败，刚进行招募特约用户界面
+                    Intent intent = new Intent(FragmentGoods.this.getActivity(), TextViewActivity.class);
+                    intent.putExtra("title", "招募特约用户");
+                    String content = "<h3>手机APP刚刚上线，现招募20位淘宝客加盟，1元成为特约用户，可以上传自己分享的商品信息。</h3>\n";
+                    content += "<h4>基本要求：</h4>\n";
+                    content += "<p>1、对分享购物不感冒</p>\n";
+                    content += "<p>2、对业余赚钱有渴望</p>\n";
+                    content += "<p>3、肯专研，爱逛淘宝</p>\n";
+                    content += "<p>4、每天至少上传一件商品</p>\n";
+                    content += "<p>5、用Android手机的（没办法，不会开发苹果APP）</p>\n";
+                    content += "<p>6、电话、微信、姓名实名认证。</p>\n";
+                    content += "<p>7、熟悉淘宝联盟，清楚淘宝客的基本操作和分享规则的优先考虑。（不了解的，这有教程）</p>\n";
+                    content += "<h4>加盟流程：</h4>\n";
+                    content += "下载闪荐 -> 注册闪荐账号 -> 完善个人资料 -> 加微信(ydxc608) -> ";
+                    content += "出示闪荐账号 -> 成为特约用户 -> 上传一个商品成功 -> 支付1元费用\n";
+                    intent.putExtra("content", content);//html类型
+                    startActivity(intent);
+                }
+            }, new NetworkEngine.Error() {
+                @Override
+                public void callback(int code, String message, Map rawData) {
+                    PrompUtil.stopProgessDialog();
+                    CommonUtil.ShowMsg(message,FragmentGoods.this.getActivity());
+                    listViewGoods.onRefreshComplete();
+                }
+            });
+        }
+
         //移除页面
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {

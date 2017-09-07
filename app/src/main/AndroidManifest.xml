@@ -32,7 +32,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AboutUsActivity" />
         <activity android:name=".UserManagerActivity" />
         <activity android:name=".GoodsListActivity" />
         <activity android:name=".UserTypeEditActivity" />
@@ -42,6 +41,7 @@
         <activity android:name=".QuestionFeedbackActivity" />
         <activity android:name=".VersionInfoActivity" />
         <activity android:name=".GuideActivity" />
+        <activity android:name=".TextViewActivity"></activity>
     </application>
 
 </manifest>

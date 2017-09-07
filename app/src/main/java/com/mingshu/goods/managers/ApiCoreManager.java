@@ -26,7 +26,7 @@ public class ApiCoreManager extends ApiManager {
         super((BaseActivity)context);
 //        baseURL = "http://192.168.10.61:8890/GoodsService.svc";//公司内网服务器
 //        baseURL = "http://182.61.58.192/GoodsService.svc";//百度外网服务器
-        baseURL = "http://139.224.129.220:8080/GoodsService.svc";//阿里外网服务器
+        baseURL = "http://www.mingshukeji.com.cn:8080/GoodsService.svc";//阿里外网服务器
     }
 
     public Api getVersionInfo(){
@@ -103,5 +103,11 @@ public class ApiCoreManager extends ApiManager {
         param.put("strBase64",strBase64);
 //        MyLogUtil.LogShitou("param",param.toString());
         return createAPI(Request.Method.POST,baseURL+"/Goods/UpdatePictrue",param);
+    }
+
+    public Api getAdvertisement(String key){
+        Map param = new HashMap<>();
+        param.put("key",key);
+        return createAPI(Request.Method.GET,baseURL+"/Advertisement/GetAdvertisement",param);
     }
 }

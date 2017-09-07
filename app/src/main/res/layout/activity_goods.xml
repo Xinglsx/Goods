@@ -10,7 +10,7 @@
             android:id="@+id/btn_buy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="点击此处一键购买"
+            android:text="点击此处一键领券"
             android:layout_alignParentBottom="true"
             android:background="@color/colorBtnYellow"
             android:layout_margin="5dp"/>
