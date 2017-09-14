@@ -55,8 +55,9 @@ public class DataBindingAdapterGoods extends BaseAdapter {
             viewHolder.txtGoodsDescription = (TextView) view.findViewById(R.id.txt_goods_description_item);
             viewHolder.txtRecommendtime= (TextView) view.findViewById(R.id.txt_goods_recommandtime_item);
             viewHolder.txtRecommendname = (TextView) view.findViewById(R.id.txt_goods_recommandname_item);
+            viewHolder.txtGoodsOldPrice = (TextView) view.findViewById(R.id.txt_goods_oldprice_item);
             viewHolder.txtGoodsPrice = (TextView) view.findViewById(R.id.txt_goods_price_item);
-            viewHolder.txtClickCount = (TextView) view.findViewById(R.id.txt_clickcount_item);
+//            viewHolder.txtClickCount = (TextView) view.findViewById(R.id.txt_clickcount_item);
 //            viewHolder.txtReason = (TextView) view.findViewById(R.id.txtreason_item);
             viewHolder.imageGoods = (ImageView) view.findViewById(R.id.image_goods_item);
 
@@ -69,13 +70,18 @@ public class DataBindingAdapterGoods extends BaseAdapter {
             viewHolder.txtRecommendtime.setText(CommonUtil.stampToDate(goodsInfos.get(i).getRecommendtime(),
                     Constant.DATEFORMAT_DATETIME_SS) );
             viewHolder.txtRecommendname.setText(goodsInfos.get(i).getRecommendname());
-            if(goodsInfos.get(i).getPrice().contains("￥")){
-                viewHolder.txtGoodsPrice.setText(goodsInfos.get(i).getPrice());
+            if(goodsInfos.get(i).getOldprice().contains("￥")){
+                viewHolder.txtGoodsOldPrice.setText("原价:"+goodsInfos.get(i).getOldprice());
             }else{
-                viewHolder.txtGoodsPrice.setText("￥" + goodsInfos.get(i).getPrice());
+                viewHolder.txtGoodsOldPrice.setText("原价:￥" + goodsInfos.get(i).getOldprice());
+            }
+            if(goodsInfos.get(i).getPrice().contains("￥")){
+                viewHolder.txtGoodsPrice.setText("【券后】"+goodsInfos.get(i).getPrice());
+            }else{
+                viewHolder.txtGoodsPrice.setText("【券后】￥" + goodsInfos.get(i).getPrice());
             }
 
-            viewHolder.txtClickCount.setText(String.valueOf(goodsInfos.get(i).getClickcount()));
+//            viewHolder.txtClickCount.setText(String.valueOf(goodsInfos.get(i).getClickcount()));
             Glide.with(context).load(goodsInfos.get(i).getImage()).dontAnimate().into(viewHolder.imageGoods);
 //            viewHolder.txtReason.setText(goodsInfos.get(i).getReason());
         }
@@ -97,6 +103,7 @@ public class DataBindingAdapterGoods extends BaseAdapter {
         TextView txtGoodsPrice;//价格
         TextView txtClickCount;//点击数量
         TextView txtReason;//推荐理由
+        TextView txtGoodsOldPrice;//原价
     }
 
 }

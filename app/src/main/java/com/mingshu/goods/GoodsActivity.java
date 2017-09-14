@@ -80,15 +80,20 @@ public class GoodsActivity extends ScanBaseActivity {
         binding.txtGoodDescription.setText(goodsInfo.getDescription());
         binding.txtReason.setText("推荐理由:" + goodsInfo.getReason());
         if (goodsInfo.getPrice().contains("￥")) {
-            binding.txtGoodsPrice.setText(goodsInfo.getPrice());
+            binding.txtGoodsPrice.setText("【券后】"+goodsInfo.getPrice());
         } else {
-            binding.txtGoodsPrice.setText("￥" + goodsInfo.getPrice());
+            binding.txtGoodsPrice.setText("【券后】￥" + goodsInfo.getPrice());
         }
-        if(type == 0){
-            binding.txtClickcount.setText(String.valueOf(goodsInfo.getClickcount() + 1));
-        }else{
-            binding.txtClickcount.setText(String.valueOf(goodsInfo.getClickcount()));
+        if (goodsInfo.getOldprice().contains("￥")) {
+            binding.txtGoodsOldprice.setText("原价:"+goodsInfo.getOldprice());
+        } else {
+            binding.txtGoodsOldprice.setText("原价:￥" + goodsInfo.getOldprice());
         }
+//        if(type == 0){
+//            binding.txtClickcount.setText(String.valueOf(goodsInfo.getClickcount() + 1));
+//        }else{
+//            binding.txtClickcount.setText(String.valueOf(goodsInfo.getClickcount()));
+//        }
 
         binding.btnBuy.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -72,30 +72,40 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/txt_goods_price_item"
-                        android:layout_width="160dp"
+                        android:id="@+id/txt_goods_oldprice_item"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:text="商品价格"
-                        android:textColor="#FF0000"/>
+                        android:text="商品原价"
+                        android:textColor="@color/colorBtnGray"/>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/txt_goods_price_item"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_gravity="center_vertical">
-                        <ImageView
-                            android:layout_gravity="center"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/image_clickcount"/>
-                        <TextView
-                            android:id="@+id/txt_clickcount_item"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="点击量"
-                            android:textColor="@color/colorGray"/>
-                    </LinearLayout>
+                        android:layout_gravity="center_vertical"
+                        android:text="商品券后价"
+                        android:textColor="@color/colorAccent"/>
+
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:orientation="horizontal"-->
+                        <!--android:layout_gravity="center_vertical">-->
+                        <!--<ImageView-->
+                            <!--android:layout_gravity="center"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:src="@drawable/image_clickcount"/>-->
+                        <!--<TextView-->
+                            <!--android:id="@+id/txt_clickcount_item"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:text="点击量"-->
+                            <!--android:textColor="@color/colorGray"/>-->
+                    <!--</LinearLayout>-->
                 </LinearLayout>
 
             </LinearLayout>

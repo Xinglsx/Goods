@@ -175,6 +175,14 @@ public class GoodsInfo implements Serializable {
         this.audittime = audittime;
     }
 
+    public String getOldprice() {
+        return oldprice;
+    }
+
+    public void setOldprice(String oldprice) {
+        this.oldprice = oldprice;
+    }
+
     private String id;
 
     private String description;
@@ -183,6 +191,8 @@ public class GoodsInfo implements Serializable {
     private String link ;
 
     private String command ;
+
+    private String oldprice ;
 
     private String price ;
 

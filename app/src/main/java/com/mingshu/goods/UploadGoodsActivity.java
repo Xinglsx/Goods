@@ -339,6 +339,12 @@ public class UploadGoodsActivity extends ScanBaseActivity{
                 binding.txtGoodsDescription.setText(content.substring(startIndex,endIndex));
             }
 
+            startIndex = content.indexOf("【在售价】") + 5;
+            endIndex = content.indexOf("【券后价】") - 2;
+            if(startIndex  >= 0 && endIndex > startIndex) {
+                binding.txtGoodsOldprice.setText("￥" + content.substring(startIndex, endIndex));
+            }
+
             startIndex = content.indexOf("【券后价】") + 5;
             endIndex = content.indexOf("【下单链接】") - 2;
             if(startIndex  >= 0 && endIndex > startIndex) {

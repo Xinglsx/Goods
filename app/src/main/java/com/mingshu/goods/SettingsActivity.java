@@ -54,7 +54,7 @@ public class SettingsActivity extends AppCompatActivity {
                 intent.putExtra("title","关于我们-闪荐");
                 String content = "<h3>关于我们</h3>\n";
                 content += "<p>我们不生产商品，也不销售商品，我们只推荐我们用着好的产品，我们只推荐性价比高的商品，我们只会给您带来便宜和便利！</p>\n";
-                content += "<p>我们的目标是净化微信朋友圈。淘宝客们把我们的朋友圈冲的乱七八糟，所以我们只能把淘宝客们请到《闪荐》中来分享商品。\n";
+                content += "<p>我们的目标是净化微信朋友圈。淘宝客们把我们的朋友圈冲的乱七八糟，所以我们只能把淘宝客们请到《闪荐》中来分享商品。</p>\n";
                 content += "<h3>成为特约用户</h3>\n";
                 content += "<h5><font color='#FF4081'>成为特约用户，即可分享自己的商品，如有需要请联系微信：ydxc608</font></h5>\n";
                 content += "<h3>商务合作</h3>\n";
