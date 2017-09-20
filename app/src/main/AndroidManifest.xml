@@ -42,6 +42,8 @@
         <activity android:name=".VersionInfoActivity" />
         <activity android:name=".GuideActivity" />
         <activity android:name=".TextViewActivity"></activity>
+        <activity android:name=".CouponActivity"></activity>
+
     </application>
 
 </manifest>

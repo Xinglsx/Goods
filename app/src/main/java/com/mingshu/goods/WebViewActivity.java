@@ -10,8 +10,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-
-import static android.webkit.WebSettings.LOAD_NO_CACHE;
+import static android.webkit.WebSettings.LOAD_DEFAULT;
 
 public class WebViewActivity extends AppCompatActivity {
     WebView webView;
@@ -51,7 +50,7 @@ public class WebViewActivity extends AppCompatActivity {
         //自适应屏幕
         webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         webView.getSettings().setLoadWithOverviewMode(true);
-        webView.getSettings().setCacheMode(LOAD_NO_CACHE);
+        webView.getSettings().setCacheMode(LOAD_DEFAULT);
 
         //如果不设置WebViewClient，请求会跳转系统浏览器
         webView.setWebViewClient(new WebViewClient() {

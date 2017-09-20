@@ -205,7 +205,7 @@ public class FragmentGoods extends BaseFragment {
                 PrompUtil.stopProgessDialog();
                 listViewGoods.onRefreshComplete();
                 if(!isLogin){
-                    CommonUtil.DisplayToast("亲，商品已经刷新成功！",FragmentGoods.this.getActivity());
+                    //CommonUtil.DisplayToast("亲，商品已经刷新成功！",FragmentGoods.this.getActivity());
                     listViewGoods.onRefreshComplete();
                 }else{
                     isLogin = false;
@@ -339,19 +339,19 @@ public class FragmentGoods extends BaseFragment {
                             //关于我们
                             Intent intent = new Intent(FragmentGoods.this.getActivity(),TextViewActivity.class);
                             intent.putExtra("title","招募特约用户");
-//                            String content = "<h3>手机APP刚刚上线，现招募20位淘宝客加盟，1元成为特约用户，可以上传自己分享的商品信息。</h3>\n";
-//                            content += "<h4>基本要求：</h4>\n";
-//                            content += "<p>1、对分享购物不感冒</p>\n";
-//                            content += "<p>2、对业余赚钱有渴望</p>\n";
-//                            content += "<p>3、肯专研，爱逛淘宝</p>\n";
-//                            content += "<p>4、每天至少上传一件商品</p>\n";
-//                            content += "<p>5、用Android手机的（没办法，不会开发苹果APP）</p>\n";
-//                            content += "<p>6、电话、微信、姓名实名认证。</p>\n";
-//                            content += "<p>7、熟悉淘宝联盟，清楚淘宝客的基本操作和分享规则的优先考虑。（不了解的，这有教程）</p>\n";
-//                            content += "<h4>加盟流程：</h4>\n";
-//                            content += "下载闪荐 -> 注册闪荐账号 -> 完善个人资料 -> 加微信(ydxc608) -> ";
-//                            content += "出示闪荐账号 -> 成为特约用户 -> 上传一个商品成功 -> 支付1元费用\n";
-                            intent.putExtra("content",data.getAdInfo().getContent());//html类型
+                            String content = "<h3>手机APP刚刚上线，现招募20位淘宝客加盟，1元成为特约用户，可以上传自己分享的商品信息。</h3>\n";
+                            content += "<h4>基本要求：</h4>\n";
+                            content += "<p>1、对分享购物不感冒</p>\n";
+                            content += "<p>2、对业余赚钱有渴望</p>\n";
+                            content += "<p>3、肯专研，爱逛淘宝</p>\n";
+                            content += "<p>4、每天至少上传一件商品</p>\n";
+                            content += "<p>5、用Android手机的（没办法，不会开发苹果APP）</p>\n";
+                            content += "<p>6、电话、微信、姓名实名认证。</p>\n";
+                            content += "<p>7、熟悉淘宝联盟，清楚淘宝客的基本操作和分享规则的优先考虑。（不了解的，这有教程）</p>\n";
+                            content += "<h4>加盟流程：</h4>\n";
+                            content += "下载闪荐 -> 注册闪荐账号 -> 完善个人资料 -> 加微信(ydxc608) -> ";
+                            content += "出示闪荐账号 -> 成为特约用户 -> 上传一个商品成功 -> 支付1元费用\n";
+                            intent.putExtra("content",content);//html类型
                             startActivity(intent);
                             break;
                         case 1:

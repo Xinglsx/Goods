@@ -20,13 +20,13 @@ import winning.framework.managers.ApiManager;
 
 public class ApiCoreManager extends ApiManager {
 
-    private String baseURL = "";
+    public static String baseURL = "http://www.mingshukeji.com.cn:8080/GoodsService.svc";
 
     public ApiCoreManager(Context context){
         super((BaseActivity)context);
 //        baseURL = "http://192.168.10.61:8890/GoodsService.svc";//公司内网服务器
 //        baseURL = "http://182.61.58.192/GoodsService.svc";//百度外网服务器
-        baseURL = "http://www.mingshukeji.com.cn:8080/GoodsService.svc";//阿里外网服务器
+//        baseURL = "";//阿里外网服务器
     }
 
     public Api getVersionInfo(){
@@ -109,5 +109,13 @@ public class ApiCoreManager extends ApiManager {
         Map param = new HashMap<>();
         param.put("key",key);
         return createAPI(Request.Method.GET,baseURL+"/Advertisement/GetAdvertisement",param);
+    }
+
+    public Api getCouponList(long pageNo, long pageSize, String q){
+        Map param = new HashMap<>();
+        param.put("pageNo",String.valueOf(pageNo));
+        param.put("pageSize",String.valueOf(pageSize));
+        param.put("q",q);
+        return createAPI(Request.Method.GET,baseURL+"/Tbk/GetCouponList",param);
     }
 }

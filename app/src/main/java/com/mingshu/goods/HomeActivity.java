@@ -8,7 +8,6 @@ import android.support.v4.view.ViewPager;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,19 +27,13 @@ public class HomeActivity extends ScanBaseActivity {
     private ActivityHomeBinding binding;
     private UserInfo user;
 
-    // 四个Tab，每个Tab包含一个按钮
-    private LinearLayout mTabGoods;
-//    private LinearLayout mTabConcerns;
-//    private LinearLayout mTabFind;
-    private LinearLayout mTabMy;
-
     // 四个按钮
-    private ImageButton mImgGoods;
-//    private ImageButton mImgConcerns;
-//    private ImageButton mImgFind;
-    private ImageButton mImgMy;
+    private ImageButton mImgGoods;//推荐商品
+    private ImageButton mImgCoupon;//粉线福利券
+    private ImageButton mImgMy;//我的
 
     private TextView txtGoods;
+    private TextView txtCoupon;
     private TextView txtMy;
 
     //Fragment相关
@@ -49,7 +42,6 @@ public class HomeActivity extends ScanBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_home);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
         user =  (UserInfo) ApplicationUtil.get(this, Constant.USERINFO);
         articleInfos = new ArrayList<>();
@@ -59,18 +51,13 @@ public class HomeActivity extends ScanBaseActivity {
     }
 
     private void initView(){
-        // 初始化四个LinearLayout
-        mTabGoods = (LinearLayout)findViewById(R.id.line_bottom_goods);
-//        mTabConcerns = (LinearLayout)findViewById(R.id.line_bottom_concerns);
-//        mTabFind = (LinearLayout)findViewById(R.id.line_bottom_find);
-        mTabMy = (LinearLayout)findViewById(R.id.line_bottom_my);
         // 初始化四个按钮
         mImgGoods = (ImageButton)findViewById(R.id.image_btn_goods);
-//        mImgConcerns = (ImageButton)findViewById(R.id.image_btn_concerns);
-//        mImgFind = (ImageButton)findViewById(R.id.image_btn_find);
+        mImgCoupon = (ImageButton)findViewById(R.id.image_btn_coupon);
         mImgMy = (ImageButton)findViewById(R.id.image_btn_my);
 
         txtGoods = (TextView) findViewById(R.id.txt_goods);
+        txtCoupon = (TextView) findViewById(R.id.txt_coupon);
         txtMy = (TextView) findViewById(R.id.txt_my);
     }
 
@@ -92,15 +79,12 @@ public class HomeActivity extends ScanBaseActivity {
                         mImgGoods.setImageResource(R.drawable.image_btn_goods_green);
                         txtGoods.setTextColor(Color.GREEN);
                         break;
-//                    case 1:
-//                        resetLayout();
-//                        mImgConcerns.setImageResource(R.drawable.image_btn_concerns_green);
-//                        break;
-//                    case 2:
-//                        resetLayout();
-//                        mImgFind.setImageResource(R.drawable.image_btn_find_green);
-//                        break;
                     case 1:
+                        resetLayout();
+                        mImgCoupon.setImageResource(R.drawable.image_btn_coupon_green);
+                        txtCoupon.setTextColor(Color.GREEN);
+                        break;
+                    case 2:
                         resetLayout();
                         mImgMy.setImageResource(R.drawable.image_btn_my_green);
                         txtMy.setTextColor(Color.GREEN);
@@ -122,8 +106,7 @@ public class HomeActivity extends ScanBaseActivity {
     public void initViewPage(){
         //将Fragment加入
         articleInfos.add(new FragmentGoods(this));
-//        articleInfos.add(new FragmentConcerns(this));
-//        articleInfos.add(new FragmentFind(this));
+        articleInfos.add(new FragmentCoupon(this));
         articleInfos.add(new FragmentMy(this));
 
         MyFragmentAdapter fragmentAdapter = new MyFragmentAdapter(getFragmentManager(),articleInfos,this);
@@ -135,13 +118,13 @@ public class HomeActivity extends ScanBaseActivity {
 
     //初始化图标
     private void resetLayout(){
-//        mImgFind.setImageResource(R.drawable.image_btn_find);
-//        mImgConcerns.setImageResource(R.drawable.image_btn_concerns);
+        mImgCoupon.setImageResource(R.drawable.image_btn_coupon);
         mImgGoods.setImageResource(R.drawable.image_btn_goods);
         mImgMy.setImageResource(R.drawable.image_btn_my);
 
         txtGoods.setTextColor(Color.BLACK);
         txtMy.setTextColor(Color.BLACK);
+        txtCoupon.setTextColor(Color.BLACK);
     }
 
     public void imageBtnClick(View v) {
@@ -153,18 +136,14 @@ public class HomeActivity extends ScanBaseActivity {
                 mImgGoods.setImageResource(R.drawable.image_btn_goods_green);
                 txtGoods.setTextColor(Color.GREEN);
                 break;
-//            case R.id.line_bottom_concerns:
-//                binding.mainViewpager.setCurrentItem(1);
-//                resetLayout();
-//                mImgConcerns.setImageResource(R.drawable.image_btn_concerns_green);
-//                break;
-//            case R.id.line_bottom_find:
-//                binding.mainViewpager.setCurrentItem(2);
-//                resetLayout();
-//                mImgFind.setImageResource(R.drawable.image_btn_find_green);
-//                break;
-            case R.id.line_bottom_my:
+            case R.id.line_bottom_coupon:
                 binding.mainViewpager.setCurrentItem(1);
+                resetLayout();
+                mImgCoupon.setImageResource(R.drawable.image_btn_coupon_green);
+                txtCoupon.setTextColor(Color.GREEN);
+                break;
+            case R.id.line_bottom_my:
+                binding.mainViewpager.setCurrentItem(2);
                 resetLayout();
                 mImgMy.setImageResource(R.drawable.image_btn_my_green);
                 txtMy.setTextColor(Color.GREEN);

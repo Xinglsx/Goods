@@ -57,8 +57,6 @@ public class DataBindingAdapterGoods extends BaseAdapter {
             viewHolder.txtRecommendname = (TextView) view.findViewById(R.id.txt_goods_recommandname_item);
             viewHolder.txtGoodsOldPrice = (TextView) view.findViewById(R.id.txt_goods_oldprice_item);
             viewHolder.txtGoodsPrice = (TextView) view.findViewById(R.id.txt_goods_price_item);
-//            viewHolder.txtClickCount = (TextView) view.findViewById(R.id.txt_clickcount_item);
-//            viewHolder.txtReason = (TextView) view.findViewById(R.id.txtreason_item);
             viewHolder.imageGoods = (ImageView) view.findViewById(R.id.image_goods_item);
 
             view.setTag(viewHolder);
@@ -81,9 +79,7 @@ public class DataBindingAdapterGoods extends BaseAdapter {
                 viewHolder.txtGoodsPrice.setText("【券后】￥" + goodsInfos.get(i).getPrice());
             }
 
-//            viewHolder.txtClickCount.setText(String.valueOf(goodsInfos.get(i).getClickcount()));
             Glide.with(context).load(goodsInfos.get(i).getImage()).dontAnimate().into(viewHolder.imageGoods);
-//            viewHolder.txtReason.setText(goodsInfos.get(i).getReason());
         }
 
         return view;
@@ -101,8 +97,6 @@ public class DataBindingAdapterGoods extends BaseAdapter {
         TextView txtRecommendname;//推荐人姓名
         TextView txtRecommendtime;//推荐时间
         TextView txtGoodsPrice;//价格
-        TextView txtClickCount;//点击数量
-        TextView txtReason;//推荐理由
         TextView txtGoodsOldPrice;//原价
     }
 

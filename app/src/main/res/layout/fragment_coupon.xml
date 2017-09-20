@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorBtnBackground2">
+        <EditText
+            android:id="@+id/txt_q"
+            android:layout_width="280dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/btn_more_style"
+            android:layout_margin="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"/>
+        <Button
+            android:id="@+id/btn_find_coupon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorBtnYellow"
+            android:layout_margin="5dp"
+            android:text="找优惠"/>
+    </LinearLayout>
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
+        android:id="@+id/listView_coupons"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorGray"
+        >
+    </com.handmark.pulltorefresh.library.PullToRefreshListView>
+</LinearLayout>

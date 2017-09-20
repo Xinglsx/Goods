@@ -103,16 +103,23 @@ public class GoodsActivity extends ScanBaseActivity {
                     if (tempCommand == null || tempCommand == "") {
                         CommonUtil.ShowMsg("此商品未维护好，无法自动跳转！", GoodsActivity.this);
                     } else {
-                        ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                        ClipData mClipData = ClipData.newPlainText("Label", goodsInfo.getCommand());
-                        cm.setPrimaryClip(mClipData);
-                        PackageManager packageManager = getPackageManager();
-                        Intent intent = new Intent();
-                        intent = packageManager.getLaunchIntentForPackage("com.taobao.taobao");
-                        try {
+                        if(CommonUtil.checkPackage(GoodsActivity.this,"com.taobao.taobao")) {
+                            ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                            ClipData mClipData = ClipData.newPlainText("Tpwd", goodsInfo.getCommand());
+                            cm.setPrimaryClip(mClipData);
+                            PackageManager packageManager = getPackageManager();
+                            Intent intent = new Intent();
+                            intent = packageManager.getLaunchIntentForPackage("com.taobao.taobao");
+                            try {
+                                startActivity(intent);
+                            } catch (Exception exp) {
+                                CommonUtil.ShowMsg("请先安装【手机淘宝】", GoodsActivity.this);
+                            }
+                        }else{
+                            Intent intent = new Intent();
+                            intent.setClass(GoodsActivity.this,WebViewActivity.class);
+                            intent.putExtra("uri",goodsInfo.getLink());
                             startActivity(intent);
-                        } catch (Exception exp) {
-                            CommonUtil.ShowMsg("请先安装【手机淘宝】", GoodsActivity.this);
                         }
                     }
                 } else if (type == 1) {//提交审核

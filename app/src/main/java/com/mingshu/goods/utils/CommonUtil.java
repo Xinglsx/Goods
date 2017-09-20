@@ -122,4 +122,21 @@ public class CommonUtil {
         }
         return cachePath;
     }
+
+    /*
+    *
+    * */
+    public static boolean checkPackage(Context context,String packageName)
+    {
+        if (packageName == null || "".equals(packageName))
+            return false;
+        try{
+            context.getPackageManager().getApplicationInfo(packageName,
+                    PackageManager.GET_UNINSTALLED_PACKAGES);
+            return true;
+        }catch (PackageManager.NameNotFoundException e){
+            return false;
+        }
+
+    }
 }
