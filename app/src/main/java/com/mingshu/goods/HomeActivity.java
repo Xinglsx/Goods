@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,12 +28,14 @@ public class HomeActivity extends ScanBaseActivity {
     private UserInfo user;
 
     // 四个按钮
-    private ImageButton mImgGoods;//推荐商品
-    private ImageButton mImgCoupon;//粉线福利券
-    private ImageButton mImgMy;//我的
+    private ImageView mImgGoods;//推荐商品
+    private ImageView mImgCoupon;//粉线福利券
+    private ImageView mImgFind;//发现
+    private ImageView mImgMy;//我的
 
     private TextView txtGoods;
     private TextView txtCoupon;
+    private TextView txtFind;
     private TextView txtMy;
 
     //Fragment相关
@@ -52,12 +54,14 @@ public class HomeActivity extends ScanBaseActivity {
 
     private void initView(){
         // 初始化四个按钮
-        mImgGoods = (ImageButton)findViewById(R.id.image_btn_goods);
-        mImgCoupon = (ImageButton)findViewById(R.id.image_btn_coupon);
-        mImgMy = (ImageButton)findViewById(R.id.image_btn_my);
+        mImgGoods = (ImageView)findViewById(R.id.image_btn_goods);
+        mImgCoupon = (ImageView)findViewById(R.id.image_btn_coupon);
+        mImgFind = (ImageView)findViewById(R.id.image_btn_find);
+        mImgMy = (ImageView)findViewById(R.id.image_btn_my);
 
         txtGoods = (TextView) findViewById(R.id.txt_goods);
         txtCoupon = (TextView) findViewById(R.id.txt_coupon);
+        txtFind = (TextView) findViewById(R.id.txt_find);
         txtMy = (TextView) findViewById(R.id.txt_my);
     }
 
@@ -86,6 +90,11 @@ public class HomeActivity extends ScanBaseActivity {
                         break;
                     case 2:
                         resetLayout();
+                        mImgFind.setImageResource(R.drawable.image_btn_find_green);
+                        txtFind.setTextColor(Color.GREEN);
+                        break;
+                    case 3:
+                        resetLayout();
                         mImgMy.setImageResource(R.drawable.image_btn_my_green);
                         txtMy.setTextColor(Color.GREEN);
                         break;
@@ -107,6 +116,7 @@ public class HomeActivity extends ScanBaseActivity {
         //将Fragment加入
         articleInfos.add(new FragmentGoods(this));
         articleInfos.add(new FragmentCoupon(this));
+        articleInfos.add(new FragmentFind(this));
         articleInfos.add(new FragmentMy(this));
 
         MyFragmentAdapter fragmentAdapter = new MyFragmentAdapter(getFragmentManager(),articleInfos,this);
@@ -120,10 +130,12 @@ public class HomeActivity extends ScanBaseActivity {
     private void resetLayout(){
         mImgCoupon.setImageResource(R.drawable.image_btn_coupon);
         mImgGoods.setImageResource(R.drawable.image_btn_goods);
+        mImgFind.setImageResource(R.drawable.image_btn_find);
         mImgMy.setImageResource(R.drawable.image_btn_my);
 
         txtGoods.setTextColor(Color.BLACK);
         txtMy.setTextColor(Color.BLACK);
+        txtFind.setTextColor(Color.BLACK);
         txtCoupon.setTextColor(Color.BLACK);
     }
 
@@ -142,8 +154,14 @@ public class HomeActivity extends ScanBaseActivity {
                 mImgCoupon.setImageResource(R.drawable.image_btn_coupon_green);
                 txtCoupon.setTextColor(Color.GREEN);
                 break;
-            case R.id.line_bottom_my:
+            case R.id.line_bottom_find:
                 binding.mainViewpager.setCurrentItem(2);
+                resetLayout();
+                mImgFind.setImageResource(R.drawable.image_btn_find_green);
+                txtFind.setTextColor(Color.GREEN);
+                break;
+            case R.id.line_bottom_my:
+                binding.mainViewpager.setCurrentItem(3);
                 resetLayout();
                 mImgMy.setImageResource(R.drawable.image_btn_my_green);
                 txtMy.setTextColor(Color.GREEN);

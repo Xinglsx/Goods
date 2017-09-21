@@ -4,6 +4,7 @@
     <string name="register_word"><u>注册账号</u></string>
     <string name="login">登录</string>
     <string name="audit_key">审核要点：自购、自用优先通过，推荐商品商家得分不低于同行业，性价比高，上传图片合适，上传信息准确。如未审核通过，请根据拒绝理由进行修改后再提交！</string>
+    <string name="wechat"><b>mskjvip888</b></string>
 
     <string name="title_activity_settings">Settings</string>
 

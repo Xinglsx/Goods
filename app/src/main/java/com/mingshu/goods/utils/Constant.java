@@ -15,6 +15,8 @@ public class Constant {
     public static final String PASSWORD = "PASSWORD";
     //用户信息
     public static final String USERINFO = "UserInfo";
+    //粉丝券查询条件标志
+    public static final String COUPON_FILTER = "COUPON_FILTER";
 
     //一次获取文章数量
     public static final Integer PAGESIZE = 8;

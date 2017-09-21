@@ -18,7 +18,7 @@ public class DialogUtil {
      * @return
      */
     public static AlertDialog GetMyDialog(Context context, String message, DialogInterface.OnClickListener listener, DialogInterface.OnClickListener listener1) {
-        AlertDialog dialog = new AlertDialog.Builder(context).setMessage(message).setTitle("提示").setPositiveButton("确认", listener).setNegativeButton("取消", listener1).create();
+        AlertDialog dialog = new AlertDialog.Builder(context).setMessage(message).setTitle("更新提示").setPositiveButton("确认", listener).setNegativeButton("取消", listener1).create();
         dialog.setCancelable(false); // 是否可以按返回键消失
         dialog.setCanceledOnTouchOutside(false); //点击加载框以外的区域
         return dialog;

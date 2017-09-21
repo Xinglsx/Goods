@@ -14,18 +14,17 @@
         android:gravity="center"
         android:orientation="vertical"
         android:onClick="imageBtnClick">
-        <ImageButton
+        <ImageView
             android:id="@+id/image_btn_goods"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:background="#00000000"
-            android:clickable="false"
             android:src="@drawable/image_btn_goods" />
         <TextView
             android:id="@+id/txt_goods"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="推荐商品"/>
+            android:text="首页推荐"/>
 
     </LinearLayout>
 
@@ -37,18 +36,17 @@
         android:gravity="center"
         android:orientation="vertical"
         android:onClick="imageBtnClick">
-        <ImageButton
+        <ImageView
             android:id="@+id/image_btn_coupon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:background="#00000000"
-            android:clickable="false"
             android:src="@drawable/image_btn_coupon"/>
         <TextView
             android:id="@+id/txt_coupon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="粉丝福利券"/>
+            android:text="粉丝福利"/>
 
     </LinearLayout>
 
@@ -60,12 +58,11 @@
         android:gravity="center"
         android:orientation="vertical"
         android:onClick="imageBtnClick">
-        <ImageButton
+        <ImageView
             android:id="@+id/image_btn_find"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:background="#00000000"
-            android:clickable="false"
             android:src="@drawable/image_btn_find"/>
         <TextView
             android:id="@+id/txt_find"
@@ -83,12 +80,11 @@
         android:gravity="center"
         android:orientation="vertical"
         android:onClick="imageBtnClick">
-        <ImageButton
+        <ImageView
             android:id="@+id/image_btn_my"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:background="#00000000"
-            android:clickable="false"
             android:src="@drawable/image_btn_my"/>
         <TextView
             android:id="@+id/txt_my"

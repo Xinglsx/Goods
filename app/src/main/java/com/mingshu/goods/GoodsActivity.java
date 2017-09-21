@@ -108,8 +108,7 @@ public class GoodsActivity extends ScanBaseActivity {
                             ClipData mClipData = ClipData.newPlainText("Tpwd", goodsInfo.getCommand());
                             cm.setPrimaryClip(mClipData);
                             PackageManager packageManager = getPackageManager();
-                            Intent intent = new Intent();
-                            intent = packageManager.getLaunchIntentForPackage("com.taobao.taobao");
+                            Intent intent = packageManager.getLaunchIntentForPackage("com.taobao.taobao");
                             try {
                                 startActivity(intent);
                             } catch (Exception exp) {

@@ -1,44 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data></data>
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:text="淘宝客"
-        android:gravity="center"
-        android:textSize="22dp"/>
-
-    <ScrollView
-        android:id="@+id/scrollView"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/colorBackground">
         <LinearLayout
+            android:id="@+id/linlayout_make_money"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:background="@color/colorPrimaryDark">
-            <ImageButton
-                android:id="@+id/image_btn_football"
+            android:layout_height="70dp"
+            android:gravity="center_vertical"
+            android:layout_marginTop="5dp"
+            android:background="#FFFFFF">
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/image_make_money"
+                android:layout_marginLeft="30dp"
+                />
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/image_btn_football"
-                android:background="#00000000"
-                android:onClick="imageBtnClick"
-                android:layout_margin="5dp"
-                />
-            <ImageButton
-                android:id="@+id/image_btn_football2"
-                android:layout_width="wrap_content"
+                android:text="移动网赚"
+                android:gravity="center_vertical"
+                android:textSize="22sp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/colorGreen"/>
+            <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/image_btn_football"
-                android:background="#00000000"
-                android:onClick="imageBtnClick"
-                android:layout_margin="5dp"
-                />
+                android:text="赚钱小应用"
+                android:gravity="bottom"
+                android:textSize="16sp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:textColor="@color/colorBtnGray"/>
         </LinearLayout>
-    </ScrollView>
-</LinearLayout>
+    </LinearLayout>
+</layout>

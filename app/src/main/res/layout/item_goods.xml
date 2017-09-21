@@ -10,7 +10,7 @@
         >
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="3dp"
+        android:layout_height="2dp"
         android:orientation="horizontal"
         android:background="@color/colorWhite"
         />
@@ -30,7 +30,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingLeft="8dp"
+                android:paddingLeft="3dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -39,7 +39,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="商品描述"
-                    android:gravity="center_vertical"/>
+                    android:gravity="center_vertical"
+                    android:layout_marginRight="5dp"/>
 
                 <LinearLayout
                     android:layout_weight="1"

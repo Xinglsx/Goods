@@ -37,7 +37,6 @@ public class RegisterActivity extends ScanBaseActivity {
                 RegisterActivity.this.finish();
             }
         });
-//        binding.set("新用户注册");
         apiCoreManager = new ApiCoreManager(this);
     }
 

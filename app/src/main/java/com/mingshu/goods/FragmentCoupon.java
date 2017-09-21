@@ -4,6 +4,7 @@ package com.mingshu.goods;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -40,6 +41,8 @@ public class FragmentCoupon  extends BaseFragment  {
     private int pageNo = 1;
     DataBindingAdapterCoupon dataBindingAdapterCoupon;
     TextView q;
+    private SharedPreferences sp;
+    private  String filter;
 
     @SuppressLint({"NewApi", "ValidFragment"})
     public FragmentCoupon(Context context) {
@@ -53,6 +56,7 @@ public class FragmentCoupon  extends BaseFragment  {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = View.inflate(getActivity(), R.layout.fragment_coupon,null);
         apiCoreManager = new ApiCoreManager(this.getActivity());
+        sp = this.getActivity().getSharedPreferences("couponFilter", Context.MODE_PRIVATE);
         initView();
         return view;
     }
@@ -60,7 +64,8 @@ public class FragmentCoupon  extends BaseFragment  {
     private void initView() {
         listViewCoupons = (PullToRefreshListView) view.findViewById(R.id.listView_coupons);
         q = (TextView) view.findViewById(R.id.txt_q);
-        getcoupons(1, Constant.PAGESIZE,q.getText().toString());
+        filter = sp.getString(Constant.COUPON_FILTER,q.getText().toString());
+        getcoupons(1, Constant.PAGESIZE,filter);
         listViewCoupons.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -75,7 +80,8 @@ public class FragmentCoupon  extends BaseFragment  {
             @Override
             public void onRefresh(PullToRefreshBase<ListView> refreshView) {
                 pageNo = 1;
-                getcoupons(pageNo,Constant.PAGESIZE,q.getText().toString());
+                filter = q.getText().toString();
+                getcoupons(pageNo,Constant.PAGESIZE,filter);
             }
         });
 
@@ -83,7 +89,7 @@ public class FragmentCoupon  extends BaseFragment  {
             @Override
             public void onLastItemVisible() {
                 if(dataBindingAdapterCoupon.getCount() ==  pageNo* Constant.PAGESIZE){
-                    getmorecoupons(pageNo+1,Constant.PAGESIZE,q.getText().toString());
+                    getmorecoupons(pageNo+1,Constant.PAGESIZE,filter);
                 }
                 else{
                     CommonUtil.DisplayToast("亲，没有更多粉丝福利券了，看看其他的吧！",FragmentCoupon.this.getActivity());
@@ -96,7 +102,10 @@ public class FragmentCoupon  extends BaseFragment  {
             @Override
             public void onClick(View v) {
                 pageNo = 1;
-                getcoupons(pageNo,Constant.PAGESIZE,q.getText().toString());
+                //缓存最后的查询关键字
+                filter = q.getText().toString();
+                sp.edit().putString(Constant.COUPON_FILTER,filter).commit();
+                getcoupons(pageNo,Constant.PAGESIZE,filter);
             }
         });
     }

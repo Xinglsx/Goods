@@ -27,7 +27,6 @@
         android:id="@+id/listView_coupons"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorGray"
         >
     </com.handmark.pulltorefresh.library.PullToRefreshListView>
 </LinearLayout>
