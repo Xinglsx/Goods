@@ -136,7 +136,7 @@ public class FragmentMy extends BaseFragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(FragmentMy.this.getActivity(),GuideActivity.class);
+                intent.setClass(FragmentMy.this.getActivity(),HelpActivity.class);
                 startActivity(intent);
             }
         });

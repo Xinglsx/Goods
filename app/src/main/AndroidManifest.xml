@@ -42,7 +42,8 @@
         <activity android:name=".GuideActivity" />
         <activity android:name=".TextViewActivity" />
         <activity android:name=".CouponActivity" />
-        <activity android:name=".MakeMoneyActivity"></activity>
+        <activity android:name=".MakeMoneyActivity" />
+        <activity android:name=".HelpActivity"></activity>
     </application>
 
 </manifest>
