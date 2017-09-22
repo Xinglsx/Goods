@@ -78,18 +78,16 @@ public class ImageUtil {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream);// (0 - 100)压缩文件
         byte[] bt = stream.toByteArray();
-        String photoStr = byte2hex(bt);
-        return photoStr;
+        return byte2hex(bt);
     }
 
     /**
      * 将16位的字符串转成图片
      */
     public static Bitmap string2Image(String str){
-        Bitmap bitmap = null;
         byte[] bytes = hex2byte(str);//字符串转二进制
         //二进度转图片
-        bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
 
         return bitmap;
     }
@@ -168,8 +166,7 @@ public class ImageUtil {
         //指定缩小比例
         opts.inSampleSize = scale;
         opts.inJustDecodeBounds = false;
-        Bitmap bm = BitmapFactory.decodeFile(path, opts);
-        return bm;
+        return BitmapFactory.decodeFile(path, opts);
     }
 
     public static String selectImage(Context context,Intent data){
@@ -184,11 +181,16 @@ public class ImageUtil {
             }
         }
         String[] filePathColumn = { MediaStore.Images.Media.DATA };
-        Cursor cursor = context.getContentResolver().query(selectedImage,filePathColumn, null, null, null);
-        cursor.moveToFirst();
-        int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-        String picturePath = cursor.getString(columnIndex);
-        cursor.close();
-        return picturePath;
+        if(selectedImage != null) {
+            Cursor cursor = context.getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+            cursor.moveToFirst();
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String picturePath = cursor.getString(columnIndex);
+            cursor.close();
+            return picturePath;
+        }else{
+            return null;
+        }
+
     }
 }

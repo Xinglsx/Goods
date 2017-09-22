@@ -1,4 +1,4 @@
-package com.mingshu.pmp.goods;
+package com.mingshu.goods;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

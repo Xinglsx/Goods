@@ -335,7 +335,7 @@ public class UploadGoodsActivity extends ScanBaseActivity{
         if (content.length() > 0){
             int startIndex = 0;
             int endIndex = content.indexOf("【在售价】") - 1;
-            if(startIndex  >= 0 && endIndex >0 && endIndex > startIndex){
+            if(endIndex >0 && endIndex > startIndex){
                 binding.txtGoodsDescription.setText(content.substring(startIndex,endIndex));
             }
 

@@ -100,7 +100,7 @@ public class GoodsActivity extends ScanBaseActivity {
             public void onClick(View view) {
                 if (type == 0) {//购买商品
                     String tempCommand = goodsInfo.getCommand();
-                    if (tempCommand == null || tempCommand == "") {
+                    if (tempCommand == null || "".equals(tempCommand)) {
                         CommonUtil.ShowMsg("此商品未维护好，无法自动跳转！", GoodsActivity.this);
                     } else {
                         if(CommonUtil.checkPackage(GoodsActivity.this,"com.taobao.taobao")) {

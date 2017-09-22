@@ -28,8 +28,8 @@ public class CouponActivity extends ScanBaseActivity {
 
     private ActivityCouponBinding binding;
     CouponInfo couponInfo;
-    private UserInfo curUser;
-    private ApiCoreManager apiCoreManager;
+    UserInfo curUser;
+    ApiCoreManager apiCoreManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +43,9 @@ public class CouponActivity extends ScanBaseActivity {
         if(intent.getSerializableExtra("coupon") != null){
             couponInfo = (CouponInfo)intent.getSerializableExtra("coupon");
             binding.setCoupon(couponInfo);
-        }else
-        {
-
+        }else {
+            couponInfo = new CouponInfo();
+            binding.setCoupon(couponInfo);
         }
         initView();
     }

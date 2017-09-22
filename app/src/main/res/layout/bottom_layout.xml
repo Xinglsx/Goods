@@ -4,7 +4,8 @@
     android:layout_height="50dp"
     android:orientation="horizontal"
     android:layout_marginTop="4dp"
-    android:layout_marginBottom="2dp">
+    android:layout_marginBottom="2dp"
+    android:baselineAligned="false">
 
     <LinearLayout
         android:id="@+id/line_bottom_goods"

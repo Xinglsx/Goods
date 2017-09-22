@@ -51,7 +51,7 @@ public class RegisterActivity extends ScanBaseActivity {
                 String strCode = binding.txtUserCode.getText().toString();
                 String password = binding.editPassword.getText().toString();
                 String passwordRepeat = binding.editPasswordRepeat.getText().toString();
-                if(password == null || "".equals(password) ){
+                if("".equals(password) ){
                     PrompUtil.stopProgessDialog();
                     CommonUtil.DisplayToast("密码未输入！",this);
                     break;

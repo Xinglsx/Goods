@@ -1,7 +1,6 @@
 package com.mingshu.goods;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
@@ -74,12 +73,12 @@ public class WebViewActivity extends AppCompatActivity {
             {
                 //返回false，意味着请求过程里，不管有多少次的跳转请求（即新的请求地址），均交给webView自己处理，这也是此方法的默认处理
                 //返回true，说明你自己想根据url，做新的跳转，比如在判断url符合条件的情况下，我想让webView加载http://ask.csdn.net/questions/178242
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 //                    if (request.getUrl().toString().contains("sina.cn")){
 //                        view.loadUrl("http://ask.csdn.net/questions/178242");
 //                        return true;
 //                    }
-                }
+//                }
                 return false;
             }
 

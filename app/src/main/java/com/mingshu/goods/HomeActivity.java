@@ -25,7 +25,7 @@ import winning.framework.ScanBaseActivity;
 public class HomeActivity extends ScanBaseActivity {
 
     private ActivityHomeBinding binding;
-    private UserInfo user;
+    UserInfo user;
 
     // 四个按钮
     private ImageView mImgGoods;//推荐商品

@@ -14,7 +14,7 @@ import java.util.List;
 public class MyFragmentAdapter extends FragmentPagerAdapter {
 
     List<Fragment> articleInfos;
-    private Context context;
+    Context context;
 
     public MyFragmentAdapter(FragmentManager fm, List<Fragment> articleInfos, Context context) {
         super(fm);

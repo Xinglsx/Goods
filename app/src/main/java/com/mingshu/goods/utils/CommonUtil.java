@@ -42,7 +42,7 @@ public class CommonUtil {
      * @param format 需要转换的格式
      */
     public static String stampToDate(String str,String format) {
-        if(str == null || str == "")
+        if(str == null || "".equals(str))
             return "";
         if (str.contains("Date(") && str.contains("+")) {
             str = str.substring(str.indexOf("(") + 1, str.indexOf("+"));
@@ -116,7 +116,11 @@ public class CommonUtil {
     public static String getDiskCacheDir(Context mContext) {
         String cachePath;
         if(Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
-            cachePath = mContext.getExternalCacheDir().getPath();
+            if(mContext.getExternalCacheDir() == null){
+                cachePath = "";
+            }else{
+                cachePath = mContext.getExternalCacheDir().getPath();
+            }
         } else {
             cachePath = mContext.getCacheDir().getPath();
         }

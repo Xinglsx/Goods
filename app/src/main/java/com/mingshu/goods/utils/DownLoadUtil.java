@@ -32,7 +32,7 @@ public class DownLoadUtil {
     }
 
     public void StartDownload(String url, String message) {
-        if (url == null ||url == "") {
+        if (url == null || "".equals(url)) {
             CommonUtil.DisplayToast( "暂无下载链接",activity);
             return;
         }
@@ -42,7 +42,7 @@ public class DownLoadUtil {
         }
         progressDialog = new MyHrpProgressDialog(activity);
         progressDialog.setTitle("更新提示");
-        if (message == null ||message == "")
+        if (message == null || "".equals(message))
             progressDialog.setMessage("正在下载...");
         else
             progressDialog.setMessage(message);

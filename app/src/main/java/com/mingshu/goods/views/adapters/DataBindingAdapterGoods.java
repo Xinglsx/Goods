@@ -23,6 +23,7 @@ public class DataBindingAdapterGoods extends BaseAdapter {
 
     List<GoodsInfo> goodsInfos;
     Context context;
+    ViewHolder viewHolder;
 
     public DataBindingAdapterGoods(List<GoodsInfo> goodsInfos, Context context){
         this.goodsInfos = goodsInfos;
@@ -46,9 +47,6 @@ public class DataBindingAdapterGoods extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-
-        ViewHolder viewHolder = null;
-
         if (view == null){
             viewHolder = new ViewHolder();
             view = View.inflate(this.context, R.layout.item_goods,null);

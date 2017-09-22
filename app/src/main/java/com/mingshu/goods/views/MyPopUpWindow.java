@@ -22,7 +22,7 @@ import java.io.File;
  */
 public class MyPopUpWindow{
     private PopupWindow popupWindow;
-    private int from = 0;
+    int from = 0;
     private Context context;
     private Activity activity;
 
@@ -47,7 +47,7 @@ public class MyPopUpWindow{
         LEFT,
         RIGHT,
         TOP,
-        BOTTOM;
+        BOTTOM,
 
     }
 

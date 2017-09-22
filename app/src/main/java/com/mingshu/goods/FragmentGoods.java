@@ -47,7 +47,7 @@ public class FragmentGoods extends BaseFragment {
     private View view;
     private PullToRefreshListView listViewGoods;
     private DataBindingAdapterGoods bindingAdapterArticle;
-    private  Context context;
+    Context context;
     private int pageNumber = 0;
     private boolean isLogin = true;
     //轮播图片

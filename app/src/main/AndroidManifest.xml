@@ -24,7 +24,6 @@
         <activity android:name=".GoodsActivity" />
         <activity android:name=".WebViewActivity" />
         <activity android:name=".UploadGoodsActivity" />
-        <activity android:name=".views.MyPopUpWindow" />
         <activity android:name=".WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

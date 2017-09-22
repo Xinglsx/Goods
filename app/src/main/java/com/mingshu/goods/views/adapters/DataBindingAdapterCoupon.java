@@ -21,6 +21,7 @@ public class DataBindingAdapterCoupon extends BaseAdapter {
 
     List<CouponInfo> couponInfos;
     Context context;
+    ViewHolder viewHolder;
 
     public DataBindingAdapterCoupon(List<CouponInfo> couponInfos, Context context){
         this.couponInfos = couponInfos;
@@ -44,9 +45,6 @@ public class DataBindingAdapterCoupon extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-
-        ViewHolder viewHolder = null;
-
         if (view == null){
             viewHolder = new ViewHolder();
             view = View.inflate(this.context, R.layout.item_coupon,null);

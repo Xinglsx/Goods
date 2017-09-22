@@ -65,13 +65,13 @@ public class ChangePasswordActivity extends ScanBaseActivity {
 
     private void changePassword(){
         String oldPassword = binding.editOldPassword.getText().toString();
-        if(oldPassword == null ||"".equals(oldPassword)){
+        if("".equals(oldPassword)){
             CommonUtil.DisplayToast("旧密码不能为空!",ChangePasswordActivity.this);
             PrompUtil.stopProgessDialog();
             return;
         }
         String newPassword = binding.editNewPassword.getText().toString();
-        if(newPassword == null ||"".equals(newPassword)){
+        if("".equals(newPassword)){
             CommonUtil.DisplayToast("新密码不能为空!",ChangePasswordActivity.this);
             PrompUtil.stopProgessDialog();
             return;
@@ -86,7 +86,7 @@ public class ChangePasswordActivity extends ScanBaseActivity {
         }
 
         String newPassword2 = binding.editNewPassword2.getText().toString();
-        if(newPassword2 == null ||"".equals(newPassword2)){
+        if("".equals(newPassword2)){
             CommonUtil.DisplayToast("确认新密码不能为空!",ChangePasswordActivity.this);
             PrompUtil.stopProgessDialog();
             return;

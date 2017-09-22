@@ -1,4 +1,4 @@
-package com.mingshu.pmp.goods;
+package com.mingshu.goods;
 
 import org.junit.Test;
 

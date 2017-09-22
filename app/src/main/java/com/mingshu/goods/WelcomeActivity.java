@@ -28,8 +28,8 @@ public class WelcomeActivity extends BaseActivity {
     private ApiCoreManager apiCoreManager;
     com.mingshu.goods.models.VersionInfo serviceVersionInfo;
     com.mingshu.goods.models.VersionInfo curVersion;
-    private Boolean isFirstIn = false;
-    private SharedPreferences sp;
+    Boolean isFirstIn = false;
+    SharedPreferences sp;
     Intent it = new Intent();
     ImageView imageView;
 

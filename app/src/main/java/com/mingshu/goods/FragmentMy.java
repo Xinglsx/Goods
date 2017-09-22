@@ -66,9 +66,12 @@ public class FragmentMy extends BaseFragment {
             case 5:
                 break;
         }
-
-        ((TextView)view.findViewById(R.id.txt_user_nickname)).setText(curUser.getNickname());
-        ((TextView)view.findViewById(R.id.txt_user_signature)).setText(curUser.getUsersignature());
+        if(curUser != null && curUser.getNickname() != null){
+            ((TextView)view.findViewById(R.id.txt_user_nickname)).setText(curUser.getNickname());
+        }
+        if(curUser != null && curUser.getUsersignature() != null){
+            ((TextView)view.findViewById(R.id.txt_user_signature)).setText(curUser.getUsersignature());
+        }
 
         (view.findViewById(R.id.linlayout_change_user)).setOnClickListener(new View.OnClickListener() {
             @Override
