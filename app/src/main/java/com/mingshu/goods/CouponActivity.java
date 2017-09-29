@@ -73,7 +73,7 @@ public class CouponActivity extends ScanBaseActivity {
 
     private void creatTpwd(){
         Map param = new HashMap<>();
-        String url = ApiCoreManager.baseURL + "/Tbk/CreateTpwd";
+        String url = ApiCoreManager.baseApiURL + "/Tbk/CreateTpwd";
         param.put("text",couponInfo.getTitle());
         param.put("url",couponInfo.getCoupon_click_url());
         param.put("logo",couponInfo.getPict_url());

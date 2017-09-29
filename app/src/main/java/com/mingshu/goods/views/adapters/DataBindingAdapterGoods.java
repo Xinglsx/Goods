@@ -63,6 +63,7 @@ public class DataBindingAdapterGoods extends BaseAdapter {
         }
         if(goodsInfos != null){
             viewHolder.txtGoodsDescription.setText( goodsInfos.get(i).getDescription());
+
             viewHolder.txtRecommendtime.setText(CommonUtil.stampToDate(goodsInfos.get(i).getRecommendtime(),
                     Constant.DATEFORMAT_DATETIME_SS) );
             viewHolder.txtRecommendname.setText(goodsInfos.get(i).getRecommendname());

@@ -7,12 +7,28 @@ import java.io.Serializable;
  */
 
 public class UserInfo implements Serializable {
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
+    public String getCreateTime() {
+        return CreateTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        CreateTime = createTime;
+    }
+
     public String getId() {
-        return id;
+        return ID;
     }
 
     public void setId(String id) {
-        this.id = id;
+        this.ID = id;
     }
 
     public String getUserid() {
@@ -126,6 +142,10 @@ public class UserInfo implements Serializable {
     public void setTaobao(String taobao) {
         this.taobao = taobao;
     }
+
+    private String ID;
+
+    private String CreateTime;
 
     private String id;
 

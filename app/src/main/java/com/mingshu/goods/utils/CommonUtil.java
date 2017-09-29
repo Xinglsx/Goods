@@ -47,6 +47,11 @@ public class CommonUtil {
         if (str.contains("Date(") && str.contains("+")) {
             str = str.substring(str.indexOf("(") + 1, str.indexOf("+"));
         }
+        //2017-08-27T09:47:58.623 mscorlib.dll v4.5.2下的显示格式
+        if(str.contains("T")){
+            str = str.replace("T"," ");
+            return str;
+        }
         String result;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
         long lt = new Long(str);

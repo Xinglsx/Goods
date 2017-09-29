@@ -128,7 +128,7 @@ public class GoodsActivity extends ScanBaseActivity {
                     goodsInfo.setState((short)2);
                     goodsInfo.setAudituser(curUser.getId());
                     goodsInfo.setAuditname(curUser.getNickname());
-                    saveGoodsInfo();
+                    auditGoodsInfo();
                 }
             }
         });
@@ -142,7 +142,7 @@ public class GoodsActivity extends ScanBaseActivity {
                     goodsInfo.setState((short)3);
                     goodsInfo.setAudituser(curUser.getId());
                     goodsInfo.setAuditname(curUser.getNickname());
-                    saveGoodsInfo();
+                    auditGoodsInfo();
                 }
             }
         });
@@ -182,6 +182,28 @@ public class GoodsActivity extends ScanBaseActivity {
             }
         });
     }
-
+    private void auditGoodsInfo(){
+        ApiManager.Api api = apiCoreManager.auditGoodsInfo(goodsInfo);
+        api.invoke(new NetworkEngine.Success<Boolean>(){
+            @Override
+            public void callback(Boolean result){
+                PrompUtil.stopProgessDialog();
+                CommonUtil.ShowMsg("审核操作处理成功！",GoodsActivity.this);
+                GoodsActivity.this.finish();
+            }
+        },new NetworkEngine.Failure(){
+            @Override
+            public void callback(int code,String message,Map rawData){
+                PrompUtil.stopProgessDialog();
+                CommonUtil.ShowMsg(message,GoodsActivity.this);
+            }
+        },new NetworkEngine.Error(){
+            @Override
+            public void callback(int code,String message,Map rawData){
+                PrompUtil.stopProgessDialog();
+                CommonUtil.ShowMsg(message,GoodsActivity.this);
+            }
+        });
+    }
 
 }

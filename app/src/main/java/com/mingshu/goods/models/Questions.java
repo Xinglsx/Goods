@@ -6,6 +6,8 @@ package com.mingshu.goods.models;
  */
 
 public class Questions {
+    private String ID;
+    private String CreateTime;
     private String id ;
     private String feedbackuserid;
     private String feedbackusernickname;
@@ -13,12 +15,28 @@ public class Questions {
     private String feedbacktime;
     private String contact;//联系方式
 
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
+    public String getCreateTime() {
+        return CreateTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        CreateTime = createTime;
+    }
+
     public String getId() {
-        return id;
+        return ID;
     }
 
     public void setId(String id) {
-        this.id = id;
+        this.ID = id;
     }
 
     public String getFeedbackuserid() {

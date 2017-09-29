@@ -12,6 +12,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.mingshu.goods.databinding.ActivityGoodsListBinding;
 import com.mingshu.goods.managers.ApiCoreManager;
 import com.mingshu.goods.models.GoodsInfo;
+import com.mingshu.goods.models.PagedData;
 import com.mingshu.goods.utils.CommonUtil;
 import com.mingshu.goods.utils.Constant;
 import com.mingshu.goods.utils.PrompUtil;
@@ -110,11 +111,11 @@ public class GoodsListActivity extends ScanBaseActivity {
     }
     //获取文章列表
     private void getGoodsInfos(int curPage, int pageSize,int state){
-        ApiCoreManager.Api api = apiCoreManager.getGoodsList(curPage,pageSize,state);
-        api.invoke(new NetworkEngine.Success<List<GoodsInfo>>() {
+        ApiCoreManager.Api api = apiCoreManager.getGoodsList(curPage,pageSize,state,"");
+        api.invoke(new NetworkEngine.Success<PagedData<GoodsInfo>>() {
             @Override
-            public void callback(List<GoodsInfo> data) {
-                goodsInfos = data;
+            public void callback(PagedData<GoodsInfo> data) {
+                goodsInfos = data.getDataList();
                 bindingAdapterArticle = new DataBindingAdapterGoods(GoodsListActivity.this.goodsInfos,GoodsListActivity.this);
                 listViewGoodsList.setAdapter(bindingAdapterArticle);
                 pageNumber = 0;
@@ -145,14 +146,14 @@ public class GoodsListActivity extends ScanBaseActivity {
     }
 
     private void getMoreGoodsInfos(int curPage, int pageSize,int state){
-        ApiCoreManager.Api api = apiCoreManager.getGoodsList(curPage,pageSize,state);
-        api.invoke(new NetworkEngine.Success<List<GoodsInfo>>() {
+        ApiCoreManager.Api api = apiCoreManager.getGoodsList(curPage,pageSize,state,"");
+        api.invoke(new NetworkEngine.Success<PagedData<GoodsInfo>>() {
             @Override
-            public void callback(List<GoodsInfo> data) {
-                if(data != null && !data.isEmpty()) {
-                    goodsInfos.removeAll(data);
-                    goodsInfos.addAll(data);
-                    bindingAdapterArticle.AddItem(data);
+            public void callback(PagedData<GoodsInfo> data) {
+                if(data != null && data.getDataList() != null && !data.getDataList().isEmpty()) {
+                    goodsInfos.removeAll(data.getDataList());
+                    goodsInfos.addAll(data.getDataList());
+                    bindingAdapterArticle.AddItem(data.getDataList());
                     bindingAdapterArticle.notifyDataSetChanged();
                     pageNumber++;
                 }
