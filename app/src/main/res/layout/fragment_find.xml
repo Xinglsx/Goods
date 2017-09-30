@@ -10,13 +10,13 @@
         <LinearLayout
             android:id="@+id/linlayout_make_money"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="45dp"
             android:gravity="center_vertical"
             android:layout_marginTop="5dp"
             android:background="#FFFFFF">
             <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
                 android:src="@drawable/image_make_money"
                 android:layout_marginLeft="30dp"
                 />
@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:text="移动网赚"
                 android:gravity="center_vertical"
-                android:textSize="22sp"
+                android:textSize="20sp"
                 android:layout_marginLeft="10dp"
                 android:textColor="@color/colorGreen"/>
             <TextView
@@ -33,10 +33,16 @@
                 android:layout_height="wrap_content"
                 android:text="赚钱小应用"
                 android:gravity="bottom"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
                 android:textColor="@color/colorBtnGray"/>
         </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_wx_share"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="分享"/>
     </LinearLayout>
 </layout>

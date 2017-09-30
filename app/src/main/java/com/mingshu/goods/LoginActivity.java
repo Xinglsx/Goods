@@ -18,7 +18,6 @@ import com.mingshu.goods.models.UserInfo;
 import com.mingshu.goods.utils.ApplicationUtil;
 import com.mingshu.goods.utils.CommonUtil;
 import com.mingshu.goods.utils.Constant;
-import com.mingshu.goods.utils.PrompUtil;
 
 import java.util.Map;
 
@@ -147,7 +146,7 @@ public class LoginActivity extends ScanBaseActivity {
 
     private void Login(){
         //加等待条
-        PrompUtil.startProgressDialog(this,"登录中，请稍等。。。");
+//        PrompUtil.startProgressDialog(this,"登录中，请稍等。。。");
         //获取用户名和密码
         String strCode = binding.txtUserCode.getText().toString();
         final String password = binding.txtPassword.getText().toString();
@@ -165,21 +164,21 @@ public class LoginActivity extends ScanBaseActivity {
         api.invoke(new NetworkEngine.Success<UserInfo>() {
             @Override
             public void callback(UserInfo data) {
-                PrompUtil.stopProgessDialog();
+//                PrompUtil.stopProgessDialog();
                 LoginSuccess(data,password);
             }
 
         }, new NetworkEngine.Failure() {
             @Override
             public void callback(int code, String message, Map rawData) {
-                PrompUtil.stopProgessDialog();
+//                PrompUtil.stopProgessDialog();
                 failuerMessage(message);
             }
         }, new NetworkEngine.Error() {
 
             @Override
             public void callback(int code, String message, Map rawData) {
-                PrompUtil.stopProgessDialog();
+//                PrompUtil.stopProgessDialog();
                 failuerMessage(message);
             }
         });

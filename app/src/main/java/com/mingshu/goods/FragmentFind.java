@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.mingshu.goods.views.adapters.BaseFragment;
+import com.mingshu.goods.wxapi.WXEntryActivity;
 
 
 /**
@@ -40,6 +41,14 @@ public class FragmentFind extends BaseFragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(FragmentFind.this.getActivity(),MakeMoneyActivity.class));
+            }
+        });
+
+        view.findViewById(R.id.btn_wx_share).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FragmentFind.this.getActivity(), WXEntryActivity.class);
+                startActivity(intent);
             }
         });
     }
