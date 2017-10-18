@@ -9,6 +9,8 @@ import android.view.View;
 import com.mingshu.goods.databinding.ActivitySettingsBinding;
 import com.mingshu.goods.models.UserInfo;
 import com.mingshu.goods.utils.Constant;
+import com.mingshu.goods.views.WxSharePopUpWindow;
+import com.mingshu.goods.wxapi.WXEntryActivity;
 
 import winning.framework.utils.ApplicationUtil;
 
@@ -16,6 +18,7 @@ import winning.framework.utils.ApplicationUtil;
 public class SettingsActivity extends AppCompatActivity {
     private ActivitySettingsBinding binding;
     private UserInfo curUser;
+    private WxSharePopUpWindow wxSharePopUpWindow;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +29,8 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        if("guest".equals(curUser.getId())){
+        wxSharePopUpWindow = new WxSharePopUpWindow(this,this);
+        if(curUser == null || "guest".equals(curUser.getId())){
             binding.linlayoutChangePassword.setVisibility(View.GONE);
             binding.linlayoutChangeUserinfo.setVisibility(View.GONE);
         }
@@ -85,6 +89,31 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 SettingsActivity.this.finish();
+            }
+        });
+        binding.btnShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent intent = new Intent(SettingsActivity.this, WXEntryActivity.class);
+//                startActivity(intent);
+                wxSharePopUpWindow.initPopupWindow(new WxSharePopUpWindow.OnGetData() {
+                    @Override
+                    public void onDataCallBack(int nClick) {
+                        WXEntryActivity wxEntryActivity;
+                        switch (nClick){
+                            case 0:
+                                wxEntryActivity = new WXEntryActivity(1,SettingsActivity.this,SettingsActivity.this.getIntent());
+                                wxEntryActivity.shareWXSceneSession();
+                                break;
+                            case 1:
+                                wxEntryActivity = new WXEntryActivity(1,SettingsActivity.this,SettingsActivity.this.getIntent());
+                                wxEntryActivity.shareWXSceneTimeline();
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                });
             }
         });
     }

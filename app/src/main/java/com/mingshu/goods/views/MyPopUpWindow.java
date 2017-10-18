@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.SystemClock;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -12,8 +11,6 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
 import com.mingshu.goods.R;
-
-import java.io.File;
 
 /**
  * Description: MyPopUpWindow
@@ -28,9 +25,6 @@ public class MyPopUpWindow{
 
     // 数据接口
     OnGetData mOnGetData;
-
-    private int xiangji = 1;
-    private File sdcardTempFile = new File("/mnt/sdcard/", "tmp_pic_" + SystemClock.currentThreadTimeMillis() + ".jpg");
 
     public MyPopUpWindow(Context context, Activity activity) {
         this.context = context;
@@ -87,8 +81,7 @@ public class MyPopUpWindow{
 
             @Override
             public void onClick(View v) {
-                mOnGetData.onDataCallBack(0);
-                //Toast.makeText(context, "拍照", Toast.LENGTH_LONG).show();
+                mOnGetData.onDataCallBack(0);//拍照
                 popupWindow.dismiss();
             }
         });
@@ -97,8 +90,7 @@ public class MyPopUpWindow{
 
             @Override
             public void onClick(View v) {
-                mOnGetData.onDataCallBack(1);
-                //Toast.makeText(context, "从相册选择", Toast.LENGTH_LONG).show();
+                mOnGetData.onDataCallBack(1);//从相册选择
                 popupWindow.dismiss();
             }
         });
@@ -107,8 +99,7 @@ public class MyPopUpWindow{
 
             @Override
             public void onClick(View v) {
-                mOnGetData.onDataCallBack(2);
-                //Toast.makeText(context, "取消", Toast.LENGTH_LONG).show();
+                mOnGetData.onDataCallBack(2);//取消
                 popupWindow.dismiss();
             }
         });

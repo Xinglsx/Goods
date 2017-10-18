@@ -53,10 +53,10 @@ public class FragmentGoods extends BaseFragment {
     private boolean isLogin = true;
     //轮播图片
     private String[] images = new String[]{
-            "http://139.224.129.220:8080/images/carousels/1.jpg",//
-            "http://139.224.129.220:8080/images/carousels/2.jpg",//
-            "http://139.224.129.220:8080/images/carousels/3.jpg",
-            "http://139.224.129.220:8080/images/carousels/4.jpg"
+            "http://www.mingshukeji.com.cn/images/carousels/1.jpg",//
+            "http://www.mingshukeji.com.cn/images/carousels/2.jpg",//
+            "http://www.mingshukeji.com.cn/images/carousels/3.jpg",
+            "http://www.mingshukeji.com.cn/images/carousels/4.jpg"
     };
     //用来存放导航图片实例（保证唯一性，滑动的时候不重复创建）
     private List<ImageView> imageViews;

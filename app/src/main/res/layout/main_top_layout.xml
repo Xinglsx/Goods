@@ -16,7 +16,7 @@
 
     <ImageButton
         android:id="@+id/image_btn_add"
-        android:background="@drawable/btn_add"
+        android:background="@drawable/image_btn_add"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_centerVertical="true"

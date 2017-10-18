@@ -76,6 +76,39 @@ public class LoginActivity extends ScanBaseActivity {
                 }
             }
         });
+
+        binding.txtRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentRegister = new Intent(LoginActivity.this,RegisterActivity.class);
+                intentRegister.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intentRegister);
+            }
+        });
+
+        binding.txtForgetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CommonUtil.DisplayToast("请联系管理员或者使用游客模式登录!",LoginActivity.this);
+            }
+        });
+
+        binding.txtGuestLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //保存全局用户信息
+                UserInfo tempUser = new UserInfo();
+                tempUser.setUserid("guest");
+                tempUser.setNickname("guest");
+                tempUser.setUsertype((short)1);
+                tempUser.setId("guest");
+                ApplicationUtil.put(LoginActivity.this,Constant.USERINFO,tempUser);
+                Intent intentGuest = new Intent(LoginActivity.this,HomeActivity.class);
+                intentGuest.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intentGuest);
+                LoginActivity.this.finish();
+            }
+        });
     }
 
     @Override
@@ -110,36 +143,6 @@ public class LoginActivity extends ScanBaseActivity {
         switch (id){
             case R.id.btn_load:
                 Login();
-                break;
-            case R.id.txt_register:
-                Intent intentRegister = new Intent(this,RegisterActivity.class);
-                intentRegister.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intentRegister);
-                break;
-            case R.id.txt_guest_login:
-                //保存全局用户信息
-                UserInfo tempUser = new UserInfo(){
-                    @Override
-                    public String getUserid() {
-                        return "guest";
-                    }
-                    public String getNickname(){
-                        return "guest";
-                    }
-                    @Override
-                    public short getUsertype() {
-                        return 0;
-                    }
-                    public String getId(){return "guest";}
-                };
-                ApplicationUtil.put(this,Constant.USERINFO,tempUser);
-                Intent intentGuest = new Intent(this,HomeActivity.class);
-                intentGuest.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intentGuest);
-                LoginActivity.this.finish();
-                break;
-            case R.id.txt_forget_password:
-                CommonUtil.DisplayToast("请联系管理员或者使用游客模式登录!",this);
                 break;
         }
     }
