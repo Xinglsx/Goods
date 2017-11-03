@@ -1,6 +1,7 @@
 package com.mingshu.goods;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -41,6 +42,8 @@ public class HomeActivity extends ScanBaseActivity {
     //Fragment相关
     private List<Fragment> articleInfos;
 
+    //语音识别按钮
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +53,18 @@ public class HomeActivity extends ScanBaseActivity {
         initView();
         initEvent();
         initViewPage();
+        Intent intent = getIntent();
+        Boolean isVoice = intent.getBooleanExtra("isVoice",false);
+        if(isVoice){
+            int fragmentIndex = intent.getIntExtra("fragmentIndex",0);
+            String searchContext = intent.getStringExtra("searchContext");
+            binding.mainViewpager.setCurrentItem(fragmentIndex);
+            resetLayout();
+            mImgCoupon.setImageResource(R.drawable.image_btn_coupon_green);
+            txtCoupon.setTextColor(Color.GREEN);
+//            FragmentCoupon couponFragment = (FragmentCoupon) articleInfos.get(2);
+//            couponFragment.SearchText(searchContext);
+        }
     }
 
     private void initView(){
@@ -109,6 +124,12 @@ public class HomeActivity extends ScanBaseActivity {
             }
         });
 
+        findViewById(R.id.image_btn_voice).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this,VoiceSearchActivity.class));
+            }
+        });
     }
 
 

@@ -1,7 +1,7 @@
 apply plugin: 'android-library'
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.0"
+    buildToolsVersion '26.0.2'
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'

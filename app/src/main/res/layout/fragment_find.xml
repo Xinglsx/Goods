@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data></data>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -38,6 +37,16 @@
                 android:layout_marginRight="40dp"
                 android:textColor="@color/colorBtnGray"/>
         </LinearLayout>
+
+        <Button
+            android:id="@+id/btnStartSpeak"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="开始讲话 "/>
+        <TextView
+            android:id="@+id/txtVoiceResult"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 </layout>

@@ -20,8 +20,13 @@ import com.mingshu.goods.managers.ApiCoreManager;
 import com.mingshu.goods.models.CouponInfo;
 import com.mingshu.goods.utils.CommonUtil;
 import com.mingshu.goods.utils.Constant;
+import com.mingshu.goods.views.MessageEvent;
 import com.mingshu.goods.views.adapters.BaseFragment;
 import com.mingshu.goods.views.adapters.DataBindingAdapterCoupon;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 import java.util.Map;
@@ -40,7 +45,7 @@ public class FragmentCoupon  extends BaseFragment  {
     List<CouponInfo> couponInfos;
     private int pageNo = 1;
     DataBindingAdapterCoupon dataBindingAdapterCoupon;
-    TextView q;
+    TextView textView;
     private SharedPreferences sp;
     private  String filter;
 
@@ -58,13 +63,14 @@ public class FragmentCoupon  extends BaseFragment  {
         apiCoreManager = new ApiCoreManager(this.getActivity());
         sp = this.getActivity().getSharedPreferences("couponFilter", Context.MODE_PRIVATE);
         initView();
+        EventBus.getDefault().register(this);
         return view;
     }
 
     private void initView() {
         listViewCoupons = (PullToRefreshListView) view.findViewById(R.id.listView_coupons);
-        q = (TextView) view.findViewById(R.id.txt_q);
-        filter = sp.getString(Constant.COUPON_FILTER,q.getText().toString());
+        textView = (TextView) view.findViewById(R.id.txt_q);
+        filter = sp.getString(Constant.COUPON_FILTER,textView.getText().toString());
         getcoupons(1, Constant.PAGESIZE,filter);
         listViewCoupons.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -80,7 +86,7 @@ public class FragmentCoupon  extends BaseFragment  {
             @Override
             public void onRefresh(PullToRefreshBase<ListView> refreshView) {
                 pageNo = 1;
-                filter = q.getText().toString();
+                filter = textView.getText().toString();
                 getcoupons(pageNo,Constant.PAGESIZE,filter);
             }
         });
@@ -103,11 +109,15 @@ public class FragmentCoupon  extends BaseFragment  {
             public void onClick(View v) {
                 pageNo = 1;
                 //缓存最后的查询关键字
-                filter = q.getText().toString();
+                filter = textView.getText().toString();
                 sp.edit().putString(Constant.COUPON_FILTER,filter).commit();
                 getcoupons(pageNo,Constant.PAGESIZE,filter);
             }
         });
+    }
+
+    public void SearchText(String text){
+        getcoupons(1, Constant.PAGESIZE,text);
     }
 
     @Override
@@ -167,5 +177,17 @@ public class FragmentCoupon  extends BaseFragment  {
                 listViewCoupons.onRefreshComplete();
             }
         });
+    }
+    // This method will be called when a MessageEvent is posted (in the UI thread for Toast)
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(MessageEvent event) {
+        CommonUtil.ShowMsg(event.message,getActivity());
+//        Toast.makeText(getActivity(), event.message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
     }
 }

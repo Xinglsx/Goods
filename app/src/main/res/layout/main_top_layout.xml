@@ -15,15 +15,14 @@
         android:textStyle="bold"/>
 
     <ImageButton
-        android:id="@+id/image_btn_add"
-        android:background="@drawable/image_btn_add"
+        android:id="@+id/image_btn_voice"
+        android:background="@drawable/image_btn_voice"
         android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_height="22dp"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
         android:onClick="imageBtnClick"
-        android:layout_marginRight="20dp"
-        android:visibility="invisible"
+        android:layout_marginRight="10dp"
         />
     <ImageButton
         android:id="@+id/image_btn_search"
@@ -31,7 +30,7 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_centerVertical="true"
-        android:layout_toLeftOf="@id/image_btn_add"
+        android:layout_toLeftOf="@id/image_btn_voice"
         android:onClick="imageBtnClick"
         android:layout_marginRight="20dp"
         android:visibility="invisible"
