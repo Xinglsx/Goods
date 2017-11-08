@@ -213,7 +213,8 @@ public class UploadGoodsActivity extends ScanBaseActivity{
             CommonUtil.DisplayToast("请输入推荐理由！",this);
             return false;
         }
-        if(binding.txtGoodsReason.length() < 50){
+        //管理员上传，无需50字理由
+        if(userInfo.getUsertype() < 4 && binding.txtGoodsReason.length() < 50){
             CommonUtil.DisplayToast("请补充推荐理由，至少50字！",this);
             return false;
         }
@@ -245,7 +246,14 @@ public class UploadGoodsActivity extends ScanBaseActivity{
             PrompUtil.stopProgessDialog();
             return ;
         }
-        goodsInfo.setState(state);
+        //管理员上传，无需审核
+        if(userInfo.getUsertype() >= 4 && state == 1){
+            goodsInfo.setState((short)2);
+            goodsInfo.setAudituser(userInfo.getId());
+            goodsInfo.setAuditname(userInfo.getNickname());
+        }else{
+            goodsInfo.setState(state);
+        }
         //推荐信息
         goodsInfo.setRecommender(userInfo.getId());
         goodsInfo.setRecommendname(userInfo.getNickname());

@@ -15,6 +15,7 @@
         android:textStyle="bold"/>
 
     <ImageButton
+        android:visibility="gone"
         android:id="@+id/image_btn_voice"
         android:background="@drawable/image_btn_voice"
         android:layout_width="24dp"

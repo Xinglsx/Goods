@@ -1,52 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data></data>
-    <LinearLayout
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@color/colorBackground">
-        <LinearLayout
-            android:id="@+id/linlayout_make_money"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:gravity="center_vertical"
-            android:layout_marginTop="5dp"
-            android:background="#FFFFFF">
-            <ImageView
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:src="@drawable/image_make_money"
-                android:layout_marginLeft="30dp"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="移动网赚"
-                android:gravity="center_vertical"
-                android:textSize="20sp"
-                android:layout_marginLeft="10dp"
-                android:textColor="@color/colorGreen"/>
-            <TextView
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/linlayout_redpaper"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="赚钱小应用"
-                android:gravity="bottom"
-                android:textSize="14sp"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
-                android:textColor="@color/colorBtnGray"/>
+                android:layout_height="45dp"
+                android:layout_marginTop="30dp"
+                android:gravity="center_vertical"
+                android:background="#FFFFFF">
+                <ImageView
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:src="@drawable/image_btn_redpaper"
+                    android:layout_marginLeft="30dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="双十一红包"
+                    android:gravity="center_vertical"
+                    android:textSize="18sp"
+                    android:layout_marginLeft="20dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="限时抢"
+                    android:gravity="center_vertical"
+                    android:textSize="13sp"
+                    android:textColor="#FF0000"
+                    android:layout_marginLeft="50dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linlayout_test_list"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:gravity="center_vertical"
+                android:layout_marginTop="30dp"
+                android:background="#FFFFFF">
+                <ImageView
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:src="@drawable/image_upload_goods_48"
+                    android:layout_marginLeft="30dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="功能测试中心"
+                    android:gravity="center_vertical"
+                    android:textSize="18sp"
+                    android:layout_marginLeft="20dp"/>
+            </LinearLayout>
+
         </LinearLayout>
+    </ScrollView>
 
-        <Button
-            android:id="@+id/btnStartSpeak"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="开始讲话 "/>
-        <TextView
-            android:id="@+id/txtVoiceResult"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </LinearLayout>
 </layout>

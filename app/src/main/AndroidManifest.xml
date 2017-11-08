@@ -22,11 +22,11 @@
     <!-- 读取网络信息状态 -->
     <!-- <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/> -->
     <!-- 获取当前wifi状态 -->
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> -->
     <!-- 允许程序改变网络连接状态 -->
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <!-- 读取手机信息权限 -->
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- <uses-permission android:name="android.permission.READ_PHONE_STATE" /> -->
     <!-- 读取联系人权限，上传联系人需要用到此权限 -->
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <!-- 外存储写权限，构建语法需要用到此权限 -->
@@ -38,6 +38,17 @@
     <!-- 手机定位信息，用来为语义等功能提供定位，提供更精准的服务 -->
     <!-- 定位信息是敏感信息，可通过Setting.setLocationEnable(false)关闭定位请求 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <!-- 集成时请添加下列权限 -->
+    <!-- 测试完成后，您自己的appId appKey secretKey 请在 SynthActivity 和 MiniActivity 中修改 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 
     <application
         android:name="winning.framework.BaseApplication"
@@ -79,7 +90,11 @@
         <activity
             android:name=".wxapi.WXEntryActivity"
             android:exported="true" />
-        <activity android:name=".VoiceSearchActivity"></activity>
+        <activity android:name=".VoiceSearchActivity" />
+        <activity android:name=".TestListActivity" />
+        <activity android:name=".SpeechRecognitionActivity" />
+        <activity android:name=".SpeechSynthesisActivity" />
+        <activity android:name=".RedPaperActivity"></activity>
     </application>
 
 </manifest>

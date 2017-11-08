@@ -49,8 +49,9 @@ public class FragmentGoods extends BaseFragment {
     private PullToRefreshListView listViewGoods;
     private DataBindingAdapterGoods bindingAdapterArticle;
     Context context;
-    private int pageNumber = 0;
+    private int pageNumber = 1;
     private boolean isLogin = true;
+    private int TotalPages;
     //轮播图片
     private String[] images = new String[]{
             "http://www.mingshukeji.com.cn/images/carousels/1.jpg",//
@@ -95,7 +96,7 @@ public class FragmentGoods extends BaseFragment {
 
     private void initView(){
 
-        int pageSize = images.length;
+        final int pageSize = images.length;
         for (int i = 0; i < pageSize; i++) {
             ImageView iv = new ImageView(FragmentGoods.this.getActivity());
             iv.setScaleType(ImageView.ScaleType.FIT_XY);
@@ -175,14 +176,14 @@ public class FragmentGoods extends BaseFragment {
         listViewGoods.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
             @Override
             public void onRefresh(PullToRefreshBase<ListView> refreshView) {
-                getGoodsInfos(0,Constant.PAGESIZE,2);
+                getGoodsInfos(pageNumber,Constant.PAGESIZE,2);
             }
         });
 
         listViewGoods.setOnLastItemVisibleListener(new PullToRefreshBase.OnLastItemVisibleListener() {
             @Override
             public void onLastItemVisible() {
-                if(bindingAdapterArticle.getCount() ==  (pageNumber+1) * Constant.PAGESIZE){
+                if(pageNumber < TotalPages){
                     getMoreGoodsInfos(pageNumber+1,Constant.PAGESIZE,2);
                 }
                 else{
@@ -202,8 +203,9 @@ public class FragmentGoods extends BaseFragment {
                 goodsInfos = data.getDataList();
                 bindingAdapterArticle = new DataBindingAdapterGoods(FragmentGoods.this.goodsInfos,FragmentGoods.this.getActivity());
                 listViewGoods.setAdapter(bindingAdapterArticle);
-                pageNumber = 0;
                 PrompUtil.stopProgessDialog();
+                pageNumber = 1;
+                TotalPages = data.getTotalPages();
                 listViewGoods.onRefreshComplete();
                 if(!isLogin){
                     //CommonUtil.DisplayToast("亲，商品已经刷新成功！",FragmentGoods.this.getActivity());
@@ -240,9 +242,9 @@ public class FragmentGoods extends BaseFragment {
                     goodsInfos.addAll(data.getDataList());
                     bindingAdapterArticle.AddItem(data.getDataList());
                     bindingAdapterArticle.notifyDataSetChanged();
-                    pageNumber++;
                 }
                 PrompUtil.stopProgessDialog();
+                pageNumber++;
                 listViewGoods.onRefreshComplete();
             }
         }, new NetworkEngine.Failure() {

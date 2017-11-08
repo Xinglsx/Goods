@@ -53,6 +53,7 @@ public class HomeActivity extends ScanBaseActivity {
         initView();
         initEvent();
         initViewPage();
+
         Intent intent = getIntent();
         Boolean isVoice = intent.getBooleanExtra("isVoice",false);
         if(isVoice){

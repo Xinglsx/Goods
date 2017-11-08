@@ -31,11 +31,6 @@ android {
         enabled = true
     }
 
-    sourceSets {
-        main {
-            jniLibs.srcDirs = ['libs']
-        }
-    }
 }
 
 dependencies {
@@ -59,4 +54,5 @@ dependencies {
     compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
     compile 'org.greenrobot:eventbus:3.0.0'
     testCompile 'junit:junit:4.12'
+    compile files('libs/com.baidu.tts_2.3.1.20170808_e39ea89.jar')
 }

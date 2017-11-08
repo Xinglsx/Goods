@@ -143,9 +143,19 @@ public class UserInfo implements Serializable {
         this.taobao = taobao;
     }
 
+    public String getRegistertime() {
+        return registertime;
+    }
+
+    public void setRegistertime(String registertime) {
+        this.registertime = registertime;
+    }
+
     private String ID;
 
     private String CreateTime;
+
+    private String registertime;
 
     private String id;
 

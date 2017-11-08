@@ -115,4 +115,10 @@ public class ApiCoreManager extends ApiManager {
         param.put("q", q);
         return createAPI(Request.Method.GET, baseApiURL + "/Tbk/GetCouponList", param);
     }
+
+    public Api getRedPaperCommand(String commandKey) {
+        Map param = new HashMap<>();
+        param.put("commandKey", commandKey);
+        return createAPI(Request.Method.GET,baseApiURL+"/Tbk/GetRedPaperCommand",param);
+    }
 }
