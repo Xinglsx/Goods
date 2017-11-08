@@ -58,11 +58,11 @@ public class WxSharePopUpWindow{
         popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         //显示位置
         if (Location.LEFT.ordinal() == from) {
-            popupWindow.showAtLocation(activity.getLayoutInflater().inflate(R.layout.activity_settings, null), Gravity.LEFT, 0, 500);
+            popupWindow.showAtLocation(activity.getLayoutInflater().inflate(R.layout.activity_home, null), Gravity.LEFT, 0, 500);
         } else if (Location.RIGHT.ordinal() == from) {
-            popupWindow.showAtLocation(activity.getLayoutInflater().inflate(R.layout.activity_settings, null), Gravity.RIGHT, 0, 500);
+            popupWindow.showAtLocation(activity.getLayoutInflater().inflate(R.layout.activity_home, null), Gravity.RIGHT, 0, 500);
         } else if (Location.BOTTOM.ordinal() == from) {
-            popupWindow.showAtLocation(activity.getLayoutInflater().inflate(R.layout.activity_settings, null), Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+            popupWindow.showAtLocation(activity.getLayoutInflater().inflate(R.layout.activity_home, null), Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
         }
         //设置背景半透明
         backgroundAlpha(1.0f);

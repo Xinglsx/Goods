@@ -8,17 +8,35 @@
         <variable
             name="backClick"
             type="android.view.View.OnClickListener"/>
+
+        <variable
+            name="shareClick"
+            type="android.view.View.OnClickListener"/>
     </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
         <include
             android:id="@+id/include"
-            layout="@layout/public_top_layout"
+            layout="@layout/public_top_share_layout"
             bind:backClick="@{backClick}"
-            bind:title="@{title}"/>
+            bind:title="@{title}"
+            bind:shareClick="@{shareClick}"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <Button
+                android:id="@+id/btn_pickup_redpaper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="点击领取红包"
+                android:layout_alignParentBottom="true"
+                android:background="@color/colorBtnYellow"
+                android:layout_margin="10dp"/>
         <ScrollView
+            android:layout_above="@id/btn_pickup_redpaper"
             android:layout_below="@id/linlayout_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -75,15 +93,8 @@
                     android:layout_marginTop="15dp"
                     android:paddingLeft="35dp"
                     android:paddingRight="15dp"/>
-                <Button
-                    android:id="@+id/btn_pickup_redpaper"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="点击领取红包"
-                    android:layout_alignParentBottom="true"
-                    android:background="@color/colorBtnYellow"
-                    android:layout_margin="20dp"/>
             </LinearLayout>
         </ScrollView>
+        </RelativeLayout>
     </LinearLayout>
 </layout>

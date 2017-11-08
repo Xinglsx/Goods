@@ -57,7 +57,12 @@ public class FragmentFind extends BaseFragment {
                 startActivity(new Intent(FragmentFind.this.getActivity(),RedPaperActivity.class));
             }
         });
-
+        view.findViewById(R.id.linlayout_redpaper_alipay).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(FragmentFind.this.getActivity(),RedPaperAlipayActivity.class));
+            }
+        });
     }
 
     @Override

@@ -94,7 +94,8 @@
         <activity android:name=".TestListActivity" />
         <activity android:name=".SpeechRecognitionActivity" />
         <activity android:name=".SpeechSynthesisActivity" />
-        <activity android:name=".RedPaperActivity"></activity>
+        <activity android:name=".RedPaperActivity" />
+        <activity android:name=".RedPaperAlipayActivity"></activity>
     </application>
 
 </manifest>

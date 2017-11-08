@@ -26,7 +26,6 @@ import com.mingshu.goods.models.GoodsInfo;
 import com.mingshu.goods.models.PagedData;
 import com.mingshu.goods.utils.CommonUtil;
 import com.mingshu.goods.utils.Constant;
-import com.mingshu.goods.utils.PrompUtil;
 import com.mingshu.goods.views.adapters.BaseFragment;
 import com.mingshu.goods.views.adapters.DataBindingAdapterGoods;
 
@@ -156,7 +155,7 @@ public class FragmentGoods extends BaseFragment {
             }
         });
 
-        PrompUtil.startProgressDialog(this.getActivity(),"获取中，请稍等。。。");
+//        PrompUtil.startProgressDialog(this.getActivity(),"获取中，请稍等。。。");
         getGoodsInfos(pageNumber, Constant.PAGESIZE,2);
 
         listViewGoods = (PullToRefreshListView)view.findViewById(R.id.listView_Goods);
@@ -176,7 +175,7 @@ public class FragmentGoods extends BaseFragment {
         listViewGoods.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
             @Override
             public void onRefresh(PullToRefreshBase<ListView> refreshView) {
-                getGoodsInfos(pageNumber,Constant.PAGESIZE,2);
+                getGoodsInfos(1,Constant.PAGESIZE,2);
             }
         });
 
@@ -203,7 +202,7 @@ public class FragmentGoods extends BaseFragment {
                 goodsInfos = data.getDataList();
                 bindingAdapterArticle = new DataBindingAdapterGoods(FragmentGoods.this.goodsInfos,FragmentGoods.this.getActivity());
                 listViewGoods.setAdapter(bindingAdapterArticle);
-                PrompUtil.stopProgessDialog();
+//                PrompUtil.stopProgessDialog();
                 pageNumber = 1;
                 TotalPages = data.getTotalPages();
                 listViewGoods.onRefreshComplete();
@@ -218,14 +217,14 @@ public class FragmentGoods extends BaseFragment {
         }, new NetworkEngine.Failure() {
             @Override
             public void callback(int code, String message, Map rawData) {
-                PrompUtil.stopProgessDialog();
+//                PrompUtil.stopProgessDialog();
                 CommonUtil.ShowMsg(message,FragmentGoods.this.getActivity());
                 listViewGoods.onRefreshComplete();
             }
         }, new NetworkEngine.Error() {
             @Override
             public void callback(int code, String message, Map rawData) {
-                PrompUtil.stopProgessDialog();
+//                PrompUtil.stopProgessDialog();
                 CommonUtil.ShowMsg(message,FragmentGoods.this.getActivity());
                 listViewGoods.onRefreshComplete();
             }
@@ -243,21 +242,21 @@ public class FragmentGoods extends BaseFragment {
                     bindingAdapterArticle.AddItem(data.getDataList());
                     bindingAdapterArticle.notifyDataSetChanged();
                 }
-                PrompUtil.stopProgessDialog();
+//                PrompUtil.stopProgessDialog();
                 pageNumber++;
                 listViewGoods.onRefreshComplete();
             }
         }, new NetworkEngine.Failure() {
             @Override
             public void callback(int code, String message, Map rawData) {
-                PrompUtil.stopProgessDialog();
+//                PrompUtil.stopProgessDialog();
                 CommonUtil.ShowMsg(message,FragmentGoods.this.getActivity());
                 listViewGoods.onRefreshComplete();
             }
         }, new NetworkEngine.Error() {
             @Override
             public void callback(int code, String message, Map rawData) {
-                PrompUtil.stopProgessDialog();
+//                PrompUtil.stopProgessDialog();
                 CommonUtil.ShowMsg(message,FragmentGoods.this.getActivity());
                 listViewGoods.onRefreshComplete();
             }
@@ -401,7 +400,7 @@ public class FragmentGoods extends BaseFragment {
             }, new NetworkEngine.Error() {
                 @Override
                 public void callback(int code, String message, Map rawData) {
-                    PrompUtil.stopProgessDialog();
+//                    PrompUtil.stopProgessDialog();
                     CommonUtil.ShowMsg(message,FragmentGoods.this.getActivity());
                     listViewGoods.onRefreshComplete();
                 }

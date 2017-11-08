@@ -29,34 +29,34 @@ public class HelpActivity extends AppCompatActivity {
         int id = v.getId();
         switch (id) {
             case R.id.linlayout_help1:
-                url = "http://www.mingshukeji.com.cn/Help/Index?id=1";
+                url = "http://www.mingshukeji.com.cn/SharePing/Help?id=1";
                 break;
             case R.id.linlayout_help2:
-                url = "http://www.mingshukeji.com.cn/Help/Index?id=2";
+                url = "http://www.mingshukeji.com.cn/SharePing/Help?id=2";
                 break;
             case R.id.linlayout_help3:
-                url = "http://www.mingshukeji.com.cn/Help/Index?id=3";
+                url = "http://www.mingshukeji.com.cn/SharePing/Help?id=3";
                 break;
             case R.id.linlayout_help4:
-                url = "http://www.mingshukeji.com.cn/Help/Index?id=4";
+                url = "http://www.mingshukeji.com.cn/SharePing/Help?id=4";
                 break;
             case R.id.linlayout_help5:
-                url = "http://www.mingshukeji.com.cn/Help/Index?id=5";
+                url = "http://www.mingshukeji.com.cn/SharePing/Help?id=5";
                 break;
             case R.id.linlayout_help6:
-                url = "http://www.mingshukeji.com.cn/Help/Index?id=6";
+                url = "http://www.mingshukeji.com.cn/SharePing/Help?id=6";
                 break;
             case R.id.linlayout_help7:
-                url = "http://www.mingshukeji.com.cn/Help/Index?id=7";
+                url = "http://www.mingshukeji.com.cn/SharePing/Help?id=7";
                 break;
             case R.id.linlayout_help8:
-                url = "http://www.mingshukeji.com.cn/Help/Index?id=8";
+                url = "http://www.mingshukeji.com.cn/SharePing/Help?id=8";
                 break;
             case R.id.linlayout_help9:
-                url = "http://www.mingshukeji.com.cn/Help/Index?id=9";
+                url = "http://www.mingshukeji.com.cn/SharePing/Help?id=9";
                 break;
             default:
-                url = "http://www.mingshukeji.com.cn";
+                url = "http://www.mingshukeji.com.cn/SharePing/Help";
                 break;
         }
         Intent intent = new Intent();

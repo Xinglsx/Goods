@@ -12,6 +12,8 @@ import android.view.View;
 import com.mingshu.goods.databinding.ActivityRedPaperBinding;
 import com.mingshu.goods.managers.ApiCoreManager;
 import com.mingshu.goods.utils.CommonUtil;
+import com.mingshu.goods.views.WxSharePopUpWindow;
+import com.mingshu.goods.wxapi.WXEntryActivity;
 
 import java.util.Map;
 
@@ -22,11 +24,13 @@ public class RedPaperActivity extends BaseActivity {
 
     private ApiCoreManager apiCoreManager;
     private ActivityRedPaperBinding binding;
+    private WxSharePopUpWindow wxSharePopUpWindow;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_red_paper);
         apiCoreManager = new ApiCoreManager(this);
+        wxSharePopUpWindow = new WxSharePopUpWindow(this,this);
         binding.setTitle("双十一红包");
         binding.setBackClick(new View.OnClickListener() {
             @Override
@@ -34,7 +38,29 @@ public class RedPaperActivity extends BaseActivity {
                 RedPaperActivity.this.finish();
             }
         });
-
+        binding.setShareClick(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                wxSharePopUpWindow.initPopupWindow(new WxSharePopUpWindow.OnGetData() {
+                    @Override
+                    public void onDataCallBack(int nClick) {
+                        WXEntryActivity wxEntryActivity;
+                        switch (nClick){
+                            case 0:
+                                wxEntryActivity = new WXEntryActivity(3,RedPaperActivity.this,RedPaperActivity.this.getIntent());
+                                wxEntryActivity.shareWXSceneSession();
+                                break;
+                            case 1:
+                                wxEntryActivity = new WXEntryActivity(3,RedPaperActivity.this,RedPaperActivity.this.getIntent());
+                                wxEntryActivity.shareWXSceneTimeline();
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                });
+            }
+        });
         initView();
     }
 

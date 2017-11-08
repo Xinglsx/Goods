@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 import com.mingshu.goods.R;
+import com.mingshu.goods.models.GoodsInfo;
 import com.mingshu.goods.utils.CommonUtil;
 import com.tencent.mm.sdk.openapi.BaseReq;
 import com.tencent.mm.sdk.openapi.BaseResp;
@@ -13,9 +14,7 @@ import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.sdk.openapi.SendMessageToWX;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
-import com.tencent.mm.sdk.openapi.WXImageObject;
 import com.tencent.mm.sdk.openapi.WXMediaMessage;
-import com.tencent.mm.sdk.openapi.WXTextObject;
 import com.tencent.mm.sdk.openapi.WXWebpageObject;
 import com.tencent.mm.sdk.platformtools.Util;
 
@@ -32,10 +31,13 @@ public class WXEntryActivity implements IWXAPIEventHandler {
 
     private String APP_ID = "wx0c8d58cd3ecdd18b";
     private IWXAPI iwxapi;
-    private int contextType;//1-分享软件
+    private int contextType;//1-分享软件 2-分享商品 3-分享活动
     enum SHARE_TYPE {Type_WXSceneSession, Type_WXSceneTimeline}
     private Context context;
     private Intent intent;
+    private GoodsInfo goodsInfo;
+    WXWebpageObject webPage;
+    WXMediaMessage mediaMessage;
 
     public void shareWXSceneSession() {
         share(Type_WXSceneSession);
@@ -49,29 +51,71 @@ public class WXEntryActivity implements IWXAPIEventHandler {
         this.contextType = contextType;
         this.context = context;
         this.intent = intent;
+        this.goodsInfo = goodsInfo;
 
         iwxapi = WXAPIFactory.createWXAPI(this.context, APP_ID, false);
         iwxapi.handleIntent(this.intent, this);
         iwxapi.registerApp(APP_ID);
     }
+    public WXEntryActivity(int contextType, GoodsInfo goodsInfo, Context context, Intent intent){
+        this.contextType = contextType;
+        this.context = context;
+        this.intent = intent;
+        this.goodsInfo = goodsInfo;
 
+        iwxapi = WXAPIFactory.createWXAPI(this.context, APP_ID, false);
+        iwxapi.handleIntent(this.intent, this);
+        iwxapi.registerApp(APP_ID);
+    }
     private void share(SHARE_TYPE type) {
         SendMessageToWX.Req req = new SendMessageToWX.Req();
         switch (contextType){
             case 1:
                 //分享软件-进入闪荐下载界面
-                WXWebpageObject webPage = new WXWebpageObject();
+                webPage = new WXWebpageObject();
                 webPage.webpageUrl = "http://www.mingshukeji.com.cn/Home/SjDownload";
 
-                WXMediaMessage msg3 = new WXMediaMessage(webPage);
-                msg3.title = "闪荐，闪电推荐更便宜的好东西";
-                msg3.description = "内有大量天猫淘宝【大额】、【限时】、【限量】优惠券，无需注册随便领取！ ";
-                Bitmap bmp1 = BitmapFactory.decodeResource(context.getResources(), R.drawable.image_sj_icon_128);
-                msg3.thumbData = Util.bmpToByteArray(bmp1,true);
+                mediaMessage= new WXMediaMessage(webPage);
+                mediaMessage.title = "[闪荐]大额限时优惠券，无需注册随便领取！";
+                mediaMessage.description = "闪荐，寻找更便宜的好东西！内有大量天猫淘宝优惠券，无需注册随便领取！";
+                Bitmap bitmap1 = BitmapFactory.decodeResource(context.getResources(), R.drawable.image_sj_icon_128);
+                mediaMessage.thumbData = Util.bmpToByteArray(bitmap1,true);
 
                 req.transaction = buildTransaction("webpage");
-                req.message = msg3;
+                req.message = mediaMessage;
                 break;
+            case 2:
+                //分享商品-进入商品明细界面
+                webPage = new WXWebpageObject();
+                webPage.webpageUrl = "www.mingshukeji.com.cn/SharePage/SingleGoods?id="+goodsInfo.getID();
+
+                mediaMessage= new WXMediaMessage(webPage);
+                mediaMessage.title = "[闪荐]"+goodsInfo.getDescription();
+                mediaMessage.description = "闪荐，寻找更便宜的好东西。内有大量天猫淘宝优惠券，无需注册随便领取！";
+                Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.image_sj_icon_128);
+                mediaMessage.thumbData = Util.bmpToByteArray(bitmap,true);
+//                Bitmap bitmap = ImageUtil.getBitmap(goodsInfo.getImage());
+//                mediaMessage.thumbData = Util.bmpToByteArray(bitmap,true);
+
+                req.transaction = buildTransaction("webpage");
+                req.message = mediaMessage;
+                break;
+
+            case 3:
+                //分享活动
+                webPage = new WXWebpageObject();
+                webPage.webpageUrl = "http://www.mingshukeji.com.cn/SharePage";
+
+                mediaMessage= new WXMediaMessage(webPage);
+                mediaMessage.title = "[闪荐]内含三个红包限时免费领取，数量有限，先到先得！";
+                mediaMessage.description = "闪荐，寻找更便宜的好东西。内有大量天猫淘宝优惠券，无需注册随便领取！";
+                Bitmap bitmap2 = BitmapFactory.decodeResource(context.getResources(), R.drawable.image_btn_redpaper_jpg);
+                mediaMessage.thumbData = Util.bmpToByteArray(bitmap2,true);
+
+                req.transaction = buildTransaction("webpage");
+                req.message = mediaMessage;
+                break;
+                /*
             case 2:
                 //图片类
                 Bitmap bmp = BitmapFactory.decodeResource(context.getResources(), R.drawable.image_icon);
@@ -99,7 +143,7 @@ public class WXEntryActivity implements IWXAPIEventHandler {
                 req.message = msg;
                 break;
             case 4:
-                break;
+                break;*/
             default:
                 break;
         }

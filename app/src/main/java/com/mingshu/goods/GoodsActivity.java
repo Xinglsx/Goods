@@ -17,6 +17,8 @@ import com.mingshu.goods.models.UserInfo;
 import com.mingshu.goods.utils.CommonUtil;
 import com.mingshu.goods.utils.Constant;
 import com.mingshu.goods.utils.PrompUtil;
+import com.mingshu.goods.views.WxSharePopUpWindow;
+import com.mingshu.goods.wxapi.WXEntryActivity;
 
 import java.util.Map;
 
@@ -33,7 +35,7 @@ public class GoodsActivity extends ScanBaseActivity {
     private int type = 0;
     private ApiCoreManager apiCoreManager;
     private UserInfo curUser;
-
+    private WxSharePopUpWindow wxSharePopUpWindow;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +44,7 @@ public class GoodsActivity extends ScanBaseActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_goods);
         apiCoreManager = new ApiCoreManager(this);
         curUser = (UserInfo) ApplicationUtil.get(this, Constant.USERINFO);
-
+        wxSharePopUpWindow = new WxSharePopUpWindow(this,this);
         Intent intent = getIntent();
         if(intent.getSerializableExtra("goods") != null){
             goodsInfo = (GoodsInfo)intent.getSerializableExtra("goods");
@@ -52,6 +54,7 @@ public class GoodsActivity extends ScanBaseActivity {
             case 0://一般用户查看商品界面
                 binding.txtRefuse.setVisibility(View.GONE);
                 binding.linlayouRefuseReason.setVisibility(View.GONE);
+                binding.txtShareGoods.setVisibility(View.VISIBLE);
                 break;
             case 1://可上传用户查看待审核和已拒绝商品界面
                 binding.txtTitle.setText("个人待审商品");
@@ -151,6 +154,30 @@ public class GoodsActivity extends ScanBaseActivity {
             @Override
             public void onClick(View v) {
                 GoodsActivity.this.finish();
+            }
+        });
+
+        binding.txtShareGoods.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                wxSharePopUpWindow.initPopupWindow(new WxSharePopUpWindow.OnGetData() {
+                    @Override
+                    public void onDataCallBack(int nClick) {
+                        WXEntryActivity wxEntryActivity;
+                        switch (nClick){
+                            case 0:
+                                wxEntryActivity = new WXEntryActivity(2,goodsInfo,GoodsActivity.this,GoodsActivity.this.getIntent());
+                                wxEntryActivity.shareWXSceneSession();
+                                break;
+                            case 1:
+                                wxEntryActivity = new WXEntryActivity(2,goodsInfo,GoodsActivity.this,GoodsActivity.this.getIntent());
+                                wxEntryActivity.shareWXSceneTimeline();
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                });
             }
         });
     }
