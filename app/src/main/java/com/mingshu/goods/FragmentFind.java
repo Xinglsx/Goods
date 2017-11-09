@@ -39,18 +39,6 @@ public class FragmentFind extends BaseFragment {
     }
 
     private void initView() {
-        //只有管理员可以看到功能测试中心
-        if(curUser == null || curUser.getUsertype() < 4){
-            view.findViewById(R.id.linlayout_test_list).setVisibility(View.GONE);
-        }
-        else {
-            view.findViewById(R.id.linlayout_test_list).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(FragmentFind.this.getActivity(),TestListActivity.class));
-                }
-            });
-        }
         view.findViewById(R.id.linlayout_redpaper).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

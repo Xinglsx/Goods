@@ -9,8 +9,7 @@
         android:background="@color/colorBackground">
         <LinearLayout android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-
+            android:orientation="vertical">s
             <LinearLayout
                 android:id="@+id/linlayout_redpaper"
                 android:layout_width="match_parent"
@@ -67,28 +66,6 @@
                     android:textColor="#FF0000"
                     android:layout_marginLeft="50dp"/>
             </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linlayout_test_list"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:gravity="center_vertical"
-                android:layout_marginTop="30dp"
-                android:background="#FFFFFF">
-                <ImageView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:src="@drawable/image_upload_goods_48"
-                    android:layout_marginLeft="30dp"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="功能测试中心"
-                    android:gravity="center_vertical"
-                    android:textSize="18sp"
-                    android:layout_marginLeft="20dp"/>
-            </LinearLayout>
-
         </LinearLayout>
     </ScrollView>
 

@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -21,7 +23,7 @@ import com.bumptech.glide.Glide;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.mingshu.goods.managers.ApiCoreManager;
-import com.mingshu.goods.models.AdInfo;
+import com.mingshu.goods.models.Advertisements;
 import com.mingshu.goods.models.GoodsInfo;
 import com.mingshu.goods.models.PagedData;
 import com.mingshu.goods.utils.CommonUtil;
@@ -32,6 +34,8 @@ import com.mingshu.goods.views.adapters.DataBindingAdapterGoods;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import winning.framework.network.NetworkEngine;
 
@@ -69,6 +73,10 @@ public class FragmentGoods extends BaseFragment {
     //红色圆点ImageView
     private ImageView red_Iv;
     android.support.v4.view.ViewPager viewPager;
+    private Timer timer = new Timer(); //为了方便取消定时轮播，将 Timer 设为全局
+    private static final int UPTATE_VIEWPAGER = 0;
+    //设置当前 第几个图片 被选中
+    private int autoCurrIndex = 0;
 
 
     @SuppressLint({"NewApi", "ValidFragment"})
@@ -86,12 +94,44 @@ public class FragmentGoods extends BaseFragment {
         rl = (RelativeLayout) view.findViewById(R.id.rl);
         viewPager = (ViewPager) view.findViewById(R.id.carousel_viewpager);
         initView();
+
+        // 设置自动轮播图片，5s后执行，周期是5s
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Message message = new Message();
+                message.what = UPTATE_VIEWPAGER;
+                if (autoCurrIndex == images.length - 1) {
+                    autoCurrIndex = -1;
+                }
+                message.arg1 = autoCurrIndex + 1;
+                mHandler.sendMessage(message);
+            }
+        }, 5000, 5000);
+
         return view;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
     }
+
+    //定时轮播图片，需要在主线程里面修改 UI
+    private Handler mHandler = new Handler() {
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case UPTATE_VIEWPAGER:
+                    if (msg.arg1 != 0) {
+                        viewPager.setCurrentItem(msg.arg1);
+                    } else {
+                        //false 当从末页调到首页是，不显示翻页动画效果，
+                        viewPager.setCurrentItem(msg.arg1, false);
+                    }
+                    break;
+            }
+        }
+    };
+
 
     private void initView(){
 
@@ -138,7 +178,7 @@ public class FragmentGoods extends BaseFragment {
             //导航页被选择的时候调用
             @Override
             public void onPageSelected(int position) {
-
+                autoCurrIndex = position;
             }
             //导航页滑动的时候调用
             //positionOffset:滑动的百分比（[0,1}）
@@ -147,6 +187,7 @@ public class FragmentGoods extends BaseFragment {
                 RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) red_Iv.getLayoutParams();
                 layoutParams.leftMargin = (int) (left * positionOffset + position * left);
                 red_Iv.setLayoutParams(layoutParams);
+                autoCurrIndex = position;
             }
             //导航页滑动的状态改变的时候调用
             @Override
@@ -332,10 +373,10 @@ public class FragmentGoods extends BaseFragment {
         //获取广告
         public void skipToAd(String key){
             final ApiCoreManager.Api api = apiCoreManager.getAdvertisement(key);
-            api.invoke(new NetworkEngine.Success<AdInfo>() {
+            api.invoke(new NetworkEngine.Success<Advertisements>() {
                 @Override
-                public void callback(AdInfo data) {
-                    int type = data.getAdInfo().getType();
+                public void callback(Advertisements data) {
+                    int type = data.getType();
                     switch (type){
                         case 0:
                             //关于我们
@@ -357,50 +398,58 @@ public class FragmentGoods extends BaseFragment {
                             startActivity(intent);
                             break;
                         case 1:
-                            //文字广告
+                            //文字内容广告
                             Intent intent1 = new Intent(FragmentGoods.this.getActivity(),TextViewActivity.class);
-                            intent1.putExtra("title","招募特约用户");
-                            intent1.putExtra("content",data.getAdInfo().getContent());//html类型
+                            intent1.putExtra("title","自定义网页");
+                            intent1.putExtra("content",data.getContent());//html类型
                             startActivity(intent1);
                             break;
                         case 2:
                             //商品广告
-                            Intent intent2 = new Intent(FragmentGoods.this.getActivity(),GoodsActivity.class);
-                            intent2.putExtra("goods",data.getGoodsInfo());
+                            String id = data.getContent();
+                            final ApiCoreManager.Api api = apiCoreManager.getGoodsInfo(id);
+                            api.invoke(new NetworkEngine.Success<GoodsInfo>() {
+                                @Override
+                                public void callback(GoodsInfo data) {
+                                    Intent intent = new Intent(FragmentGoods.this.getActivity(),GoodsActivity.class);
+                                    intent.putExtra("type",0);
+                                    intent.putExtra("goods",data);//传入商品信息
+                                    startActivity(intent);
+                                }
+                            }, new NetworkEngine.Failure() {
+                                @Override
+                                public void callback(int code, String message, Map rawData) {
+                                    CommonUtil.ShowMsg("对不起，该商品信息不存在！",FragmentGoods.this.getActivity());
+                                    listViewGoods.onRefreshComplete();
+                                }
+                            }, new NetworkEngine.Error() {
+                                @Override
+                                public void callback(int code, String message, Map rawData) {
+                                    CommonUtil.ShowMsg(message,FragmentGoods.this.getActivity());
+                                    listViewGoods.onRefreshComplete();
+                                }
+                            });
+                            break;
+                        case 3:
+                            //网页链接广告
+                            Intent intent2 = new Intent(FragmentGoods.this.getActivity(),WebViewActivity.class);
+                            intent2.putExtra("uri",data.getContent());
                             startActivity(intent2);
                             break;
                         default:
+                            //默认点击无效果
                             break;
                     }
                 }
             }, new NetworkEngine.Failure() {
                 @Override
                 public void callback(int code, String message, Map rawData) {
-//                    PrompUtil.stopProgessDialog();
-//                    CommonUtil.ShowMsg(message,FragmentGoods.this.getActivity());
-//                    listViewGoods.onRefreshComplete();
-                    //如果失败，刚进行招募特约用户界面
-                    Intent intent = new Intent(FragmentGoods.this.getActivity(), TextViewActivity.class);
-                    intent.putExtra("title", "招募特约用户");
-                    String content = "<h3>手机APP刚刚上线，现招募20位淘宝客加盟，1元成为特约用户，可以上传自己分享的商品信息。</h3>\n";
-                    content += "<h4>基本要求：</h4>\n";
-                    content += "<p>1、对分享购物不感冒</p>\n";
-                    content += "<p>2、对业余赚钱有渴望</p>\n";
-                    content += "<p>3、肯专研，爱逛淘宝</p>\n";
-                    content += "<p>4、每天至少上传一件商品</p>\n";
-                    content += "<p>5、用Android手机的（没办法，不会开发苹果APP）</p>\n";
-                    content += "<p>6、电话、微信、姓名实名认证。</p>\n";
-                    content += "<p>7、熟悉淘宝联盟，清楚淘宝客的基本操作和分享规则的优先考虑。（不了解的，这有教程）</p>\n";
-                    content += "<h4>加盟流程：</h4>\n";
-                    content += "下载闪荐 -> 注册闪荐账号 -> 完善个人资料 -> 加微信(ydxc608) -> ";
-                    content += "出示闪荐账号 -> 成为特约用户 -> 上传一个商品成功 -> 支付1元费用\n";
-                    intent.putExtra("content", content);//html类型
-                    startActivity(intent);
+                    CommonUtil.ShowMsg("维护中，暂不可用！请稍后重试！",FragmentGoods.this.getActivity());
+                    listViewGoods.onRefreshComplete();
                 }
             }, new NetworkEngine.Error() {
                 @Override
                 public void callback(int code, String message, Map rawData) {
-//                    PrompUtil.stopProgessDialog();
                     CommonUtil.ShowMsg(message,FragmentGoods.this.getActivity());
                     listViewGoods.onRefreshComplete();
                 }

@@ -23,6 +23,8 @@ public class PrompUtil {
 
     //结束等待框
     public static void stopProgessDialog(){
-        dialog.hide();
+        if(dialog != null){
+            dialog.hide();
+        }
     }
 }

@@ -107,7 +107,7 @@ public class WXEntryActivity implements IWXAPIEventHandler {
                 webPage.webpageUrl = "http://www.mingshukeji.com.cn/SharePage";
 
                 mediaMessage= new WXMediaMessage(webPage);
-                mediaMessage.title = "[闪荐]内含三个红包限时免费领取，数量有限，先到先得！";
+                mediaMessage.title = "[闪荐]内含三个双十一红包限时免费领取，数量有限，先到先得！";
                 mediaMessage.description = "闪荐，寻找更便宜的好东西。内有大量天猫淘宝优惠券，无需注册随便领取！";
                 Bitmap bitmap2 = BitmapFactory.decodeResource(context.getResources(), R.drawable.image_btn_redpaper_jpg);
                 mediaMessage.thumbData = Util.bmpToByteArray(bitmap2,true);

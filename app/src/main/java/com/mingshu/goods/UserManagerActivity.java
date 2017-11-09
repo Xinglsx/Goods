@@ -15,7 +15,6 @@ import com.mingshu.goods.models.PagedData;
 import com.mingshu.goods.models.UserInfo;
 import com.mingshu.goods.utils.CommonUtil;
 import com.mingshu.goods.utils.Constant;
-import com.mingshu.goods.utils.PrompUtil;
 import com.mingshu.goods.views.adapters.DataBindingAdapterUser;
 
 import java.util.List;
@@ -112,7 +111,7 @@ public class UserManagerActivity extends ScanBaseActivity {
             @Override
             public void callback(PagedData<UserInfo> result){
                 userInfos = result.getDataList();
-                PrompUtil.stopProgessDialog();
+//                PrompUtil.stopProgessDialog();
                 bindingAdapterUser = new DataBindingAdapterUser(result.getDataList(),UserManagerActivity.this);
                 binding.listviewUsers.setAdapter(bindingAdapterUser);
                 pageNumber = 0;
@@ -126,14 +125,14 @@ public class UserManagerActivity extends ScanBaseActivity {
         },new NetworkEngine.Failure(){
             @Override
             public void callback(int code,String message,Map rawData){
-                PrompUtil.stopProgessDialog();
+//                PrompUtil.stopProgessDialog();
                 CommonUtil.ShowMsg(message,UserManagerActivity.this);
                 binding.listviewUsers.onRefreshComplete();
             }
         },new NetworkEngine.Error(){
             @Override
             public void callback(int code,String message,Map rawData){
-                PrompUtil.stopProgessDialog();
+//                PrompUtil.stopProgessDialog();
                 CommonUtil.ShowMsg(message,UserManagerActivity.this);
                 binding.listviewUsers.onRefreshComplete();
             }
@@ -151,20 +150,20 @@ public class UserManagerActivity extends ScanBaseActivity {
                 bindingAdapterUser.notifyDataSetChanged();
                 pageNumber++;
                 binding.listviewUsers.onRefreshComplete();
-                PrompUtil.stopProgessDialog();
+//                PrompUtil.stopProgessDialog();
 
             }
         },new NetworkEngine.Failure(){
             @Override
             public void callback(int code,String message,Map rawData){
-                PrompUtil.stopProgessDialog();
+//                PrompUtil.stopProgessDialog();
                 CommonUtil.ShowMsg(message,UserManagerActivity.this);
                 binding.listviewUsers.onRefreshComplete();
             }
         },new NetworkEngine.Error(){
             @Override
             public void callback(int code,String message,Map rawData){
-                PrompUtil.stopProgessDialog();
+//                PrompUtil.stopProgessDialog();
                 CommonUtil.ShowMsg(message,UserManagerActivity.this);
                 binding.listviewUsers.onRefreshComplete();
             }

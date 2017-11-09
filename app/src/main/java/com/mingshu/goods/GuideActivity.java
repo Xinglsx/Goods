@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
@@ -20,6 +22,8 @@ import com.mingshu.goods.utils.Constant;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import winning.framework.ScanBaseActivity;
 
@@ -46,6 +50,11 @@ public class GuideActivity extends ScanBaseActivity {
     //首次开启缓存修改
     private SharedPreferences sp;
 
+    private Timer timer = new Timer(); //为了方便取消定时轮播，将 Timer 设为全局
+    private static final int UPTATE_VIEWPAGER = 0;
+    //设置当前 第几个图片 被选中
+    private int autoCurrIndex = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +64,38 @@ public class GuideActivity extends ScanBaseActivity {
         rl = binding.rl;
         sp = GuideActivity.this.getSharedPreferences("first_pref", Context.MODE_PRIVATE);
         initView();
+
+        // 设置自动轮播图片，5s后执行，周期是5s
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if (autoCurrIndex == images.length - 1) {
+                    return;
+                }
+                Message message = new Message();
+                message.what = UPTATE_VIEWPAGER;
+                message.arg1 = autoCurrIndex + 1;
+                mHandler.sendMessage(message);
+            }
+        }, 5000, 5000);
+
     }
+
+    //定时轮播图片，需要在主线程里面修改 UI
+    private Handler mHandler = new Handler() {
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case UPTATE_VIEWPAGER:
+                    if (msg.arg1 != 0) {
+                        binding.guideViewpager.setCurrentItem(msg.arg1);
+                    } else {
+                        //false 当从末页调到首页是，不显示翻页动画效果，
+                        binding.guideViewpager.setCurrentItem(msg.arg1, false);
+                    }
+                    break;
+            }
+        }
+    };
 
     private void initView() {
         int pageSize = images.length;
@@ -104,6 +144,7 @@ public class GuideActivity extends ScanBaseActivity {
                 }else {
                     binding.btn.setVisibility(View.GONE);
                 }
+                autoCurrIndex = position;
             }
             //导航页滑动的时候调用
             //positionOffset:滑动的百分比（[0,1}）
@@ -112,6 +153,7 @@ public class GuideActivity extends ScanBaseActivity {
                 RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) red_Iv.getLayoutParams();
                 layoutParams.leftMargin = (int) (left * positionOffset + position * left);
                 red_Iv.setLayoutParams(layoutParams);
+                autoCurrIndex = position;
             }
             //导航页滑动的状态改变的时候调用
             @Override
