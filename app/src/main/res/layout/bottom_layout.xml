@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
+    android:layout_height="40dp"
     android:orientation="horizontal"
-    android:layout_marginTop="4dp"
-    android:layout_marginBottom="2dp"
+    android:background="@color/colorBtnGray"
     android:baselineAligned="false">
 
     <LinearLayout
+
         android:id="@+id/line_bottom_goods"
         android:layout_width="0dp"
         android:layout_height="match_parent"
@@ -17,12 +17,13 @@
         android:onClick="imageBtnClick">
         <ImageView
             android:id="@+id/image_btn_goods"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
             android:background="#00000000"
             android:src="@drawable/image_btn_goods" />
         <TextView
             android:id="@+id/txt_goods"
+            android:textSize="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
@@ -40,14 +41,15 @@
         android:onClick="imageBtnClick">
         <ImageView
             android:id="@+id/image_btn_find"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
             android:background="#00000000"
             android:src="@drawable/image_btn_find"/>
         <TextView
             android:id="@+id/txt_find"
             android:layout_width="wrap_content"
             android:layout_marginTop="2dp"
+            android:textSize="10dp"
             android:layout_height="wrap_content"
             android:text="创新服务"/>
 
@@ -63,12 +65,13 @@
         android:onClick="imageBtnClick">
         <ImageView
             android:id="@+id/image_btn_coupon"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
             android:background="#00000000"
             android:src="@drawable/image_btn_coupon"/>
         <TextView
             android:id="@+id/txt_coupon"
+            android:textSize="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
@@ -86,12 +89,13 @@
         android:onClick="imageBtnClick">
         <ImageView
             android:id="@+id/image_btn_my"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
             android:background="#00000000"
             android:src="@drawable/image_btn_my"/>
         <TextView
             android:id="@+id/txt_my"
+            android:textSize="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"

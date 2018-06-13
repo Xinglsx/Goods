@@ -49,17 +49,20 @@ public class FragmentMy extends BaseFragment {
         switch (type){
             default:
             case 0:
+                //未注册
+                view.findViewById(R.id.linLayout_RegisterOrLogin).setVisibility(View.VISIBLE);
             case 1:
             case 2:
+                //待审商品
                 view.findViewById(R.id.linlayout_pending).setVisibility(View.GONE);
                 view.findViewById(R.id.txt_pending).setVisibility(View.GONE);
-
+                //上传商品
                 view.findViewById(R.id.linlayout_upload_goods).setVisibility(View.GONE);
-
             case 3:
+                //审核商品
                 view.findViewById(R.id.linlayout_audit_goods).setVisibility(View.GONE);
                 view.findViewById(R.id.txt_audit_goods).setVisibility(View.GONE);
-
+                //用户管理
                 view.findViewById(R.id.txt_user_manager).setVisibility(View.GONE);
                 view.findViewById(R.id.linlayout_user_manager).setVisibility(View.GONE);
             case 4:
@@ -79,9 +82,8 @@ public class FragmentMy extends BaseFragment {
                 Intent intent = new Intent();
                 intent.setClass(FragmentMy.this.getActivity(),LoginActivity.class);
                 intent.putExtra("isLogout",true);
-                winning.framework.utils.ApplicationUtil.put(FragmentMy.this.getActivity(),Constant.USERINFO,"");
                 startActivity(intent);
-                FragmentMy.this.getActivity().finish();
+//                FragmentMy.this.getActivity().finish();
             }
         });
 
@@ -132,11 +134,35 @@ public class FragmentMy extends BaseFragment {
                 startActivity(intent);
             }
         });
+        view.findViewById(R.id.linlayout_help_new).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(FragmentMy.this.getActivity(),HelpActivity.class);
+                startActivity(intent);
+            }
+        });
         view.findViewById(R.id.linlayout_help).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setClass(FragmentMy.this.getActivity(),HelpActivity.class);
+                startActivity(intent);
+            }
+        });
+        view.findViewById(R.id.btn_Register).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(FragmentMy.this.getActivity(),RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
+        view.findViewById(R.id.btn_Login).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(FragmentMy.this.getActivity(),LoginActivity.class);
                 startActivity(intent);
             }
         });

@@ -67,12 +67,12 @@ public class DataBindingAdapterGoods extends BaseAdapter {
             viewHolder.txtRecommendtime.setText(CommonUtil.stampToDate(goodsInfos.get(i).getRecommendtime(),
                     Constant.DATEFORMAT_DATETIME_SS) );
             viewHolder.txtRecommendname.setText(goodsInfos.get(i).getRecommendname());
-            if(goodsInfos.get(i).getOldprice().contains("￥")){
+            if(goodsInfos.get(i).getOldprice() != null && goodsInfos.get(i).getOldprice().contains("￥")){
                 viewHolder.txtGoodsOldPrice.setText("原价:"+goodsInfos.get(i).getOldprice());
             }else{
                 viewHolder.txtGoodsOldPrice.setText("原价:￥" + goodsInfos.get(i).getOldprice());
             }
-            if(goodsInfos.get(i).getPrice().contains("￥")){
+            if(goodsInfos.get(i).getPrice() != null && goodsInfos.get(i).getPrice().contains("￥")){
                 viewHolder.txtGoodsPrice.setText("【券后】"+goodsInfos.get(i).getPrice());
             }else{
                 viewHolder.txtGoodsPrice.setText("【券后】￥" + goodsInfos.get(i).getPrice());

@@ -7,6 +7,7 @@ import com.android.volley.Request;
 import com.mingshu.goods.models.GoodsInfo;
 import com.mingshu.goods.models.Questions;
 import com.mingshu.goods.models.UserInfo;
+import com.mingshu.goods.utils.MyLogUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -92,7 +93,7 @@ public class ApiCoreManager extends ApiManager {
     public Api saveGoodsInfo(GoodsInfo goodsInfo){
         JSONObject param = new JSONObject();
         param.put("goodsInfo",goodsInfo);
-//        MyLogUtil.LogShitou("lisx",param.toString ());
+        MyLogUtil.LogShitou("lisx",param.toString ());
         return createAPI(Request.Method.POST,baseApiURL+"/RecommandGoods/SaveGoodsInfo",param);
     }
 

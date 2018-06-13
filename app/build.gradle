@@ -55,4 +55,5 @@ dependencies {
     compile 'org.greenrobot:eventbus:3.0.0'
     testCompile 'junit:junit:4.12'
     compile files('libs/com.baidu.tts_2.3.1.20170808_e39ea89.jar')
+    compile files('libs/fastjson-1.2.47.jar')
 }

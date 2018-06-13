@@ -5,12 +5,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
-import android.widget.Toast;
 
 import com.mingshu.goods.databinding.ActivityLoginBinding;
 import com.mingshu.goods.managers.ApiCoreManager;
@@ -43,14 +41,8 @@ public class LoginActivity extends ScanBaseActivity {
         binding.txtUserCode.setText(sp.getString(Constant.USERCODE, ""));
         if (sp.getBoolean(Constant.REMEMBERPASSWORD_ISCHECK, false)) {
             binding.chkRememberPassword.setChecked(true);
-            binding.txtPassword.setText(sp.getString(Constant.PASSWORD, ""));//不再保存密码
-            if (sp.getBoolean(Constant.AUTOLOGIN_ISCHECK, false)) {
-                binding.chkAutoLogin.setChecked(true);
-                Intent intent = this.getIntent();
-                if (!intent.getBooleanExtra("isLogout", false)) {
-                    Login();
-                }
-            }
+            //不再保存密码
+            binding.txtPassword.setText(sp.getString(Constant.PASSWORD, ""));
         }
     }
 
@@ -109,6 +101,14 @@ public class LoginActivity extends ScanBaseActivity {
                 LoginActivity.this.finish();
             }
         });
+
+        binding.setBackClick(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LoginActivity.this.finish();
+            }
+        });
+        binding.setTitle("登录");
     }
 
     @Override
@@ -167,21 +167,18 @@ public class LoginActivity extends ScanBaseActivity {
         api.invoke(new NetworkEngine.Success<UserInfo>() {
             @Override
             public void callback(UserInfo data) {
-//                PrompUtil.stopProgessDialog();
                 LoginSuccess(data,password);
             }
 
         }, new NetworkEngine.Failure() {
             @Override
             public void callback(int code, String message, Map rawData) {
-//                PrompUtil.stopProgessDialog();
                 failuerMessage(message);
             }
         }, new NetworkEngine.Error() {
 
             @Override
             public void callback(int code, String message, Map rawData) {
-//                PrompUtil.stopProgessDialog();
                 failuerMessage(message);
             }
         });
@@ -216,18 +213,18 @@ public class LoginActivity extends ScanBaseActivity {
 
     private long mkeyTime;
 
-    //两次返回键退出
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if ((System.currentTimeMillis() - mkeyTime) > 1500) {
-                mkeyTime = System.currentTimeMillis();
-                Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_LONG).show();
-            } else {
-                finish();
-            }
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
-    }
+//    //两次返回键退出
+//    @Override
+//    public boolean onKeyDown(int keyCode, KeyEvent event) {
+//        if (keyCode == KeyEvent.KEYCODE_BACK) {
+//            if ((System.currentTimeMillis() - mkeyTime) > 1500) {
+//                mkeyTime = System.currentTimeMillis();
+//                Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_LONG).show();
+//            } else {
+//                finish();
+//            }
+//            return true;
+//        }
+//        return super.onKeyDown(keyCode, event);
+//    }
 }

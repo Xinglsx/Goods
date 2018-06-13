@@ -119,7 +119,7 @@ public class UploadGoodsActivity extends ScanBaseActivity{
                                 pickIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
                                 startActivityForResult(pickIntent, 4);
                                 break;
-                            case 2:
+                            default:
 //                                Toast.makeText(UploadGoodsActivity.this, "点击了取消2", Toast.LENGTH_LONG).show();
                                 break;
                         }
@@ -365,8 +365,8 @@ public class UploadGoodsActivity extends ScanBaseActivity{
                 binding.txtGoodsLink.setText(content.substring(startIndex, endIndex));
             }
 
-            startIndex = content.indexOf("复制这条信息") + 7;
-            endIndex = content.indexOf("打开【手机淘宝】") - 2;
+            startIndex = content.indexOf("復·制这段描述") + 8;
+            endIndex = content.indexOf("咑閞【手机淘宝】") - 2;
             if(startIndex  >= 0 && endIndex >0 && endIndex > startIndex) {
                 binding.txtGoodsCommand.setText(content.substring(startIndex, endIndex));
             }

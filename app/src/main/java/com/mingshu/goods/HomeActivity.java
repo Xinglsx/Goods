@@ -1,7 +1,9 @@
 package com.mingshu.goods;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mingshu.goods.databinding.ActivityHomeBinding;
+import com.mingshu.goods.managers.ApiCoreManager;
 import com.mingshu.goods.models.UserInfo;
 import com.mingshu.goods.utils.ApplicationUtil;
 import com.mingshu.goods.utils.Constant;
@@ -20,12 +23,17 @@ import com.mingshu.goods.views.adapters.MyFragmentAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import winning.framework.ScanBaseActivity;
+import winning.framework.managers.ApiManager;
+import winning.framework.network.NetworkEngine;
 
 public class HomeActivity extends ScanBaseActivity {
 
     private ActivityHomeBinding binding;
+    private SharedPreferences sp;
+    private ApiCoreManager apiCoreManager;
     UserInfo user;
 
     // 四个按钮
@@ -48,6 +56,15 @@ public class HomeActivity extends ScanBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
+        apiCoreManager = new ApiCoreManager(this);
+        sp = this.getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+        if (sp.getBoolean(Constant.AUTOLOGIN_ISCHECK, false)) {
+            Intent intent = this.getIntent();
+            if (!intent.getBooleanExtra("isLogout", false)) {
+                GetUserInfo();
+            }
+        }
+
         user =  (UserInfo) ApplicationUtil.get(this, Constant.USERINFO);
         articleInfos = new ArrayList<>();
         initView();
@@ -133,7 +150,6 @@ public class HomeActivity extends ScanBaseActivity {
         });
     }
 
-
     public void initViewPage(){
         //将Fragment加入
         articleInfos.add(new FragmentGoods(this));
@@ -147,7 +163,6 @@ public class HomeActivity extends ScanBaseActivity {
         binding.mainViewpager.setCurrentItem(0);
 
     }
-
     //初始化图标
     private void resetLayout(){
         mImgCoupon.setImageResource(R.drawable.image_btn_coupon);
@@ -214,4 +229,26 @@ public class HomeActivity extends ScanBaseActivity {
         return super.onKeyDown(keyCode, event);
     }
 
+    public void GetUserInfo() {
+        //网络访问成功不成功，均不处理
+        ApiManager.Api api = apiCoreManager.validateUserInfo(sp.getString(Constant.USERCODE,""),
+                sp.getString(Constant.PASSWORD,""));
+        api.invoke(new NetworkEngine.Success<UserInfo>() {
+            @Override
+            public void callback(UserInfo data) {
+                //保存全局用户信息
+                ApplicationUtil.put(HomeActivity.this,Constant.USERINFO,data);
+            }
+
+        }, new NetworkEngine.Failure() {
+            @Override
+            public void callback(int code, String message, Map rawData) {
+            }
+        }, new NetworkEngine.Error() {
+
+            @Override
+            public void callback(int code, String message, Map rawData) {
+            }
+        });
+    }
 }
