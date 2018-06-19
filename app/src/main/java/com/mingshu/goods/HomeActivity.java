@@ -39,7 +39,7 @@ public class HomeActivity extends ScanBaseActivity {
     // 四个按钮
     private ImageView mImgGoods;//推荐商品
     private ImageView mImgCoupon;//粉线福利券
-    private ImageView mImgFind;//发现
+    private ImageView mImgFind;//福利闪达
     private ImageView mImgMy;//我的
 
     private TextView txtGoods;
@@ -50,8 +50,8 @@ public class HomeActivity extends ScanBaseActivity {
     //Fragment相关
     private List<Fragment> articleInfos;
 
-    //语音识别按钮
-
+    //选中的菜单颜色
+    private int selectColor = Color.parseColor("#FF9900") ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,7 +78,7 @@ public class HomeActivity extends ScanBaseActivity {
             String searchContext = intent.getStringExtra("searchContext");
             binding.mainViewpager.setCurrentItem(fragmentIndex);
             resetLayout();
-            mImgCoupon.setImageResource(R.drawable.image_btn_coupon_green);
+            mImgCoupon.setImageResource(R.drawable.image_btn_coupon_select);
             txtCoupon.setTextColor(Color.GREEN);
 //            FragmentCoupon couponFragment = (FragmentCoupon) articleInfos.get(2);
 //            couponFragment.SearchText(searchContext);
@@ -113,23 +113,23 @@ public class HomeActivity extends ScanBaseActivity {
                     case 0:
                         binding.mainViewpager.setCurrentItem(0);
                         resetLayout();
-                        mImgGoods.setImageResource(R.drawable.image_btn_goods_green);
-                        txtGoods.setTextColor(Color.GREEN);
+                        mImgGoods.setImageResource(R.drawable.image_btn_goods_select);
+                        txtGoods.setTextColor(selectColor);
                         break;
                     case 1:
                         resetLayout();
-                        mImgFind.setImageResource(R.drawable.image_btn_find_green);
-                        txtFind.setTextColor(Color.GREEN);
+                        mImgFind.setImageResource(R.drawable.image_btn_welfareflash_select);
+                        txtFind.setTextColor(selectColor);
                         break;
                     case 2:
                         resetLayout();
-                        mImgCoupon.setImageResource(R.drawable.image_btn_coupon_green);
-                        txtCoupon.setTextColor(Color.GREEN);
+                        mImgCoupon.setImageResource(R.drawable.image_btn_coupon_select);
+                        txtCoupon.setTextColor(selectColor);
                         break;
                     case 3:
                         resetLayout();
-                        mImgMy.setImageResource(R.drawable.image_btn_my_green);
-                        txtMy.setTextColor(Color.GREEN);
+                        mImgMy.setImageResource(R.drawable.image_btn_my_select);
+                        txtMy.setTextColor(selectColor);
                         break;
                     default:
                         break;
@@ -165,10 +165,10 @@ public class HomeActivity extends ScanBaseActivity {
     }
     //初始化图标
     private void resetLayout(){
-        mImgCoupon.setImageResource(R.drawable.image_btn_coupon);
-        mImgGoods.setImageResource(R.drawable.image_btn_goods);
-        mImgFind.setImageResource(R.drawable.image_btn_find);
-        mImgMy.setImageResource(R.drawable.image_btn_my);
+        mImgCoupon.setImageResource(R.drawable.image_btn_coupon_unselect);
+        mImgGoods.setImageResource(R.drawable.image_btn_goods_unselect);
+        mImgFind.setImageResource(R.drawable.image_btn_welfareflash_unselect);
+        mImgMy.setImageResource(R.drawable.image_btn_my_unselect);
 
         txtGoods.setTextColor(Color.BLACK);
         txtMy.setTextColor(Color.BLACK);
@@ -182,26 +182,26 @@ public class HomeActivity extends ScanBaseActivity {
             case R.id.line_bottom_goods:
                 binding.mainViewpager.setCurrentItem(0);
                 resetLayout();
-                mImgGoods.setImageResource(R.drawable.image_btn_goods_green);
-                txtGoods.setTextColor(Color.GREEN);
+                mImgGoods.setImageResource(R.drawable.image_btn_goods_select);
+                txtGoods.setTextColor(selectColor);
                 break;
             case R.id.line_bottom_find:
                 binding.mainViewpager.setCurrentItem(1);
                 resetLayout();
-                mImgFind.setImageResource(R.drawable.image_btn_find_green);
-                txtFind.setTextColor(Color.GREEN);
+                mImgFind.setImageResource(R.drawable.image_btn_welfareflash_select);
+                txtFind.setTextColor(selectColor);
                 break;
             case R.id.line_bottom_coupon:
                 binding.mainViewpager.setCurrentItem(2);
                 resetLayout();
-                mImgCoupon.setImageResource(R.drawable.image_btn_coupon_green);
-                txtCoupon.setTextColor(Color.GREEN);
+                mImgCoupon.setImageResource(R.drawable.image_btn_coupon_select);
+                txtCoupon.setTextColor(selectColor);
                 break;
             case R.id.line_bottom_my:
                 binding.mainViewpager.setCurrentItem(3);
                 resetLayout();
-                mImgMy.setImageResource(R.drawable.image_btn_my_green);
-                txtMy.setTextColor(Color.GREEN);
+                mImgMy.setImageResource(R.drawable.image_btn_my_select);
+                txtMy.setTextColor(selectColor);
                 break;
             default:
                 break;

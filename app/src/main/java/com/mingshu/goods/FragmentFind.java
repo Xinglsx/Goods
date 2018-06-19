@@ -2,12 +2,12 @@ package com.mingshu.goods;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 
 import com.mingshu.goods.models.UserInfo;
 import com.mingshu.goods.utils.ApplicationUtil;
@@ -39,18 +39,8 @@ public class FragmentFind extends BaseFragment {
     }
 
     private void initView() {
-        view.findViewById(R.id.linlayout_redpaper).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(FragmentFind.this.getActivity(),RedPaperActivity.class));
-            }
-        });
-        view.findViewById(R.id.linlayout_redpaper_alipay).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(FragmentFind.this.getActivity(),RedPaperAlipayActivity.class));
-            }
-        });
+        WebView webView_Welfare = (WebView) view.findViewById(R.id.webView_Welfare);
+        webView_Welfare.loadUrl("http://www.mingshukeji.com.cn/WelfareFlash");
     }
 
     @Override

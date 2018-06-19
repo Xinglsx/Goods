@@ -13,4 +13,5 @@
     <color name="colorBtnYellow">#f29702</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBtnGray">#858585</color>
+    <color name="colorShallowGray">#DDDDDD</color>
 </resources>

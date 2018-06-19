@@ -51,12 +51,8 @@ public class GoodsActivity extends ScanBaseActivity {
         }
         type = intent.getIntExtra("type",0);
         switch (type){
-            case 0://一般用户查看商品界面
-                binding.txtRefuse.setVisibility(View.GONE);
-                binding.linlayouRefuseReason.setVisibility(View.GONE);
-                binding.txtShareGoods.setVisibility(View.VISIBLE);
-                break;
-            case 1://可上传用户查看待审核和已拒绝商品界面
+            //可上传用户查看待审核和已拒绝商品界面
+            case 1:
                 binding.txtTitle.setText("个人待审商品");
                 if(goodsInfo == null || goodsInfo.getState() > 0){
                     binding.btnBuy.setVisibility(View.GONE);
@@ -70,10 +66,18 @@ public class GoodsActivity extends ScanBaseActivity {
                     binding.editRefuseReason.setEnabled(false);
                 }
                 break;
-            case 2://管理员审核界面
+            //管理员审核界面
+            case 2:
                 //审核界面
                 binding.txtTitle.setText("商品审核界面");
                 binding.btnBuy.setText("审核通过");
+                break;
+            //一般用户查看商品界面
+            case 0:
+            default:
+                binding.txtRefuse.setVisibility(View.GONE);
+                binding.linlayouRefuseReason.setVisibility(View.GONE);
+                binding.txtShareGoods.setVisibility(View.VISIBLE);
                 break;
         }
         initView();
@@ -92,26 +96,29 @@ public class GoodsActivity extends ScanBaseActivity {
         } else {
             binding.txtGoodsOldprice.setText("原价:￥" + goodsInfo.getOldprice());
         }
-//        if(type == 0){
-//            binding.txtClickcount.setText(String.valueOf(goodsInfo.getClickcount() + 1));
-//        }else{
-//            binding.txtClickcount.setText(String.valueOf(goodsInfo.getClickcount()));
-//        }
 
         binding.btnBuy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (type == 0) {//购买商品
+                if (type == 0) {
+                    //领取优惠
                     String tempCommand = goodsInfo.getCommand();
+                    //淘宝应用包名
+                    String taobaoPackageName = "com.taobao.taobao";
+                    //过期标志
+                    String strOverDue = "2018-01-01";
                     if (tempCommand == null || "".equals(tempCommand)) {
                         CommonUtil.ShowMsg("此商品未维护好，无法自动跳转！", GoodsActivity.this);
+                    } else if (goodsInfo.getExpirydate().startsWith(strOverDue)){
+                        //超过效期的，默认三天
+                        CommonUtil.ShowMsg("对不起，您来晚了一步，优惠券已经被抢完了！", GoodsActivity.this);
                     } else {
-                        if(CommonUtil.checkPackage(GoodsActivity.this,"com.taobao.taobao")) {
+                        if(CommonUtil.checkPackage(GoodsActivity.this,taobaoPackageName)) {
                             ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
                             ClipData mClipData = ClipData.newPlainText("Tpwd", goodsInfo.getCommand());
                             cm.setPrimaryClip(mClipData);
                             PackageManager packageManager = getPackageManager();
-                            Intent intent = packageManager.getLaunchIntentForPackage("com.taobao.taobao");
+                            Intent intent = packageManager.getLaunchIntentForPackage(taobaoPackageName);
                             try {
                                 startActivity(intent);
                             } catch (Exception exp) {
@@ -124,10 +131,12 @@ public class GoodsActivity extends ScanBaseActivity {
                             startActivity(intent);
                         }
                     }
-                } else if (type == 1) {//提交审核
+                } else if (type == 1) {
+                    //提交审核
                     goodsInfo.setState((short)1);
                     saveGoodsInfo();
-                } else {//审核通过
+                } else {
+                    //审核通过
                     goodsInfo.setState((short)2);
                     goodsInfo.setAudituser(curUser.getId());
                     goodsInfo.setAuditname(curUser.getNickname());

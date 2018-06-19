@@ -21,7 +21,7 @@
             android:layout_height="match_parent"
             android:background="@color/colorBtnYellow"
             android:layout_margin="5dp"
-            android:text="找优惠"/>
+            android:text="找券"/>
     </LinearLayout>
     <com.handmark.pulltorefresh.library.PullToRefreshListView
         android:id="@+id/listView_coupons"

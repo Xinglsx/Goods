@@ -334,44 +334,39 @@ public class UploadGoodsActivity extends ScanBaseActivity{
         ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData mClipData = cm.getPrimaryClip();
         String content = mClipData.getItemAt(mClipData.getItemCount() - 1).getText().toString();
-        //圣手三阶四阶魔方二三五阶顺滑成人比赛盲拧益智玩具套装学生初学【包邮】
-        //【在售价】10.10元
-        //【券后价】5.10元
-        //【下单链接】http://e22a.com/h.KnZPt7
-        //    -----------------
-        //            复制这条信息，￥2kFy02xYXBx￥ ，打开【手机淘宝】即可查看
+
         if (content.length() > 0){
-            int startIndex = 0;
-            int endIndex = content.indexOf("【在售价】") - 1;
-            if(endIndex >0 && endIndex > startIndex){
-                binding.txtGoodsDescription.setText(content.substring(startIndex,endIndex));
-            }
-
-            startIndex = content.indexOf("【在售价】") + 5;
-            endIndex = content.indexOf("【券后价】") - 2;
-            if(startIndex  >= 0 && endIndex > startIndex) {
-                binding.txtGoodsOldprice.setText("￥" + content.substring(startIndex, endIndex));
-            }
-
-            startIndex = content.indexOf("【券后价】") + 5;
-            endIndex = content.indexOf("【下单链接】") - 2;
-            if(startIndex  >= 0 && endIndex > startIndex) {
-                binding.txtGoodsPrice.setText("￥" + content.substring(startIndex, endIndex));
-            }
-
-            startIndex = content.indexOf("【下单链接】") + 6;
-            endIndex = content.indexOf("-----") - 1;
-            if(startIndex  >= 0 && endIndex >0 && endIndex > startIndex) {
-                binding.txtGoodsLink.setText(content.substring(startIndex, endIndex));
-            }
-
-            startIndex = content.indexOf("復·制这段描述") + 8;
-            endIndex = content.indexOf("咑閞【手机淘宝】") - 2;
-            if(startIndex  >= 0 && endIndex >0 && endIndex > startIndex) {
-                binding.txtGoodsCommand.setText(content.substring(startIndex, endIndex));
-            }
+            //修改为网络请求，防止出现规则有所更改后必须升级APK才可使用此功能的问题。
+            ApiManager.Api api = apiCoreManager.analysisTbkStr(content);
+            api.invoke(new NetworkEngine.Success<GoodsInfo>(){
+                @Override
+                public void callback(GoodsInfo result){
+                    paseGoodsInfoToUI(result);
+                }
+            },new NetworkEngine.Failure(){
+                @Override
+                public void callback(int code,String message,Map rawData){
+                    PrompUtil.stopProgessDialog();
+                    CommonUtil.ShowMsg(message,UploadGoodsActivity.this);
+                }
+            },new NetworkEngine.Error(){
+                @Override
+                public void callback(int code,String message,Map rawData){
+                    PrompUtil.stopProgessDialog();
+                    CommonUtil.ShowMsg(message,UploadGoodsActivity.this);
+                }
+            });
         }else{
             CommonUtil.DisplayToast("粘贴板内无内容！",this);
         }
+    }
+
+    private void paseGoodsInfoToUI(GoodsInfo goodsInfo)
+    {
+        binding.txtGoodsDescription.setText(goodsInfo.getDescription());
+        binding.txtGoodsOldprice.setText(goodsInfo.getOldprice());
+        binding.txtGoodsPrice.setText(goodsInfo.getPrice());
+        binding.txtGoodsLink.setText(goodsInfo.getLink());
+        binding.txtGoodsCommand.setText(goodsInfo.getCommand());
     }
 }

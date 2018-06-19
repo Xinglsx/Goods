@@ -128,4 +128,10 @@ public class ApiCoreManager extends ApiManager {
         param.put("id",id);
         return createAPI(Request.Method.GET,baseApiURL+"/RecommandGoods/GetGoodsInfo",param);
     }
+
+    public Api analysisTbkStr(String tbkStr){
+        JSONObject param = new JSONObject();
+        param.put("tbkStr",tbkStr);
+        return createAPI(Request.Method.POST,baseApiURL+"/RecommandGoods/AnalysisTbkStr",param);
+    }
 }
