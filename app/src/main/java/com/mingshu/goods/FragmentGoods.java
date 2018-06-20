@@ -87,7 +87,7 @@ public class FragmentGoods extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_goods,null); //View.inflate(getActivity(),R.layout.fragment_goods,null);
+        view = inflater.inflate(R.layout.fragment_goods,null);
         apiCoreManager = new ApiCoreManager(this.getActivity());
         imageViews = new ArrayList<>();
         ll = (LinearLayout) view.findViewById(R.id.ll);
@@ -116,7 +116,9 @@ public class FragmentGoods extends BaseFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
     }
 
-    //定时轮播图片，需要在主线程里面修改 UI
+    /**
+     * 定时轮播图片，需要在主线程里面修改 UI
+     */
     private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
             switch (msg.what) {
@@ -140,7 +142,6 @@ public class FragmentGoods extends BaseFragment {
             ImageView iv = new ImageView(FragmentGoods.this.getActivity());
             iv.setScaleType(ImageView.ScaleType.FIT_XY);
             Glide.with(this).load(images[i]).dontAnimate().into(iv);
-//            iv.setImageResource(images[i]);
             imageViews.add(iv);
             //动态加载灰色圆点
             ImageView gray_Iv = new ImageView(this.getActivity());
@@ -149,7 +150,8 @@ public class FragmentGoods extends BaseFragment {
                     new LinearLayout.LayoutParams(24,24);
             //从第二个开始有边距
             if (i > 0) {
-                layoutParams.leftMargin = 70;  //注意单位是px
+                //注意单位是px
+                layoutParams.leftMargin = 70;
             }
             gray_Iv.setLayoutParams(layoutParams);
             ll.addView(gray_Iv);
@@ -196,15 +198,14 @@ public class FragmentGoods extends BaseFragment {
             }
         });
 
-//        PrompUtil.startProgressDialog(this.getActivity(),"获取中，请稍等。。。");
         getGoodsInfos(pageNumber, Constant.PAGESIZE,2);
 
         listViewGoods = (PullToRefreshListView)view.findViewById(R.id.listView_Goods);
-//        listViewGoods.setMode(PullToRefreshBase.Mode.BOTH);
         listViewGoods.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                articleTitleClick(i-1);//更新阅读量
+                //更新阅读量
+                articleTitleClick(i-1);
 
                 //跳转文章详细信息
                 Intent intent = new Intent();
@@ -243,12 +244,10 @@ public class FragmentGoods extends BaseFragment {
                 goodsInfos = data.getDataList();
                 bindingAdapterArticle = new DataBindingAdapterGoods(FragmentGoods.this.goodsInfos,FragmentGoods.this.getActivity());
                 listViewGoods.setAdapter(bindingAdapterArticle);
-//                PrompUtil.stopProgessDialog();
                 pageNumber = 1;
                 TotalPages = data.getTotalPages();
                 listViewGoods.onRefreshComplete();
                 if(!isLogin){
-                    //CommonUtil.DisplayToast("亲，商品已经刷新成功！",FragmentGoods.this.getActivity());
                     listViewGoods.onRefreshComplete();
                 }else{
                     isLogin = false;
@@ -258,14 +257,12 @@ public class FragmentGoods extends BaseFragment {
         }, new NetworkEngine.Failure() {
             @Override
             public void callback(int code, String message, Map rawData) {
-//                PrompUtil.stopProgessDialog();
                 CommonUtil.ShowMsg(message,FragmentGoods.this.getActivity());
                 listViewGoods.onRefreshComplete();
             }
         }, new NetworkEngine.Error() {
             @Override
             public void callback(int code, String message, Map rawData) {
-//                PrompUtil.stopProgessDialog();
                 CommonUtil.ShowMsg(message,FragmentGoods.this.getActivity());
                 listViewGoods.onRefreshComplete();
             }
@@ -283,21 +280,18 @@ public class FragmentGoods extends BaseFragment {
                     bindingAdapterArticle.AddItem(data.getDataList());
                     bindingAdapterArticle.notifyDataSetChanged();
                 }
-//                PrompUtil.stopProgessDialog();
                 pageNumber++;
                 listViewGoods.onRefreshComplete();
             }
         }, new NetworkEngine.Failure() {
             @Override
             public void callback(int code, String message, Map rawData) {
-//                PrompUtil.stopProgessDialog();
                 CommonUtil.ShowMsg(message,FragmentGoods.this.getActivity());
                 listViewGoods.onRefreshComplete();
             }
         }, new NetworkEngine.Error() {
             @Override
             public void callback(int code, String message, Map rawData) {
-//                PrompUtil.stopProgessDialog();
                 CommonUtil.ShowMsg(message,FragmentGoods.this.getActivity());
                 listViewGoods.onRefreshComplete();
             }
@@ -401,7 +395,8 @@ public class FragmentGoods extends BaseFragment {
                             //文字内容广告
                             Intent intent1 = new Intent(FragmentGoods.this.getActivity(),TextViewActivity.class);
                             intent1.putExtra("title","自定义网页");
-                            intent1.putExtra("content",data.getContent());//html类型
+                            //html类型
+                            intent1.putExtra("content",data.getContent());
                             startActivity(intent1);
                             break;
                         case 2:
@@ -413,7 +408,8 @@ public class FragmentGoods extends BaseFragment {
                                 public void callback(GoodsInfo data) {
                                     Intent intent = new Intent(FragmentGoods.this.getActivity(),GoodsActivity.class);
                                     intent.putExtra("type",0);
-                                    intent.putExtra("goods",data);//传入商品信息
+                                    //传入商品信息
+                                    intent.putExtra("goods",data);
                                     startActivity(intent);
                                 }
                             }, new NetworkEngine.Failure() {

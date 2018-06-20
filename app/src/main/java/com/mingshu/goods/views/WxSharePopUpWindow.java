@@ -24,7 +24,9 @@ public class WxSharePopUpWindow{
     private Context context;
     private Activity activity;
 
-    // 数据接口
+    /**
+     * 数据接口
+     */
     OnGetData mOnGetData;
     public WxSharePopUpWindow(){}
     public WxSharePopUpWindow(Context context, Activity activity) {
@@ -73,7 +75,8 @@ public class WxSharePopUpWindow{
 
             @Override
             public void onClick(View v) {
-                mOnGetData.onDataCallBack(0);//分享给朋友
+                //分享给朋友
+                mOnGetData.onDataCallBack(0);
                 popupWindow.dismiss();
             }
         });
@@ -82,7 +85,8 @@ public class WxSharePopUpWindow{
 
             @Override
             public void onClick(View v) {
-                mOnGetData.onDataCallBack(1);//分享到朋友圈
+                //分享到朋友圈
+                mOnGetData.onDataCallBack(1);
                 popupWindow.dismiss();
             }
         });
@@ -91,7 +95,8 @@ public class WxSharePopUpWindow{
 
             @Override
             public void onClick(View v) {
-                mOnGetData.onDataCallBack(2);//取消
+                //取消
+                mOnGetData.onDataCallBack(2);
                 popupWindow.dismiss();
             }
         });
@@ -111,16 +116,18 @@ public class WxSharePopUpWindow{
 
     /**
      * 设置添加屏幕的背景透明度
-     *
      * @param bgAlpha
      */
     public void backgroundAlpha(float bgAlpha) {
         WindowManager.LayoutParams lp = activity.getWindow().getAttributes();
-        lp.alpha = bgAlpha; //0.0-1.0
+        //0.0-1.0
+        lp.alpha = bgAlpha;
         activity.getWindow().setAttributes(lp);
     }
 
-    // 数据接口抽象方法
+    /**
+     * 数据接口抽象方法
+     */
     public interface OnGetData {
         abstract void onDataCallBack(int nClick);
     }

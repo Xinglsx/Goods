@@ -51,7 +51,6 @@ public class WXEntryActivity implements IWXAPIEventHandler {
         this.contextType = contextType;
         this.context = context;
         this.intent = intent;
-        this.goodsInfo = goodsInfo;
 
         iwxapi = WXAPIFactory.createWXAPI(this.context, APP_ID, false);
         iwxapi.handleIntent(this.intent, this);
@@ -115,35 +114,7 @@ public class WXEntryActivity implements IWXAPIEventHandler {
                 req.transaction = buildTransaction("webpage");
                 req.message = mediaMessage;
                 break;
-                /*
-            case 2:
-                //图片类
-                Bitmap bmp = BitmapFactory.decodeResource(context.getResources(), R.drawable.image_icon);
-                WXImageObject imgObj = new WXImageObject(bmp);
 
-                WXMediaMessage msg2 = new WXMediaMessage();
-                msg2.mediaObject = imgObj;
-                Bitmap thumbBmp = Bitmap.createScaledBitmap(bmp,16,16,true);
-                bmp.recycle();
-                msg2.thumbData = Util.bmpToByteArray(thumbBmp,true);
-
-                req.transaction = buildTransaction("img");
-                req.message = msg2;
-                break;
-            case 3:
-                //文字类
-                WXTextObject textObject = new WXTextObject();
-                textObject.text = "这个是来测试分享的！";
-
-                WXMediaMessage msg = new WXMediaMessage();
-                msg.mediaObject = textObject;
-                msg.description = textObject.text;
-
-                req.transaction = buildTransaction("Req");
-                req.message = msg;
-                break;
-            case 4:
-                break;*/
             default:
                 break;
         }

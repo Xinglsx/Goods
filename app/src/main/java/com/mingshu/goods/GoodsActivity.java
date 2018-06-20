@@ -109,7 +109,7 @@ public class GoodsActivity extends ScanBaseActivity {
                     String strOverDue = "2018-01-01";
                     if (tempCommand == null || "".equals(tempCommand)) {
                         CommonUtil.ShowMsg("此商品未维护好，无法自动跳转！", GoodsActivity.this);
-                    } else if (goodsInfo.getExpirydate().startsWith(strOverDue)){
+                    } else if (goodsInfo.getExpirydate() != null && goodsInfo.getExpirydate().startsWith(strOverDue)){
                         //超过效期的，默认三天
                         CommonUtil.ShowMsg("对不起，您来晚了一步，优惠券已经被抢完了！", GoodsActivity.this);
                     } else {

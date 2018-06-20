@@ -1,6 +1,7 @@
 package com.mingshu.goods.views.adapters;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -65,18 +66,21 @@ public class DataBindingAdapterGoods extends BaseAdapter {
             viewHolder.txtGoodsDescription.setText( goodsInfos.get(i).getDescription());
 
             viewHolder.txtRecommendtime.setText(CommonUtil.stampToDate(goodsInfos.get(i).getRecommendtime(),
-                    Constant.DATEFORMAT_DATETIME_SS) );
+                    Constant.DATEFORMAT_DATETIME_MM) );
             viewHolder.txtRecommendname.setText(goodsInfos.get(i).getRecommendname());
             if(goodsInfos.get(i).getOldprice() != null && goodsInfos.get(i).getOldprice().contains("￥")){
                 viewHolder.txtGoodsOldPrice.setText("原价:"+goodsInfos.get(i).getOldprice());
             }else{
                 viewHolder.txtGoodsOldPrice.setText("原价:￥" + goodsInfos.get(i).getOldprice());
             }
+            viewHolder.txtGoodsOldPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+
             if(goodsInfos.get(i).getPrice() != null && goodsInfos.get(i).getPrice().contains("￥")){
                 viewHolder.txtGoodsPrice.setText("【券后】"+goodsInfos.get(i).getPrice());
             }else{
                 viewHolder.txtGoodsPrice.setText("【券后】￥" + goodsInfos.get(i).getPrice());
             }
+            viewHolder.txtGoodsPrice.getPaint().setFlags(Paint.FAKE_BOLD_TEXT_FLAG);
 
             Glide.with(context).load(goodsInfos.get(i).getImage()).dontAnimate().into(viewHolder.imageGoods);
         }

@@ -58,7 +58,7 @@ public class MyPopUpWindow{
             popupWindow = new PopupWindow(popupWindowView, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.FILL_PARENT, true);
         }
         //菜单背景色
-//        ColorDrawable dw = new ColorDrawable(0xffffffff);
+        //ColorDrawable dw = new ColorDrawable(0xffffffff);
         popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         //宽度
         //popupWindow.setWidth(LayoutParams.WRAP_CONTENT);
@@ -81,7 +81,8 @@ public class MyPopUpWindow{
 
             @Override
             public void onClick(View v) {
-                mOnGetData.onDataCallBack(0);//拍照
+                //拍照
+                mOnGetData.onDataCallBack(0);
                 popupWindow.dismiss();
             }
         });
@@ -90,7 +91,8 @@ public class MyPopUpWindow{
 
             @Override
             public void onClick(View v) {
-                mOnGetData.onDataCallBack(1);//从相册选择
+                //从相册选择
+                mOnGetData.onDataCallBack(1);
                 popupWindow.dismiss();
             }
         });
@@ -99,7 +101,8 @@ public class MyPopUpWindow{
 
             @Override
             public void onClick(View v) {
-                mOnGetData.onDataCallBack(2);//取消
+                //取消
+                mOnGetData.onDataCallBack(2);
                 popupWindow.dismiss();
             }
         });
@@ -124,11 +127,15 @@ public class MyPopUpWindow{
      */
     public void backgroundAlpha(float bgAlpha) {
         WindowManager.LayoutParams lp = activity.getWindow().getAttributes();
-        lp.alpha = bgAlpha; //0.0-1.0
+        //0.0-1.0
+        lp.alpha = bgAlpha;
         activity.getWindow().setAttributes(lp);
     }
 
-    // 数据接口抽象方法
+    /**
+     * 数据接口抽象方法
+     *
+     */
     public interface OnGetData {
         abstract void onDataCallBack(int nClick);
     }

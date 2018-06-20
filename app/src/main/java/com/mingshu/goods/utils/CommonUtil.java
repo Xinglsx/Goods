@@ -48,15 +48,36 @@ public class CommonUtil {
             str = str.substring(str.indexOf("(") + 1, str.indexOf("+"));
         }
         //2017-08-27T09:47:58.623 mscorlib.dll v4.5.2下的显示格式
+        String result;
         if(str.contains("T")){
             str = str.replace("T"," ");
-            return str;
+            if(str.length() > 19){
+                switch (format){
+                    case Constant.DATEFORMAT_DATE:
+                        return str.substring(0,10);
+                    case Constant.DATEFORMAT_DATETIME_MM:
+                        return str.substring(0,16);
+                    case Constant.DATEFORMAT_DATETIME_SS:
+                        return str.substring(0,19);
+                    case Constant.DATEFORMAT_DATE_WITHOUTLINE:
+                        return str.substring(0,10).replace("-","");
+                    case Constant.DATEFORMAT_DATETIME_WITHOUTLINE:
+                        return str.substring(0,10).replace("-","").
+                                replace(" ","").replace(":","");
+                    default:
+                        return str;
+                }
+            }
+            else{
+                return str;
+            }
         }
-        String result;
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
-        long lt = new Long(str);
-        Date date = new Date(lt);
-        result = simpleDateFormat.format(date);
+        else{
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
+            long lt = new Long(str);
+            Date date = new Date(lt);
+            result = simpleDateFormat.format(date);
+        }
         return result;
     }
 

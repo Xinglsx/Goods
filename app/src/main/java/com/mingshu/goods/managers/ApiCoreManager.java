@@ -85,9 +85,9 @@ public class ApiCoreManager extends ApiManager {
     }
 
     public Api clickCounIncrement(String goodsId){
-        Map param = new HashMap<>();
+        JSONObject param = new JSONObject();
         param.put("id",goodsId);
-        return createAPI(Request.Method.GET,baseApiURL+"/RecommandGoods/ClickCounIncrement",param);
+        return createAPI(Request.Method.POST,baseApiURL+"/RecommandGoods/ClickCounIncrement",param);
     }
 
     public Api saveGoodsInfo(GoodsInfo goodsInfo){

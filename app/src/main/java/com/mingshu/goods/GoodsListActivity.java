@@ -27,9 +27,12 @@ import winning.framework.network.NetworkEngine;
 
 public class GoodsListActivity extends ScanBaseActivity {
 
-    private int curType;//0-用户上传商品列表   1-管理员待审核商品列表
-    private int nextType;//0-用户查看草稿商品   1-用户查看提交商品  2-管理员查看待审核商品
-    private int state;//获取商品状态
+    //0-用户上传商品列表   1-管理员待审核商品列表
+    private int curType;
+    //0-用户查看草稿商品   1-用户查看提交商品  2-管理员查看待审核商品
+    private int nextType;
+    //获取商品状态
+    private int state;
     private ActivityGoodsListBinding binding;
     private ApiCoreManager apiCoreManager;
     private List<GoodsInfo> goodsInfos;
@@ -57,7 +60,6 @@ public class GoodsListActivity extends ScanBaseActivity {
 
     private void initView() {
         listViewGoodsList = binding.listviewGoodsList;
-//        listViewGoodsList.setMode(PullToRefreshBase.Mode.BOTH);
         getGoodsInfos(pageNumber,10,state);
 
         binding.setBackClick(new View.OnClickListener() {
@@ -72,7 +74,8 @@ public class GoodsListActivity extends ScanBaseActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //跳转商品详细信息
                 Intent intent = new Intent();
-                GoodsInfo temp = goodsInfos.get(i-1);//选中的商品
+                //选中的商品
+                GoodsInfo temp = goodsInfos.get(i-1);
                 intent.putExtra("goods",temp);
                 if(curType == 0 ){
                     nextType = 1;

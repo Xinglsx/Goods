@@ -68,7 +68,6 @@ public class VoiceSearchActivity extends AppCompatActivity {
         public void onEvent(AIUIEvent event) {
             switch (event.eventType) {
                 case AIUIConstant.EVENT_WAKEUP:
-//                    CommonUtil.DisplayToast("进入识别状态",FragmentFind.this.getActivity());
                     ((ImageView)findViewById(R.id.image_robot)).setImageResource(R.drawable.image_robot_wakeup);
                     break;
 
@@ -91,7 +90,6 @@ public class VoiceSearchActivity extends AppCompatActivity {
                                 resultStr = resultStr + (new JSONObject(cntJson.optString("intent"))).optString("text");
                             }
                             if(lrst){
-//                                CommonUtil.DisplayToast(resultStr,VoiceSearchActivity.this);
                                 startActivity(VoiceUtil.AnalyzeText(resultStr,VoiceSearchActivity.this));
                                 EventBus.getDefault().post(new MessageEvent("Hello everyone!"));
                             }
